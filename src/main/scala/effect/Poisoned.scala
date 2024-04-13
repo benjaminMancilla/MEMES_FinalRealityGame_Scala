@@ -1,0 +1,5 @@
+package effect
+
+class Poisoned {
+
+}
