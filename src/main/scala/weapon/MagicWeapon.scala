@@ -1,6 +1,6 @@
 package weapon
 
-import character.MagicCharacter
+import entity.character.MagicCharacter
 
 trait MagicWeapon extends Weapon {
   val _magicAttack: Int

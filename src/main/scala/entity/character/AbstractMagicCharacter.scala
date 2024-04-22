@@ -1,6 +1,5 @@
-package character
+package entity.character
 
-import weapon.Weapon
 
 abstract class AbstractMagicCharacter extends AbstractCharacter with MagicCharacter {
   val _magic_points: Int

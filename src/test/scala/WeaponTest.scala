@@ -1,5 +1,5 @@
+import entity.character.{Character, Warrior}
 import munit.FunSuite
-import character.{Character, Warrior}
 import weapon.{Axe, Bow, Sword}
 class WeaponTest extends FunSuite {
 
@@ -9,6 +9,7 @@ class WeaponTest extends FunSuite {
     assert(axe.attackPoints == 60)
     assert(axe.weight == 20)
     assert(axe.owner == null)
+    assert(axe.weapon_type == "Axe")
   }
 
   test("AbstractWeapon should update owner correctly") {
@@ -32,6 +33,7 @@ class WeaponTest extends FunSuite {
     assert(sword.attackPoints == 55)
     assert(sword.weight == 18)
     assert(sword.owner == null)
+    assert(sword.weapon_type == "Sword")
   }
 
   test("Bow should initialize correctly") {
@@ -40,6 +42,8 @@ class WeaponTest extends FunSuite {
     assert(bow.attackPoints == 40)
     assert(bow.weight == 12)
     assert(bow.owner == null)
+    assert(bow.weapon_type == "Bow")
+
   }
 }
 

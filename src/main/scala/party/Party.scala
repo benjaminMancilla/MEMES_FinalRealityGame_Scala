@@ -1,7 +1,7 @@
 package party
 
+import entity.character.Character
 import scala.collection.mutable.ArrayBuffer
-import character.Character
 
 trait Party {
   var _characters: ArrayBuffer[Character]

@@ -1,5 +1,5 @@
+import entity.character.{BlackMage, WhiteMage}
 import munit.FunSuite
-import character.{BlackMage, WhiteMage}
 import weapon.{Wand, Staff}
 
 class MagicCharacterTest extends FunSuite {
@@ -11,10 +11,10 @@ class MagicCharacterTest extends FunSuite {
     assert(blackMage.magicPoints == 150)
     assert(blackMage.currentMagicPoints == 150)
     assert(blackMage.name == "Gandalf")
-    assert(blackMage.hitPoints == 100)
+    assert(blackMage.hit_points == 100)
     assert(blackMage.defense == 20)
     assert(blackMage.weight == 30)
-    assert(blackMage.equippedWeapon.isInstanceOf[Wand])
+    assert(blackMage.equipped_weapon.isInstanceOf[Wand])
   }
 
   test("AbstractMagicCharacter should update currentMagicPoints correctly") {

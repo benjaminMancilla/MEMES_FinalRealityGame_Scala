@@ -1,6 +1,5 @@
-import character.MagicCharacter
+import entity.character.{MagicCharacter, WhiteMage}
 import munit.FunSuite
-import character.WhiteMage
 import weapon.{Staff, Wand}
 
 class MagicWeaponTest extends FunSuite {

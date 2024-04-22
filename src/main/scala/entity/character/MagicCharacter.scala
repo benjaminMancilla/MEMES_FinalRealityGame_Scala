@@ -1,4 +1,4 @@
-package character
+package entity.character
 
 trait MagicCharacter extends Character {
   val _magic_points: Int

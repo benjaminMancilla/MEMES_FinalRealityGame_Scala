@@ -1,14 +1,13 @@
 package party
 
+import entity.character.Character
 import scala.collection.mutable.ArrayBuffer
-import character.Character
 
 class ConcreteParty (var _characters : ArrayBuffer[Character] =  ArrayBuffer.empty[Character],
                      var _partyState : Boolean = true)
   extends Party {
 
   def addCharacter(character: Character): Unit = {
-
     if (characters.contains(character)) {}
     else {
       characters_=(characters.append(character))
@@ -22,7 +21,7 @@ class ConcreteParty (var _characters : ArrayBuffer[Character] =  ArrayBuffer.emp
   }
 
   def checkPartyState(): Unit = {
-    val allCharactersDead = characters.forall(!_.characterState)
+    val allCharactersDead = characters.forall(!_.state)
     if (allCharactersDead) {
       partyState = false
     }

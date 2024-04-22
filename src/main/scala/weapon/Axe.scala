@@ -1,9 +1,11 @@
 package weapon
-import character.Character
+
+import entity.character.Character
 
 class Axe  (val _name: String,
             val _attackPoints: Int,
             val _weight: Int,
             var _owner: Character) extends AbstractWeapon {
+  val _weapon_type : String = "Axe"
 
 }
