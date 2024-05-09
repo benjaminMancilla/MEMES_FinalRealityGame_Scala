@@ -4,8 +4,8 @@ import entity.Entity
 import collection.mutable
 
 import scala.collection.mutable.ArrayBuffer
-
-class TurnScheduler(var _turn_entities: ArrayBuffer[Entity] = ArrayBuffer.empty[Entity]) extends TraitTurnScheduler {
+//NO PUEDE TENER MAS DE 3 characters, los enemies son max 5, pero pueden ser menos
+class TurnScheduler(protected var _turn_entities: ArrayBuffer[Entity] = ArrayBuffer.empty[Entity]) extends TraitTurnScheduler {
   val _turn_wait: ArrayBuffer[(Entity, Int, Int, Boolean)] = createTurnInfo
   var _turn_ready: mutable.Queue[(Entity, Int, Int, Boolean)] = mutable.Queue.empty
 
@@ -84,18 +84,14 @@ class TurnScheduler(var _turn_entities: ArrayBuffer[Entity] = ArrayBuffer.empty[
         ready_entities.append(ready_tuple)
       }
     }
-
     for (entityToRemove <- entitiesToRemove) {
       removeWait(entityToRemove)
     }
-
     ready_entities = ready_entities.sortWith((a, b) => a._2 > b._2)
     for (i <- ready_entities.indices) {
       addReady(ready_entities(i))
     }
   }
-
-
 
   def addEntity(new_char: Entity): Unit =  {
     if (_turn_entities.contains(new_char)) {}
@@ -113,14 +109,14 @@ class TurnScheduler(var _turn_entities: ArrayBuffer[Entity] = ArrayBuffer.empty[
     }
   }
 
-  def addWait(new_tuple:(Entity, Int, Int, Boolean) ): Unit =  {
+  protected def addWait(new_tuple:(Entity, Int, Int, Boolean) ): Unit =  {
     val (new_entity, _, _, _) =new_tuple
     if (!_turn_wait.exists { case (entity, _, _, _) => entity == new_entity }) {
       _turn_wait.append(new_tuple)
     }
   }
 
-  def removeWait(old_tuple:(Entity, Int, Int, Boolean)): Unit = {
+  protected def removeWait(old_tuple:(Entity, Int, Int, Boolean)): Unit = {
     val (old_entity, _, _, _) =old_tuple
     val index = _turn_wait.indexWhere { case (entity, _, _, _) => entity == old_entity }
     if (index != -1) {
@@ -128,29 +124,25 @@ class TurnScheduler(var _turn_entities: ArrayBuffer[Entity] = ArrayBuffer.empty[
     }
   }
 
-  def addReady(new_tuple:(Entity, Int, Int, Boolean) ): Unit =  {
+  protected def addReady(new_tuple:(Entity, Int, Int, Boolean) ): Unit =  {
     _turn_ready = _turn_ready.enqueue(new_tuple)
   }
 
-  def nextAttacker: (Entity, Int, Int, Boolean) = {
+  protected def nextAttacker: (Entity, Int, Int, Boolean) = {
     val next_attacker: (Entity, Int, Int, Boolean) = _turn_ready.dequeue
     next_attacker
   }
-
 
   def maxBarValue(entity:Entity): Int = {
     entity.barValue
   }
 
-
   def turn_entities: ArrayBuffer[Entity] = _turn_entities
-  def turn_entities_=(new_array: ArrayBuffer[Entity]): Unit = {
+  protected def turn_entities_=(new_array: ArrayBuffer[Entity]): Unit = {
     _turn_entities = new_array
   }
 
   def turn_wait: ArrayBuffer[(Entity, Int, Int, Boolean)] = _turn_wait
   def turn_ready: mutable.Queue[(Entity, Int, Int, Boolean)] = _turn_ready
-
-
-
+  
 }

@@ -7,8 +7,8 @@ abstract class AbstractMagicCharacter extends AbstractCharacter with MagicCharac
 
   def magicPoints: Int = _magic_points
   def currentMagicPoints: Int = _current_magic_points
-  def currentMagicPoints_=(newmp: Int) : Unit = {
-    _current_magic_points = newmp
+  def currentMagicPoints_=(newMp: Int) : Unit = {
+    _current_magic_points = newMp
   }
 
 }

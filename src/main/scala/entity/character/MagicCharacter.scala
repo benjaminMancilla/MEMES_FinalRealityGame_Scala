@@ -6,6 +6,6 @@ trait MagicCharacter extends Character {
 
   def magicPoints: Int
   def currentMagicPoints: Int
-  def currentMagicPoints_=(newmp: Int) : Unit
+  def currentMagicPoints_=(newMp: Int) : Unit
 
 }

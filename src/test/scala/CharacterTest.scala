@@ -1,5 +1,6 @@
 import entity.character.{Ninja, Paladin, Warrior}
 import weapon.{Sword, Weapon}
+
 class CharacterTest extends munit.FunSuite {
 
   // No me funcionaba porque lo estaba escribiendo mal xd, luego tal vez actualizo los tests usando esto

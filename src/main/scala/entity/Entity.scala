@@ -2,27 +2,21 @@ package entity
 
 import weapon.Weapon
 
-trait Entity {
-  val _name: String
-  val _hit_points: Int
-  val _defense: Int
-  val _weight: Int
+trait Entity extends PIEntity {
+  protected val _name: String
+  protected val _hit_points: Int
+  protected val _defense: Int
+  protected val _weight: Int
 
-  var _current_hit_points: Int
-  var _state: Boolean
+  protected var _current_hit_points: Int
+  protected var _state: Boolean
 
-  val _isPlayer: Boolean
-
-
-  def name: String
-  def hit_points: Int
-  def defense: Int
-  def weight: Int
-  def current_hit_points: Int
+  protected val _isPlayer: Boolean
   def current_hit_points_=(new_current_hit_points: Int): Unit
-  def state: Boolean
   def state_=(new_character_state: Boolean): Unit
-  def barValue: Int
+  def doDamage(entity: Entity, damage: Int): Unit
+  def receiveDamage(damage: Int): Int
+  def doAttack(entity: Entity, damage: Int): Unit
 
 
 

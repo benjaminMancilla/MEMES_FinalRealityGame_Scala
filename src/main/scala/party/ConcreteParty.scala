@@ -1,8 +1,9 @@
 package party
 
-import entity.character.Character
-import scala.collection.mutable.ArrayBuffer
+import entity.character.{Character, PICharacter}
 
+import scala.collection.mutable.ArrayBuffer
+//NO PUEDE TENER MAS DE 3
 class ConcreteParty (var _characters : ArrayBuffer[Character] =  ArrayBuffer.empty[Character],
                      var _partyState : Boolean = true)
   extends Party {
@@ -10,13 +11,13 @@ class ConcreteParty (var _characters : ArrayBuffer[Character] =  ArrayBuffer.emp
   def addCharacter(character: Character): Unit = {
     if (characters.contains(character)) {}
     else {
-      characters_=(characters.append(character))
+      characters_=(_characters.append(character))
     }
   }
   def removeCharacter(character: Character): Unit = {
     if (!characters.contains(character)) {}
     else {
-      characters_=(characters.filterInPlace(_ != character))
+      characters_=(_characters.filterInPlace(_ != character))
     }
   }
 
@@ -30,13 +31,20 @@ class ConcreteParty (var _characters : ArrayBuffer[Character] =  ArrayBuffer.emp
     }
   }
 
-  def characters: ArrayBuffer[Character] = _characters
-  def characters_=(newc: ArrayBuffer[Character]): Unit = {
-    _characters = newc
+  def characters: ArrayBuffer[PICharacter] = {
+    val piCharactersBuffer = ArrayBuffer.empty[PICharacter]
+    _characters.foreach { character =>
+      val pi_char: PICharacter = character
+      piCharactersBuffer += pi_char
+    }
+    piCharactersBuffer
+  }
+  private def characters_=(newC: ArrayBuffer[Character]): Unit = {
+    _characters = newC
   }
   def partyState: Boolean = _partyState
-  def partyState_=(newps: Boolean): Unit = {
-    _partyState = newps
+  private def partyState_=(newPs: Boolean): Unit = {
+    _partyState = newPs
   }
 
 }
