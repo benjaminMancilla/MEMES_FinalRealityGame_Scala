@@ -1,16 +1,38 @@
 package entity
 
-abstract class AbstractEntity(name: String, hit_points: Int, defense: Int, weight:Int) extends Entity with PIEntity {
+abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, weightI:Int) extends Entity with PIEntity {
 
-  protected val _name: String = name
-  protected val _hit_points: Int = hit_points
-  protected val _defense: Int = defense
-  protected val _weight: Int = weight
+
+  private val _name: String = try {
+    if (nameI.nonEmpty) nameI else throw new IllegalArgumentException("Name can not be Empty.")
+  } catch {
+    case _: IllegalArgumentException => ""
+  }
+
+  private val _hit_points: Int = try {
+    if (hit_pointsI>0) hit_pointsI else throw new IllegalArgumentException("Hit points must be larger than 0")
+  } catch {
+    case _: IllegalArgumentException => 1
+  }
+
+
+  private val _defense: Int = try {
+    if (defenseI>=0) defenseI else throw new IllegalArgumentException("Defense must be larger than -1")
+  } catch {
+    case _: IllegalArgumentException => 0
+  }
+
+  private val _weight: Int = try {
+    if (weightI>=0) weightI else throw new IllegalArgumentException("Weight must be larger than -1")
+  } catch {
+    case _: IllegalArgumentException => 0
+  }
+
   protected val _isPlayer: Boolean
 
 
-  var _current_hit_points: Int = _hit_points
-  var _state: Boolean = true
+  private var _current_hit_points: Int = _hit_points
+  private var _state: Boolean = true
 
 
   def name: String = _name
@@ -28,33 +50,33 @@ abstract class AbstractEntity(name: String, hit_points: Int, defense: Int, weigh
 
   protected def doDamage(entity: Entity, damage: Int): Unit = {
     if (!state) {
-      printf(s"$name no puede atacar porque ya esta fuera de combate.")
+      printf(s"$name is unable to attack, already out of combat.")
     }
     else {
-      printf(s"$name atacara a ${entity.name}")
+      printf(s"$name attacks ${entity.name}")
       val extraDmg = entity.receiveDamage(damage)
       if (extraDmg > 0) {
-        printf(s"$name ha derrotado a ${entity.name} con un bonus de $extraDmg de DMG!!!!!.")
+        printf(s"$name has defeated ${entity.name} with a $extraDmg of extra DMG!!!!!.")
       }
       else if (extraDmg == 0) {
-        printf(s"$name ha derrotado a ${entity.name} justo!!")
+        printf(s"$name has defeated ${entity.name} precisely!!")
       }
       else {
-        printf(s"$name ha atacado a ${entity.name}")
+        printf(s"$name has attacked ${entity.name}")
       }
     }
   }
 
   protected def receiveDamage(damage: Int): Int = {
     val totalDmg = damage - defense
-    var extraDmg = -1 // si queda negativo entonces no se derroto al character
+    var extraDmg = -1
     if (current_hit_points - totalDmg <= 0) {
       extraDmg = totalDmg - current_hit_points
       current_hit_points = 0
       state = false
     }
     else {
-      printf(s"$name ha recibido $totalDmg de DMG")
+      printf(s"$name has received $totalDmg of DMG")
       current_hit_points -= totalDmg
       state = true
     }

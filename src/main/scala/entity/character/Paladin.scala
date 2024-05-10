@@ -2,8 +2,8 @@ package entity.character
 
 import weapon.Weapon
 
-class Paladin (name: String, hit_points: Int, defense: Int, weight: Int)
-  extends AbstractCharacter(name: String, hit_points: Int, defense: Int, weight: Int) {
+class Paladin (nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
+  extends AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int) {
   val _typeName : String = "Paladin"
 
   def checkValidWeapon(newWeapon: Weapon): Boolean = {

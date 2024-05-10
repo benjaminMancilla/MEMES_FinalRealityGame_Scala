@@ -1,6 +1,5 @@
 package entity
 
-import weapon.Weapon
 
 trait Entity extends PIEntity {
 

@@ -2,7 +2,6 @@ package entity
 
 trait PIEntity {
 
-
   def name: String
   def hit_points: Int
   def defense: Int

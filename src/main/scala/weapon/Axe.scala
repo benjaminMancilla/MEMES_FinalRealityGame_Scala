@@ -2,8 +2,8 @@ package weapon
 
 import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 
-class Axe (name: String, attackPoints: Int, weight: Int)
-  extends AbstractWeapon(name: String, attackPoints: Int, weight: Int) {
+class Axe (nameI: String, attackPointsI: Int, weightI: Int)
+  extends AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) {
 
   def canBeEquipped(character: Warrior): Boolean = true
   def canBeEquipped(character: Paladin): Boolean = true

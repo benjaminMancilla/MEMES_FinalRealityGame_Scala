@@ -3,10 +3,23 @@ package party
 import entity.character.{Character, PICharacter}
 
 import scala.collection.mutable.ArrayBuffer
-//NO PUEDE TENER MAS DE 3
-class ConcreteParty (var _characters : ArrayBuffer[Character] =  ArrayBuffer.empty[Character],
-                     var _partyState : Boolean = true)
+class ConcreteParty (charactersI : ArrayBuffer[Character])
   extends Party {
+
+  private var _characters : ArrayBuffer[Character] = try {
+    if (charactersI.nonEmpty) {
+      if (charactersI.length == 3) {
+        charactersI
+      } else {
+        throw new IllegalArgumentException("Party can not have an empty array.")
+      }
+    } else {
+      throw new IllegalArgumentException("Party must have 3 Characters.")
+    }
+  } catch {
+    case e: IllegalArgumentException => throw e
+  }
+  private var _partyState : Boolean = true
 
   def addCharacter(character: Character): Unit = {
     if (characters.contains(character)) {}

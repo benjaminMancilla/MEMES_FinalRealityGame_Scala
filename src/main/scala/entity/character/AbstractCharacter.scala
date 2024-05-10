@@ -3,8 +3,9 @@ package entity.character
 import entity.{AbstractEntity, Entity}
 import weapon.{EmptyWeapon, Weapon}
 
-abstract class AbstractCharacter(name: String, hit_points: Int, defense: Int, weight: Int)
-  extends AbstractEntity(name: String, hit_points: Int, defense: Int,weight: Int) with Character  {
+abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
+  extends AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int,weightI: Int) with Character  {
+
 
   protected val _typeName: String
 
