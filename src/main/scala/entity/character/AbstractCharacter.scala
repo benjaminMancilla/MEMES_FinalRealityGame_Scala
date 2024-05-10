@@ -2,13 +2,15 @@ package entity.character
 
 import entity.{AbstractEntity, Entity}
 import weapon.{EmptyWeapon, Weapon}
-//Usar Object Initialization pdf 07
-//Usar truquito del trait para visibility del pdf 7 para el controlador mas tarde
-abstract class AbstractCharacter extends AbstractEntity with Character  {
 
-  val _isPlayer: Boolean = true
+abstract class AbstractCharacter(name: String, hit_points: Int, defense: Int, weight: Int)
+  extends AbstractEntity(name: String, hit_points: Int, defense: Int,weight: Int) with Character  {
 
-  var _equipped_weapon: Weapon = new EmptyWeapon(_owner = None)
+  protected val _typeName: String
+
+  protected val _isPlayer: Boolean = true
+
+  protected var _equipped_weapon: Weapon = new EmptyWeapon()
 
   def equipped_weapon: Weapon = _equipped_weapon
   def equipped_weapon_=(new_weapon: Weapon): Unit = {
@@ -33,10 +35,10 @@ abstract class AbstractCharacter extends AbstractEntity with Character  {
     }
   }
 
-  def checkValidWeapon(newWeapon: Weapon): Boolean
+  protected def checkValidWeapon(newWeapon: Weapon): Boolean
 
   override def doAttack(entity: Entity, damage: Int): Unit = {
-    if (!equipped_weapon.isEmpty) {
+    if (!equipped_weapon.hasOwner) {
       doDamage(entity: Entity, damage: Int)
     }
     else {
@@ -45,6 +47,7 @@ abstract class AbstractCharacter extends AbstractEntity with Character  {
 
   }
 
+  def typeName: String = _typeName
 
 
 }

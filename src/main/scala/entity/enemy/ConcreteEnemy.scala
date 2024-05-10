@@ -2,13 +2,14 @@ package entity.enemy
 
 import entity.AbstractEntity
 
-class ConcreteEnemy (val _name: String,
-                     val _hit_points: Int,
-                     val _defense: Int,
-                     val _weight: Int,
-                     val _attack: Int,
-                     val _isPlayer: Boolean = false)
-  extends AbstractEntity with Enemy {
+class ConcreteEnemy (name: String,
+                     hit_points: Int,
+                     defense: Int,
+                     weight: Int,
+                     attack: Int)
+  extends AbstractEntity(name, hit_points, defense, weight) with Enemy {
+  private val _attack: Int = attack
+  override val _isPlayer = false
   def attack: Int = _attack
   def barValue: Int = {
     weight

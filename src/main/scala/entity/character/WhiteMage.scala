@@ -1,13 +1,10 @@
 package entity.character
 
-import weapon.{EmptyWeapon, Weapon}
+import weapon.Weapon
 
-class WhiteMage (val _name: String,
-                 val _hit_points: Int,
-                 val _defense: Int,
-                 val _weight: Int,
-                 val _magic_points: Int)
-  extends AbstractMagicCharacter {
+class WhiteMage (name: String, hit_points: Int, defense: Int, weight: Int, magic_points: Int)
+  extends AbstractMagicCharacter(name: String, hit_points: Int, defense: Int, weight: Int, magic_points: Int) {
+  val _typeName : String = "WhiteMage"
 
   def checkValidWeapon(newWeapon: Weapon): Boolean = {
     newWeapon.canBeEquipped(this)

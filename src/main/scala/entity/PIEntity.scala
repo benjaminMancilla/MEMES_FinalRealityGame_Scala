@@ -10,5 +10,6 @@ trait PIEntity {
   def current_hit_points: Int
   def state: Boolean
   def barValue: Int
+  def isPlayer: Boolean
 
 }

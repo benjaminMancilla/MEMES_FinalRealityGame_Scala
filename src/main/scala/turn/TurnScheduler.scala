@@ -6,8 +6,8 @@ import collection.mutable
 import scala.collection.mutable.ArrayBuffer
 //NO PUEDE TENER MAS DE 3 characters, los enemies son max 5, pero pueden ser menos
 class TurnScheduler(protected var _turn_entities: ArrayBuffer[Entity] = ArrayBuffer.empty[Entity]) extends TraitTurnScheduler {
-  val _turn_wait: ArrayBuffer[(Entity, Int, Int, Boolean)] = createTurnInfo
-  var _turn_ready: mutable.Queue[(Entity, Int, Int, Boolean)] = mutable.Queue.empty
+  private val _turn_wait: ArrayBuffer[(Entity, Int, Int, Boolean)] = createTurnInfo
+  private var _turn_ready: mutable.Queue[(Entity, Int, Int, Boolean)] = mutable.Queue.empty
 
   def createTurnInfo: ArrayBuffer[(Entity, Int, Int, Boolean)] = {
     val empty_list: ArrayBuffer[(Entity, Int, Int, Boolean)] = ArrayBuffer.empty[(Entity, Int, Int, Boolean)]

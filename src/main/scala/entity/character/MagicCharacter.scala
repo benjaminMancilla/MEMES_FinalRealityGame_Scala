@@ -1,11 +1,6 @@
 package entity.character
 
-trait MagicCharacter extends Character {
-  val _magic_points: Int
-  var _current_magic_points: Int
-
-  def magicPoints: Int
-  def currentMagicPoints: Int
+trait MagicCharacter extends Character with PIMagicPlayer {
   def currentMagicPoints_=(newMp: Int) : Unit
 
 }

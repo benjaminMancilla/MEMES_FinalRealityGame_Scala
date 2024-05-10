@@ -12,6 +12,7 @@ trait PIWeapon {
   def canBeEquipped(character: Ninja): Boolean
   def canBeEquipped(character: WhiteMage): Boolean
   def canBeEquipped(character: BlackMage): Boolean
-  def isEmpty: Boolean
+  def hasOwner: Boolean
+  def isEmptyWeapon: Boolean
 
 }

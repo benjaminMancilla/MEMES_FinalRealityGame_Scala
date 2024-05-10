@@ -1,12 +1,9 @@
 package weapon
 
-import entity.character.{BlackMage, Character, Ninja, Paladin, Warrior, WhiteMage}
+import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 
-class Staff (val _name: String,
-             val _attackPoints: Int,
-             val _weight: Int,
-             var _owner: Option[Character],
-             val _magicAttack: Int) extends AbstractMagicWeapon {
+class Staff (name: String, attackPoints: Int, weight: Int, magicAttack: Int)
+  extends AbstractMagicWeapon(name: String, attackPoints: Int, weight: Int, magicAttack: Int) {
 
   def canBeEquipped(character: Warrior): Boolean = false
   def canBeEquipped(character: Paladin): Boolean = false

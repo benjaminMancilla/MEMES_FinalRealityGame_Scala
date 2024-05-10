@@ -1,14 +1,12 @@
 package entity
 
-import weapon.Weapon
+abstract class AbstractEntity(name: String, hit_points: Int, defense: Int, weight:Int) extends Entity with PIEntity {
 
-abstract class AbstractEntity extends Entity with PIEntity {
-
-  val _name: String
-  val _hit_points: Int
-  val _defense: Int
-  val _weight: Int
-  val _isPlayer: Boolean
+  protected val _name: String = name
+  protected val _hit_points: Int = hit_points
+  protected val _defense: Int = defense
+  protected val _weight: Int = weight
+  protected val _isPlayer: Boolean
 
 
   var _current_hit_points: Int = _hit_points
@@ -66,6 +64,8 @@ abstract class AbstractEntity extends Entity with PIEntity {
   def doAttack(entity: Entity, damage: Int): Unit = {
     doDamage(entity: Entity, damage: Int)
   }
+
+  def isPlayer: Boolean = _isPlayer
 
 
 
