@@ -29,7 +29,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
         return
       }
       equipped_weapon.owner = None
-      _equipped_weapon = newWeapon
+      equipped_weapon = newWeapon
       newWeapon.owner = Some(this)
     } else {
       println(s"No puedes equipar ${newWeapon.name} en este personaje.")
@@ -48,7 +48,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
   protected def checkValidWeapon(newWeapon: Weapon): Boolean
 
   override def doAttack(entity: Entity, damage: Int): Unit = {
-    if (!equipped_weapon.hasOwner) {
+    if (!equipped_weapon.isEmptyWeapon) {
       doDamage(entity: Entity, damage: Int)
     }
     else {

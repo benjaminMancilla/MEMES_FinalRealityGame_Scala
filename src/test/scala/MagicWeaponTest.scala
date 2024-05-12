@@ -1,8 +1,13 @@
-import entity.character.{MagicCharacter, WhiteMage}
+import entity.character.{BlackMage, MagicCharacter, Ninja, Paladin, Warrior, WhiteMage}
 import munit.FunSuite
-import weapon.{Staff, Wand}
+import weapon.{Axe, Bow, Staff, Sword, Wand}
 
 class MagicWeaponTest extends FunSuite {
+
+  test("Negative magic points are not allowed"){
+    val staff = new Staff("Magic Staff", 10, 10 , -19)
+    assert(staff.magicAttack == 0)
+  }
 
   test("AbstractMagicWeapon should initialize correctly") {
     val staff = new Staff("Magic Staff", 70, 15, 50) : Staff
@@ -36,5 +41,33 @@ class MagicWeaponTest extends FunSuite {
     assert(wand.weight == 10)
     assert(wand.owner.isEmpty)
     assert(wand.magicAttack == 35)
+  }
+
+  test("Weapons should accept the correct Characters") {
+    val staff = new Staff("Staff", 10, 10, 10)
+    val wand = new Wand("Wand", 10, 10, 10)
+
+
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    val ninja = new Ninja("Entity1", 100, 10, 20)
+    val paladin = new Paladin("Entity1", 100, 10, 20)
+    val blackMage = new BlackMage("Entity1", 100, 10, 20, 10)
+    val whiteMage = new WhiteMage("Entity1", 100, 10, 20, 10)
+
+    //wand
+    assert(!wand.canBeEquipped(warrior))
+    assert(wand.canBeEquipped(ninja))
+    assert(!wand.canBeEquipped(paladin))
+    assert(wand.canBeEquipped(blackMage))
+    assert(wand.canBeEquipped(whiteMage))
+
+    //staff
+    assert(!staff.canBeEquipped(warrior))
+    assert(!staff.canBeEquipped(ninja))
+    assert(!staff.canBeEquipped(paladin))
+    assert(staff.canBeEquipped(blackMage))
+    assert(staff.canBeEquipped(whiteMage))
+
+
   }
 }

@@ -5,6 +5,12 @@ import weapon.{MagicWeapon, Staff, Wand}
 class MagicCharacterTest extends FunSuite {
   val wand: MagicWeapon = new Wand("MagicWand", 50, 10, 20)
 
+  test("Magic points can not be negative"){
+    val blackMage = new BlackMage("Gandalf", 100, 20, 30, -1)
+    assert(blackMage.magicPoints == 0)
+
+  }
+
   test("AbstractMagicCharacter should initialize correctly") {
 
     val blackMage = new BlackMage("Gandalf", 100, 20, 30, 150) : BlackMage

@@ -9,7 +9,6 @@ trait Character extends Entity with PICharacter {
   def unequipWeapon(): Unit
 
   def equipped_weapon: Weapon
-  def equipped_weapon_=(new_weapon: Weapon): Unit
 
 }
 

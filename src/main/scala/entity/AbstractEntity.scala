@@ -6,7 +6,7 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   private val _name: String = try {
     if (nameI.nonEmpty) nameI else throw new IllegalArgumentException("Name can not be Empty.")
   } catch {
-    case _: IllegalArgumentException => ""
+    case _: IllegalArgumentException => "Entity"
   }
 
   private val _hit_points: Int = try {
@@ -53,16 +53,16 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
       printf(s"$name is unable to attack, already out of combat.")
     }
     else {
-      printf(s"$name attacks ${entity.name}")
+      println(s"$name attacks ${entity.name}")
       val extraDmg = entity.receiveDamage(damage)
       if (extraDmg > 0) {
-        printf(s"$name has defeated ${entity.name} with a $extraDmg of extra DMG!!!!!.")
+        println(s"$name has defeated ${entity.name} with a $extraDmg of extra DMG!!!!!.")
       }
       else if (extraDmg == 0) {
-        printf(s"$name has defeated ${entity.name} precisely!!")
+        println(s"$name has defeated ${entity.name} precisely!!")
       }
       else {
-        printf(s"$name has attacked ${entity.name}")
+        println(s"$name has attacked ${entity.name}")
       }
     }
   }

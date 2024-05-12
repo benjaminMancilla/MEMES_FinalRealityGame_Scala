@@ -123,9 +123,16 @@ class TurnSchedulerTest extends FunSuite {
 
     val turnScheduler = new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, enemy1))
 
-    turnScheduler.updateActionProgress(12)
+    turnScheduler.updateActionProgress(1)
+    turnScheduler.checkWaitEntities()
     turnScheduler.resetBarValue(entity1)
     assert(turnScheduler.turn_info(0)._2 == 0)
+    turnScheduler.updateActionProgress(100)
+    turnScheduler.checkWaitEntities()
+    turnScheduler.resetBarValue(entity1)
+    assert(turnScheduler.turn_info(0)._2 == 0)
+    assert(turnScheduler.turn_wait.size == 1)
+
   }
 
   test("TurnScheduler should check entity bars correctly") {
@@ -183,5 +190,57 @@ class TurnSchedulerTest extends FunSuite {
     assert(turnScheduler.turn_ready.isEmpty)
 
   }
+
+  test("TestScheduler should be able to remove entities") {
+    val entity1 = new ConcreteEnemy("Goblin1", 30, 5, 40, 15) // 40
+    val entity2 = new ConcreteEnemy("Goblin2", 30, 5, 20, 15) // 20
+    val entityaux = new ConcreteEnemy("Goblin3", 30, 5, 20, 15)
+    val entity3 = new Warrior("Conan", 200, 30, 40) // 40 + 5
+    entity3.changeWeapon(new Sword("Sword", 50, 10))
+    val entity4 = new Ninja("Hattori", 150, 25, 30) // 30 + 5
+    entity4.changeWeapon(new Sword("Sword", 50, 10))
+    val entity5 = new Paladin("Dohvakin", 150, 25, 30) // 30
+
+    val turnScheduler = new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity4, entity5, entityaux))
+    turnScheduler.removeEntity(entity1)
+    assert(turnScheduler.turn_info.size == 5)
+
+    assert(turnScheduler.turn_wait.max == 4)
+    assert(turnScheduler.turn_wait.min == 0)
+    assert(turnScheduler.turn_info(turnScheduler.turn_wait(0))._1 == entity2)
+    turnScheduler.updateActionProgress(1000)
+    turnScheduler.checkWaitEntities()
+    turnScheduler.removeEntity(entity2)
+    assert(turnScheduler.turn_ready.size == 4)
+    assert(turnScheduler.turn_ready(0)._1 == 3)
+
+
+
+
+
+
+
+  }
+  test("TestScheduler should be able to return all ready entities") {
+    val entity1 = new ConcreteEnemy("Goblin1", 30, 5, 40, 15) // 40
+    val entity2 = new ConcreteEnemy("Goblin2", 30, 5, 20, 15) // 20
+    val entity3 = new Warrior("Conan", 200, 30, 40) // 40 + 5
+    entity3.changeWeapon(new Sword("Sword", 50, 10))
+    val entity4 = new Ninja("Hattori", 150, 25, 30) // 30 + 5
+    entity4.changeWeapon(new Sword("Sword", 50, 10))
+    val entity5 = new Paladin("Dohvakin", 150, 25, 30) // 30
+
+    val turnScheduler = new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity4, entity5))
+    assert(turnScheduler.readyEntities().isEmpty)
+    turnScheduler.updateActionProgress(1000)
+    turnScheduler.checkWaitEntities()
+    assert(turnScheduler.readyEntities().size == 5)
+
+  }
+
+  test(""){
+
+  }
+
 }
 

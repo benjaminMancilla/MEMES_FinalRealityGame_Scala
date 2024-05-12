@@ -6,7 +6,7 @@ abstract class AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) e
   protected val _name: String = try {
     if (nameI.nonEmpty) nameI else throw new IllegalArgumentException("Name of Weapon can not be Empty.")
   } catch {
-    case _: IllegalArgumentException => ""
+    case _: IllegalArgumentException => "Weapon"
   }
   private val _attackPoints: Int = try {
     if (attackPointsI>=0) attackPointsI else throw new IllegalArgumentException("Weapon power attack can not be negative.")
