@@ -122,7 +122,7 @@ class CharacterTest extends munit.FunSuite {
       entity2.changeWeapon(sword)
     }
     val output = stream.toString()
-    assert(output.contains("Sword ya tiene dueño."))
+    assert(output.contains("Sword already has an owner."))
   }
 
   test("Character can not use a weapon that does not fit their class") {
@@ -144,7 +144,7 @@ class CharacterTest extends munit.FunSuite {
         characters(i).changeWeapon(weapons(i))
       }
       val output = stream.toString()
-      assert(output.contains(s"No puedes equipar ${weapons(i).name}"))
+      assert(output.contains(s"Cannot equip ${weapons(i).name} on this character"))
 
 
     }
@@ -159,7 +159,7 @@ class CharacterTest extends munit.FunSuite {
       warrior.doAttack(ninja, 10)
     }
     val output = stream.toString()
-    assert(output.contains("no tiene arma equipada, no puede atacar"))
+    assert(output.contains("does not have an equipped weapon and cannot attack."))
 
     assert(ninja.current_hit_points == ninja.hit_points)
 

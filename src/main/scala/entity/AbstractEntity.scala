@@ -1,53 +1,135 @@
 package entity
 
+/**
+ * Abstract class representing an entity in a game with basic properties and behavior.
+ * This class extends the Entity trait and implements the PIEntity trait.
+ * An entity can be a character controlled by the player or an enemy.
+ *
+ * @param nameI       The name of the entity.
+ * @param hit_pointsI The initial hit points of the entity.
+ * @param defenseI    The defense level of the entity.
+ * @param weightI     The weight of the entity.
+ */
 abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, weightI:Int) extends Entity with PIEntity {
 
-
+  /**
+   * Name of the entity.
+   */
   private val _name: String = try {
-    if (nameI.nonEmpty) nameI else throw new IllegalArgumentException("Name can not be Empty.")
+    if (nameI.nonEmpty) nameI else throw new IllegalArgumentException("Name cannot be empty.")
   } catch {
     case _: IllegalArgumentException => "Entity"
   }
 
+  /**
+   * Hit points of the entity.
+   */
   private val _hit_points: Int = try {
-    if (hit_pointsI>0) hit_pointsI else throw new IllegalArgumentException("Hit points must be larger than 0")
+    if (hit_pointsI > 0) hit_pointsI else throw new IllegalArgumentException("Hit points must be larger than 0")
   } catch {
     case _: IllegalArgumentException => 1
   }
 
-
+  /**
+   * Defense level of the entity.
+   */
   private val _defense: Int = try {
-    if (defenseI>=0) defenseI else throw new IllegalArgumentException("Defense must be larger than -1")
+    if (defenseI >= 0) defenseI else throw new IllegalArgumentException("Defense must be larger than or equal to 0")
   } catch {
     case _: IllegalArgumentException => 0
   }
 
+  /**
+   * Weight of the entity.
+   */
   private val _weight: Int = try {
-    if (weightI>=0) weightI else throw new IllegalArgumentException("Weight must be larger than -1")
+    if (weightI >= 0) weightI else throw new IllegalArgumentException("Weight must be larger than or equal to 0")
   } catch {
     case _: IllegalArgumentException => 0
   }
 
+  /**
+   * Indicates whether the entity is controlled by the player.
+   * Must be implemented by subclasses.
+   */
   protected val _isPlayer: Boolean
 
-
+  /**
+   * Current hit points of the entity.
+   */
   private var _current_hit_points: Int = _hit_points
+
+  /**
+   * State of the entity (true for alive, false for dead).
+   */
   private var _state: Boolean = true
 
-
+  /**
+   * Gets the name of the entity.
+   *
+   * @return The name of the entity.
+   */
   def name: String = _name
+
+  /**
+   * Gets the hit points of the entity.
+   *
+   * @return The hit points of the entity.
+   */
   def hit_points: Int = _hit_points
+
+  /**
+   * Gets the defense level of the entity.
+   *
+   * @return The defense level of the entity.
+   */
   def defense: Int = _defense
+
+  /**
+   * Gets the weight of the entity.
+   *
+   * @return The weight of the entity.
+   */
   def weight: Int = _weight
+
+  /**
+   * Gets the current hit points of the entity.
+   *
+   * @return The current hit points of the entity.
+   */
   def current_hit_points: Int = _current_hit_points
+
+  /**
+   * Sets the current hit points of the entity.
+   *
+   * @param new_current_hit_points The new value for the current hit points.
+   */
   def current_hit_points_=(new_current_hit_points: Int): Unit = {
     _current_hit_points = new_current_hit_points
   }
+
+  /**
+   * Gets the state of the entity.
+   *
+   * @return The state of the entity (true for alive, false for dead).
+   */
   def state: Boolean = _state
+
+  /**
+   * Sets the state of the entity.
+   *
+   * @param new_character_state The new state of the entity (true for alive, false for dead).
+   */
   def state_=(new_character_state: Boolean): Unit = {
     _state = new_character_state
   }
 
+  /**
+   * Performs an attack on another entity.
+   *
+   * @param entity The entity being attacked.
+   * @param damage The amount of damage to be inflicted.
+   */
   def doDamage(entity: Entity, damage: Int): Unit = {
     if (!state) {
       printf(s"$name is unable to attack, already out of combat.")
@@ -66,7 +148,12 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
       }
     }
   }
-
+  /**
+   * Receives damage from an attack.
+   *
+   * @param damage The amount of damage received.
+   * @return The remaining hit points after receiving the damage.
+   */
   def receiveDamage(damage: Int): Int = {
     val totalDmg = damage - defense
     var extraDmg = -1
@@ -83,10 +170,21 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     extraDmg
   }
 
+  /**
+   * Performs an attack on another entity.
+   *
+   * @param entity The entity being attacked.
+   * @param damage The amount of damage to be inflicted.
+   */
   def doAttack(entity: Entity, damage: Int): Unit = {
     doDamage(entity: Entity, damage: Int)
   }
 
+  /**
+   * Indicates whether the entity is controlled by the player or not.
+   *
+   * @return true if the entity is controlled by the player, false otherwise.
+   */
   def isPlayer: Boolean = _isPlayer
 
 

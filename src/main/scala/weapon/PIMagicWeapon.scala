@@ -1,6 +1,11 @@
 package weapon
 
+/**
+ * Trait representing a magical weapon.
+ * Magical weapons are a subtype of weapons and possess additional magical attack capabilities.
+ */
 trait PIMagicWeapon extends PIWeapon {
-  def magicAttack: Int
 
+  /** The magical attack points of the weapon. */
+  def magicAttack: Int
 }

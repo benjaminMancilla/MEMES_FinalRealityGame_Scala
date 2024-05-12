@@ -37,7 +37,7 @@ trait PIEntity {
   def state: Boolean
 
   /**
-   * Value for the entity's status bar (e.g., representing visually the hit points).
+   * Value for the entity's combat bar.
    */
   def barValue: Int
 
