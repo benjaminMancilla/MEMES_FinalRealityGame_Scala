@@ -4,16 +4,16 @@ import entity.Entity
 
 import scala.collection.mutable.ArrayBuffer
 //PriorityQueue no deja quitar un elemento que no sea el primero, por lo que prefiero usar mi propia cola
-class TurnScheduler(turn_entities: ArrayBuffer[Entity]) extends TraitTurnScheduler {
-  private val _turn_info : ArrayBuffer[(Entity, Int, Int, Boolean)] = createTurnInfo(turn_entities)
+class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnScheduler {
+  private val _turn_info : ArrayBuffer[(Entity, Int, Int, Boolean)] = createTurnInfo(turn_entitiesI)
   checkEntitiesRestrictions()
-  private val _turn_wait: ArrayBuffer[Int] = createTurnWaitIndex(turn_entities.size)
+  private var _turn_wait: ArrayBuffer[Int] = createTurnWaitIndex(turn_entitiesI.size)
   private val _turn_ready: ArrayBuffer[(Int, Int)] = ArrayBuffer.empty
 
   private def checkEntitiesRestrictions(): Unit = {
     if (_turn_info.size > 8) {
       throw new IllegalArgumentException("Max number of entities is exceeded.")
-    } else if (_turn_info.size < 3) {
+    } else if (_turn_info.size < 4) {
       throw new IllegalArgumentException("Min number of entities is exceeded.")
     } else {
       var characterCounter: Int = 0
@@ -38,7 +38,10 @@ class TurnScheduler(turn_entities: ArrayBuffer[Entity]) extends TraitTurnSchedul
     }
     for (j <- _turn_ready.indices) {
       if(_turn_ready(j)._1 > removedIndex){
-        _turn_ready(j)._1 -= 1
+        var tuple_copy = _turn_ready(j)
+        val newInt = tuple_copy._1 - 1
+        tuple_copy = tuple_copy.copy(_1 = newInt)
+        _turn_ready.update(j, tuple_copy)
       }
     }
   }
@@ -88,12 +91,16 @@ class TurnScheduler(turn_entities: ArrayBuffer[Entity]) extends TraitTurnSchedul
   }
 
   def resetAllBarValues(): Unit = {
-    for (i <- _turn_wait) {
+    for (i <- _turn_info.indices) {
       val current_entity: Entity = _turn_info(i)._1
       val current_tuple =  (current_entity, 0, _turn_info(i)._3, false)
       _turn_info.update(i, current_tuple)
 
     }
+    for (tuple <- _turn_ready) {
+      _turn_wait += tuple._1
+    }
+    _turn_ready.clear()
   }
 
   def resetBarValue(entity: Entity): Unit = {
@@ -125,11 +132,12 @@ class TurnScheduler(turn_entities: ArrayBuffer[Entity]) extends TraitTurnSchedul
   }
 
   def checkWaitEntities(): Unit = {
-    for (i <- _turn_wait) {
+    val _turn_wait_copy = _turn_wait.toList
+    for (i <- _turn_wait_copy) {
       if (_turn_info(i)._4) {
         val current_max = _turn_info(i)._3
         val current_bar = _turn_info(i)._2
-        val ready_tuple = _turn_info(i).copy(_2 = current_bar - current_max, _4 = true) // ojo
+        val ready_tuple = _turn_info(i).copy(_2 = current_bar - current_max, _4 = true)
         _turn_wait -= i
         addReady((i, current_bar - current_max))
         _turn_info.update(i, ready_tuple)
@@ -138,7 +146,7 @@ class TurnScheduler(turn_entities: ArrayBuffer[Entity]) extends TraitTurnSchedul
   }
 
   def readyEntities(): ArrayBuffer[Entity] = {
-    val readyEntities: ArrayBuffer[Entity] = ArrayBuffer[Entity].empty
+    val readyEntities: ArrayBuffer[Entity] = ArrayBuffer.empty[Entity]
     for (tuple <- _turn_ready) {
       readyEntities += _turn_info(tuple._1)._1
     }
@@ -148,7 +156,7 @@ class TurnScheduler(turn_entities: ArrayBuffer[Entity]) extends TraitTurnSchedul
   def addEntity(new_char: Entity): Unit =  {
     if (_turn_info.exists(tuple => tuple._1 == new_char)) {}
     else {
-      _turn_info += (new_char, 0, maxBarValue(new_char), false)
+      _turn_info += ((new_char, 0, maxBarValue(new_char), false))
       _turn_wait += _turn_info.size-1
     }
     checkEntitiesRestrictions()
@@ -204,5 +212,6 @@ class TurnScheduler(turn_entities: ArrayBuffer[Entity]) extends TraitTurnSchedul
 
   def turn_wait: ArrayBuffer[Int] = _turn_wait
   def turn_ready: ArrayBuffer[(Int, Int)] = _turn_ready
+  def turn_info: ArrayBuffer[(Entity, Int, Int, Boolean)] = _turn_info
   
 }

@@ -10,5 +10,3 @@ abstract class AbstractMagicWeapon(nameI: String, attackPointsI: Int, weightI: I
   def magicAttack: Int = _magicAttack
 
 }
-
-// git commit -m "ADD: added all restrictions for constructors parameters (Entity, TurnScheduler, Party and Weapon)"

@@ -11,7 +11,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
 
   protected val _isPlayer: Boolean = true
 
-  protected var _equipped_weapon: Weapon = new EmptyWeapon()
+  private var _equipped_weapon: Weapon = new EmptyWeapon()
 
   def equipped_weapon: Weapon = _equipped_weapon
   def equipped_weapon_=(new_weapon: Weapon): Unit = {
@@ -34,6 +34,15 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
     } else {
       println(s"No puedes equipar ${newWeapon.name} en este personaje.")
     }
+  }
+
+  def unequipWeapon(): Unit = {
+    equipped_weapon.owner = None
+    val emptyW = new EmptyWeapon()
+    _equipped_weapon = emptyW
+    emptyW.owner = Some(this)
+
+
   }
 
   protected def checkValidWeapon(newWeapon: Weapon): Boolean

@@ -4,9 +4,9 @@ import entity.Entity
 import weapon.Weapon
 
 trait Character extends Entity with PICharacter {
-  var _equipped_weapon: Weapon
 
   def changeWeapon(new_weapon : Weapon): Unit
+  def unequipWeapon(): Unit
 
   def equipped_weapon: Weapon
   def equipped_weapon_=(new_weapon: Weapon): Unit

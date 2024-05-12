@@ -40,15 +40,15 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   def defense: Int = _defense
   def weight: Int = _weight
   def current_hit_points: Int = _current_hit_points
-  protected def current_hit_points_=(new_current_hit_points: Int): Unit = {
+  def current_hit_points_=(new_current_hit_points: Int): Unit = {
     _current_hit_points = new_current_hit_points
   }
   def state: Boolean = _state
-  protected def state_=(new_character_state: Boolean): Unit = {
+  def state_=(new_character_state: Boolean): Unit = {
     _state = new_character_state
   }
 
-  protected def doDamage(entity: Entity, damage: Int): Unit = {
+  def doDamage(entity: Entity, damage: Int): Unit = {
     if (!state) {
       printf(s"$name is unable to attack, already out of combat.")
     }
@@ -67,7 +67,7 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     }
   }
 
-  protected def receiveDamage(damage: Int): Int = {
+  def receiveDamage(damage: Int): Int = {
     val totalDmg = damage - defense
     var extraDmg = -1
     if (current_hit_points - totalDmg <= 0) {
