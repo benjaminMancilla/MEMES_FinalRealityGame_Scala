@@ -28,6 +28,8 @@ trait Character extends Entity with PICharacter {
    */
   def equipped_weapon: Weapon
 
+  def checkValidWeapon(newWeapon: Weapon): Boolean
+
 }
 
 

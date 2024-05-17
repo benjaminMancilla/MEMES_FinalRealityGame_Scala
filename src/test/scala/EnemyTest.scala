@@ -4,7 +4,7 @@ class EnemyTest extends FunSuite {
 
   test("ConcreteEnemy should not initialize with invalid parameters"){
     val enemy = new ConcreteEnemy("Orc", 50, 10, 50, -20)
-    assert(enemy.attack == 0)
+    assert(enemy.attack == 10)
   }
 
   test("ConcreteEnemy should initialize correctly") {

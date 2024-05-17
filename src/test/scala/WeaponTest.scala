@@ -1,4 +1,4 @@
-import entity.character.{BlackMage, Character, Ninja, Paladin, Warrior, WhiteMage}
+import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import munit.FunSuite
 import weapon.{Axe, Bow, EmptyWeapon, Sword}
 class WeaponTest extends FunSuite {
@@ -6,9 +6,8 @@ class WeaponTest extends FunSuite {
   test("AbstractWeapon should not initialize with invalid parameters"){
     val axe = new Axe("", -1, -20) : Axe
     assert(axe.name == "Weapon")
-    assert(axe.attackPoints == 0)
-    assert(axe.weight == 0)
-
+    assert(axe.attackPoints == 10)
+    assert(axe.weight == 10)
   }
 
   test("Weapons should not be empty weapon (except empty weapon"){

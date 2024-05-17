@@ -1,6 +1,7 @@
 package party
 
 import entity.character.{Character, PICharacter}
+import exceptions.EntityOverflow
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -21,13 +22,13 @@ class ConcreteParty (charactersI : ArrayBuffer[Character])
       if (charactersI.length == 3) {
         charactersI
       } else {
-        throw new IllegalArgumentException("Party can not have an empty array.")
+        throw new EntityOverflow("Party can not have an empty array.")
       }
     } else {
-      throw new IllegalArgumentException("Party must have 3 Characters.")
+      throw new EntityOverflow("Party must have 3 Characters.")
     }
   } catch {
-    case e: IllegalArgumentException => throw e
+    case e: EntityOverflow => throw e
   }
 
   /**

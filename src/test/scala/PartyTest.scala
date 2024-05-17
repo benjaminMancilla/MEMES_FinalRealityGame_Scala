@@ -1,4 +1,5 @@
 import entity.character.{BlackMage, Character, Ninja, Warrior}
+import exceptions.EntityOverflow
 import munit.FunSuite
 import party.ConcreteParty
 
@@ -11,10 +12,10 @@ class PartyTest extends FunSuite {
   val mage: BlackMage = new BlackMage("elmago", 160, 10, 30, 80)
 
   test("ConcreteParty should initialize correctly") {
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new ConcreteParty(ArrayBuffer.empty[Character])
     }
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new ConcreteParty(ArrayBuffer[Character](warrior))
     }
     val party = new ConcreteParty(ArrayBuffer(warrior, ninja, mage))

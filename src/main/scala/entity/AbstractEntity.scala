@@ -1,5 +1,7 @@
 package entity
 
+import exceptions.{InvalidNameException, InvalidStatException, Require}
+
 /**
  * Abstract class representing an entity in a game with basic properties and behavior.
  * This class extends the Entity trait and implements the PIEntity trait.
@@ -15,38 +17,35 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   /**
    * Name of the entity.
    */
-  private val _name: String = try {
-    if (nameI.nonEmpty) nameI else throw new IllegalArgumentException("Name cannot be empty.")
-  } catch {
-    case _: IllegalArgumentException => "Entity"
+  private val _name: String = try {Require.Name(nameI) lengthAtLeast 3}
+  catch {
+    case _: InvalidNameException => "Entity"
   }
 
   /**
    * Hit points of the entity.
    */
-  private val _hit_points: Int = try {
-    if (hit_pointsI > 0) hit_pointsI else throw new IllegalArgumentException("Hit points must be larger than 0")
-  } catch {
-    case _: IllegalArgumentException => 1
+  private val _hit_points: Int = try {Require.Stat(hit_pointsI, "hit_points") in (1 to 10000)}
+  catch {
+    case _: InvalidStatException => 10
   }
 
   /**
    * Defense level of the entity.
    */
-  private val _defense: Int = try {
-    if (defenseI >= 0) defenseI else throw new IllegalArgumentException("Defense must be larger than or equal to 0")
-  } catch {
-    case _: IllegalArgumentException => 0
+  private val _defense: Int = try {Require.Stat(defenseI, "defense") atLeast  0 }
+  catch {
+    case _: InvalidStatException => 0
   }
 
   /**
    * Weight of the entity.
    */
-  private val _weight: Int = try {
-    if (weightI >= 0) weightI else throw new IllegalArgumentException("Weight must be larger than or equal to 0")
-  } catch {
-    case _: IllegalArgumentException => 0
+  private val _weight: Int = try {Require.Stat(weightI, "weight") atLeast  0 }
+  catch {
+    case _: InvalidStatException => 0
   }
+
 
   /**
    * Indicates whether the entity is controlled by the player.

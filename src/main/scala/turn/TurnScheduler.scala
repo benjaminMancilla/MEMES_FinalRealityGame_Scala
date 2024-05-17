@@ -1,6 +1,7 @@
 package turn
 
 import entity.Entity
+import exceptions.EntityOverflow
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -33,9 +34,9 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
   // Check if the number of entities and characters meets the required restrictions.
   private def checkEntitiesRestrictions(): Unit = {
     if (_turn_info.size > 8) {
-      throw new IllegalArgumentException("Max number of entities is exceeded.")
+      throw new EntityOverflow("Max number of entities is exceeded.")
     } else if (_turn_info.size < 4) {
-      throw new IllegalArgumentException("Min number of entities is exceeded.")
+      throw new EntityOverflow("Min number of entities is exceeded.")
     } else {
       var characterCounter: Int = 0
       for (tuple <- _turn_info) {
@@ -44,7 +45,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
         }
       }
       if (characterCounter != 3) {
-        throw new IllegalArgumentException("Max number of characters (3) is exceeded.")
+        throw new EntityOverflow("Max number of characters (3) is exceeded.")
       }
     }
   }

@@ -1,6 +1,7 @@
 package entity.character
 
 import entity.{AbstractEntity, Entity}
+import exceptions.{InvalidWeaponException, Require}
 import weapon.{EmptyWeapon, Weapon}
 
 /**
@@ -60,17 +61,20 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    *
    * @param newWeapon The new weapon to be equipped.
    */
+  private def setWeapon(newWeapon: Weapon): Unit = {
+    Require.WeaponAssigment(newWeapon, this) validWeapon (newWeapon, this)
+    equipped_weapon.owner = None
+    equipped_weapon = newWeapon
+    newWeapon.owner = Some(this)
+  }
+
   def changeWeapon(newWeapon: Weapon): Unit = {
-    if (checkValidWeapon(newWeapon: Weapon)) {
-      if (newWeapon.owner.isDefined) {
-        println(s"${newWeapon.name} already has an owner.")
-        return
-      }
-      equipped_weapon.owner = None
-      equipped_weapon = newWeapon
-      newWeapon.owner = Some(this)
-    } else {
-      println(s"Cannot equip ${newWeapon.name} on this character.")
+    try {
+      setWeapon(newWeapon)
+    } catch {
+      case e: InvalidWeaponException =>
+        println(e.getMessage)
+        setWeapon(new EmptyWeapon())
     }
   }
 
@@ -90,7 +94,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * @param newWeapon The new weapon to be equipped.
    * @return true if the weapon can be equipped, false otherwise.
    */
-  protected def checkValidWeapon(newWeapon: Weapon): Boolean
+  def checkValidWeapon(newWeapon: Weapon): Boolean
 
   /**
    * Performs an attack on another entity.

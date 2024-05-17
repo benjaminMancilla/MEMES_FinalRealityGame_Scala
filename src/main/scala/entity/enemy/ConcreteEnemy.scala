@@ -1,6 +1,7 @@
 package entity.enemy
 
 import entity.AbstractEntity
+import exceptions.{InvalidStatException, Require}
 
 /**
  * Concrete class representing an enemy entity in a game.
@@ -18,10 +19,9 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
   /**
    * Attack strength of the enemy.
    */
-  private val _attack: Int = try {
-    if (attackI >= 0) attackI else throw new IllegalArgumentException("Attack must be larger than or equal to 0")
-  } catch {
-    case _: IllegalArgumentException => 0
+  private val _attack: Int = try {Require.Stat(attackI, "attack") in (0 to 10000)}
+  catch {
+    case _: InvalidStatException => 10
   }
 
   /**

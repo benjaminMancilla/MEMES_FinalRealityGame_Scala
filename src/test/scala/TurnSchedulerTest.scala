@@ -1,6 +1,7 @@
 import entity.Entity
 import entity.character.{Ninja, Paladin, Warrior}
 import entity.enemy.ConcreteEnemy
+import exceptions.EntityOverflow
 import munit.FunSuite
 import turn.TurnScheduler
 import weapon.Sword
@@ -27,31 +28,31 @@ class TurnSchedulerTest extends FunSuite {
     val entity2 = new Ninja("Hattori", 150, 25, 30)
     val entity3 = new ConcreteEnemy("Juan", 100, 20, 30, 10)
 
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer(entity1, entity2))
     }
 
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer(entity1, entity2, entity1))
     }
 
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity3))
     }
 
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer(entity1, entity2, entity2, entity2))
     }
 
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer(entity1, entity2, entity2, entity3, entity3, entity3, entity3, entity3, entity3))
     }
 
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity3, entity3, entity3, entity3))
     }
 
-    intercept[IllegalArgumentException] {
+    intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer.empty[Entity])
     }
   }
@@ -213,12 +214,6 @@ class TurnSchedulerTest extends FunSuite {
     turnScheduler.removeEntity(entity2)
     assert(turnScheduler.turn_ready.size == 4)
     assert(turnScheduler.turn_ready(0)._1 == 3)
-
-
-
-
-
-
 
   }
   test("TestScheduler should be able to return all ready entities") {

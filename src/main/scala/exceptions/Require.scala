@@ -1,5 +1,8 @@
 package exceptions
 
+import weapon.Weapon
+import entity.character.Character
+
 /** The `Require` object provides utilities for validating specific constraints or requirements.
  *
  * This object includes the `Stat` class, designed to validate a statistic's value against
@@ -73,4 +76,29 @@ object Require {
       if (value >= lo) value
       else throw new InvalidStatException(s"$name should be at least $lo but was $value")
   }
+
+  final case class Name(name: String){
+    def lengthAtLeast(length: Int): String =
+      if(name.length >= length) name
+      else throw new InvalidNameException(s"The name of the entity should be at least $length long.")
+  }
+
+  final case class WeaponAssigment(weapon: Weapon, character: Character){
+    def validWeapon(weapon: Weapon, character: Character): Weapon = {
+      if (character.checkValidWeapon(weapon)) {
+        if (weapon.owner.isEmpty) {
+          weapon
+        }
+
+        else {
+          val ownerName: String = weapon.owner.map(_.name).getOrElse("No owner")
+          throw new InvalidWeaponException(s"${weapon.name} is already being used by $ownerName")}
+      }
+      else{
+
+        throw new InvalidWeaponException(s"Cannot equip ${weapon.name} on this character")}
+      }
+    }
+
+
 }

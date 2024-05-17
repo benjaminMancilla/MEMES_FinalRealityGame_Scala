@@ -1,6 +1,6 @@
 import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import weapon.{Axe, Bow, Staff, Sword, Wand, Weapon}
+import weapon.{Axe, Bow, Staff, Sword, Wand}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -23,13 +23,11 @@ class CharacterTest extends munit.FunSuite {
     val conan = new Warrior("", 0, 30, 40)
     assert(conan.name == "Entity")
     val conan1 = new Warrior("Conan", 0, 30, 40)
-    assert(conan1.hit_points == 1)
+    assert(conan1.hit_points == 10)
     val conan2 = new Warrior("Conan", 200, -1, 40)
     assert(conan2.defense == 0)
     val conan3 = new Warrior("Conan", 200, 30, -1)
     assert(conan3.weight == 0)
-
-
 
   }
 
@@ -122,7 +120,7 @@ class CharacterTest extends munit.FunSuite {
       entity2.changeWeapon(sword)
     }
     val output = stream.toString()
-    assert(output.contains("Sword already has an owner."))
+    assert(output.contains("Sword is already being used by Entity1"))
   }
 
   test("Character can not use a weapon that does not fit their class") {
