@@ -9,7 +9,7 @@ import entity.character.Character
  * Weapons can either be ordinary or magical.
  * Magical weapons can be used to cast spells.
  * Each weapon can only be equipped by one character at a time.
- * EmptyWeapon represents being unarmed.
+ * None in equipped weapon represents being unarmed.
  */
 trait Weapon extends PIWeapon {
 
@@ -20,11 +20,5 @@ trait Weapon extends PIWeapon {
    */
   def owner_=(newOwner: Option[Character]): Unit
 
-  /**
-   * Sets whether the weapon has an owner.
-   *
-   * @param newBool The boolean value indicating whether the weapon has an owner.
-   */
-  def setHasOwner(newBool: Boolean): Unit
 }
 

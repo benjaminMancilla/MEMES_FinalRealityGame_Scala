@@ -172,6 +172,26 @@ class CharacterTest extends munit.FunSuite {
     intercept[ProhibitedTarget]{
       warrior.doAttack(ninja, 10)
     }
+
+  }
+
+  test("Character should be able to unequip the weapon"){
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    val sword =  new Sword("Sword", 50, 10)
+    warrior.changeWeapon(Some(sword))
+    assert(warrior.equipped_weapon.exists(_.name == "Sword"))
+    assert(sword.owner.exists(_.name == "Entity1"))
+    warrior.unequipWeapon()
+    assert(warrior.equipped_weapon.isEmpty)
+    assert(sword.owner.isEmpty)
+    warrior.changeWeapon(Some(sword))
+    warrior.changeWeapon(None)
+    assert(warrior.equipped_weapon.isEmpty)
+    assert(sword.owner.isEmpty)
+
+
+
+
   }
 
 

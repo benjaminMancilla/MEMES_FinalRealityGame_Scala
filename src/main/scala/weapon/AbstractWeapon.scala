@@ -11,7 +11,7 @@ import exceptions.{InvalidNameException, InvalidStatException, Require}
  * Weapons can either be ordinary or magical.
  * Magical weapons can be used to cast spells.
  * Each weapon can only be equipped by one character at a time.
- * EmptyWeapon represents being unarmed.
+ * None value in equipped weapon represents being unarmed.
  *
  * @param nameI         The name of the weapon.
  * @param attackPointsI The attack points of the weapon.
@@ -59,17 +59,6 @@ abstract class AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) e
   def owner_=(newOwner: Option[Character]): Unit = {
     _owner = newOwner
   }
-
-  /** Indicates whether the weapon has an owner. */
-  def hasOwner: Boolean = _hasOwner
-
-  /** Sets whether the weapon has an owner. */
-  def setHasOwner(newBool: Boolean): Unit = {
-    _hasOwner = newBool
-  }
-
-  /** Indicates whether the weapon is empty (unarmed). */
-  def isEmptyWeapon: Boolean = false
 
 }
 

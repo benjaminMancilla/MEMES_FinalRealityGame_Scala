@@ -9,7 +9,7 @@ import entity.character.{BlackMage, Character, Ninja, Paladin, Warrior, WhiteMag
  * Weapons can either be ordinary or magical.
  * Magical weapons can be used to cast spells.
  * Each weapon can only be equipped by one character at a time.
- * EmptyWeapon represents being unarmed.
+ * No value for equipped weapon represents being unarmed.
  */
 trait PIWeapon {
 
@@ -65,10 +65,5 @@ trait PIWeapon {
    */
   def canBeEquipped(character: BlackMage): Boolean
 
-  /** Indicates whether the weapon has an owner. */
-  def hasOwner: Boolean
-
-  /** Indicates whether the weapon is empty (unarmed). */
-  def isEmptyWeapon: Boolean
 }
 

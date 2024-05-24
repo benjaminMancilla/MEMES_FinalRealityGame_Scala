@@ -1,3 +1,4 @@
+import entity.character.Warrior
 import entity.enemy.ConcreteEnemy
 import exceptions.{InvalidStatException, ProhibitedTarget}
 import munit.FunSuite
@@ -38,6 +39,13 @@ class EnemyTest extends FunSuite {
     intercept[ProhibitedTarget]{
       enemy.doAttack(enemy2, 10)
     }
+  }
+
+  test("An enemy should be able to attack a Character"){
+    val enemy = new ConcreteEnemy("Troll", 80, 15, 60, 25)
+    val warrior = new Warrior("Juan", 100, 10, 10)
+    enemy.doAttack(warrior, 20)
+    assert(warrior.current_hit_points == 90)
   }
 
 }
