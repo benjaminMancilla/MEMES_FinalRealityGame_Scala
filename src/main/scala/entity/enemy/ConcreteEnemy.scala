@@ -1,7 +1,8 @@
 package entity.enemy
 
-import entity.AbstractEntity
-import exceptions.{InvalidStatException, Require}
+import entity.character.Character
+import entity.{AbstractEntity, Entity}
+import exceptions.{ ProhibitedTarget, Require}
 
 /**
  * Concrete class representing an enemy entity in a game.
@@ -19,10 +20,8 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
   /**
    * Attack strength of the enemy.
    */
-  private val _attack: Int = try {Require.Stat(attackI, "attack") in (0 to 10000)}
-  catch {
-    case _: InvalidStatException => 10
-  }
+  private val _attack: Int = {Require.Stat(attackI, "attack") in (0 to 10000)}
+
 
   /**
    * Indicates whether the enemy is controlled by the player.
@@ -43,6 +42,14 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
    */
   def barValue: Int = {
     weight
+  }
+
+  def doAttack(entity: ConcreteEnemy, damage: Int): Unit = {
+    throw new ProhibitedTarget("An enemy can not attack other enemies")
+  }
+
+  def doAttack(entity: Character, damage: Int): Unit = {
+    doDamage(entity: Entity, damage: Int)
   }
 }
 

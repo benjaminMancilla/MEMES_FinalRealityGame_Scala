@@ -1,5 +1,7 @@
 package entity.character
 
+import exceptions.Require
+
 
 /**
  * Abstract class representing a magic character entity in a game.
@@ -17,11 +19,7 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
   /**
    * The total magic points of the magic character.
    */
-  private val _magic_points: Int = try {
-    if (magic_pointsI >= 0) magic_pointsI else throw new IllegalArgumentException("Magic Points must be larger than or equal to 0")
-  } catch {
-    case _: IllegalArgumentException => 0
-  }
+  private val _magic_points: Int = {Require.Stat(magic_pointsI, "magic_points") in (0 to 10000)}
 
   /**
    * The current magic points of the magic character.

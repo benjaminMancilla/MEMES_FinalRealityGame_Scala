@@ -17,34 +17,24 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   /**
    * Name of the entity.
    */
-  private val _name: String = try {Require.Name(nameI) lengthAtLeast 3}
-  catch {
-    case _: InvalidNameException => "Entity"
-  }
+  private val _name: String = {Require.Name(nameI) lengthAtLeast 3}
 
   /**
    * Hit points of the entity.
    */
-  private val _hit_points: Int = try {Require.Stat(hit_pointsI, "hit_points") in (1 to 10000)}
-  catch {
-    case _: InvalidStatException => 10
-  }
+  private val _hit_points: Int = {Require.Stat(hit_pointsI, "hit_points") in (1 to 10000)}
+
 
   /**
    * Defense level of the entity.
    */
-  private val _defense: Int = try {Require.Stat(defenseI, "defense") atLeast  0 }
-  catch {
-    case _: InvalidStatException => 0
-  }
+  private val _defense: Int = {Require.Stat(defenseI, "defense") atLeast  0 }
 
   /**
    * Weight of the entity.
    */
-  private val _weight: Int = try {Require.Stat(weightI, "weight") atLeast  0 }
-  catch {
-    case _: InvalidStatException => 0
-  }
+  private val _weight: Int = {Require.Stat(weightI, "weight") atLeast  0 }
+
 
 
   /**

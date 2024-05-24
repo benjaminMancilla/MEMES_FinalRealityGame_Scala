@@ -1,10 +1,12 @@
 import entity.enemy.ConcreteEnemy
+import exceptions.{InvalidStatException, ProhibitedTarget}
 import munit.FunSuite
 class EnemyTest extends FunSuite {
 
   test("ConcreteEnemy should not initialize with invalid parameters"){
-    val enemy = new ConcreteEnemy("Orc", 50, 10, 50, -20)
-    assert(enemy.attack == 10)
+    intercept[InvalidStatException]{
+      new ConcreteEnemy("Orc", 50, 10, 50, -20)
+    }
   }
 
   test("ConcreteEnemy should initialize correctly") {
@@ -28,6 +30,14 @@ class EnemyTest extends FunSuite {
     val enemy = new ConcreteEnemy("Troll", 80, 15, 60, 25)
     enemy.state = false
     assert(!enemy.state)
+  }
+
+  test("An enemy can not attack another enemy"){
+    val enemy = new ConcreteEnemy("Troll", 80, 15, 60, 25)
+    val enemy2 = new ConcreteEnemy("Goblin", 30, 5, 40, 15)
+    intercept[ProhibitedTarget]{
+      enemy.doAttack(enemy2, 10)
+    }
   }
 
 }

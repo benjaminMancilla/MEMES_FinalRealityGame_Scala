@@ -1,5 +1,6 @@
 import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import entity.enemy.ConcreteEnemy
+import exceptions.{InvalidNameException, InvalidStatException, ProhibitedTarget}
 import weapon.{Axe, Bow, Staff, Sword, Wand}
 
 import scala.collection.mutable.ArrayBuffer
@@ -20,14 +21,19 @@ class CharacterTest extends munit.FunSuite {
   }
 
   test("Entity should not initialize with invalid parameters") {
-    val conan = new Warrior("", 0, 30, 40)
-    assert(conan.name == "Entity")
-    val conan1 = new Warrior("Conan", 0, 30, 40)
-    assert(conan1.hit_points == 10)
-    val conan2 = new Warrior("Conan", 200, -1, 40)
-    assert(conan2.defense == 0)
-    val conan3 = new Warrior("Conan", 200, 30, -1)
-    assert(conan3.weight == 0)
+    intercept[InvalidNameException] {
+      new Warrior("", 0, 30, 40)
+    }
+    intercept[InvalidStatException] {
+      new Warrior("Conan", 0, 30, 40)
+    }
+    intercept[InvalidStatException] {
+      new Warrior("Conan", 200, -1, 40)
+    }
+    intercept[InvalidStatException] {
+      new Warrior("Conan", 200, 30, -1)
+    }
+
 
   }
 
@@ -151,17 +157,25 @@ class CharacterTest extends munit.FunSuite {
 
   test("Character should not be able to attack if it is disarmed"){
     val warrior = new Warrior("Entity1", 100, 10, 20)
-    val ninja = new Ninja("Entity1", 100, 10, 20)
+    val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
     val stream = new java.io.ByteArrayOutputStream()
     Console.withOut(stream) {
-      warrior.doAttack(ninja, 10)
+      warrior.doAttack(enemy, 10)
     }
     val output = stream.toString()
     assert(output.contains("does not have an equipped weapon and cannot attack."))
 
-    assert(ninja.current_hit_points == ninja.hit_points)
+    assert(enemy.current_hit_points == enemy.hit_points)
 
 
+  }
+
+  test("Character can not attack another Character"){
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    val ninja = new Ninja("Entity1", 100, 10, 20)
+    intercept[ProhibitedTarget]{
+      warrior.doAttack(ninja, 10)
+    }
   }
 
 

@@ -1,7 +1,8 @@
 package entity.character
 
+import entity.enemy.ConcreteEnemy
 import entity.{AbstractEntity, Entity}
-import exceptions.{InvalidWeaponException, Require}
+import exceptions.{InvalidWeaponException, ProhibitedTarget, Require}
 import weapon.{EmptyWeapon, Weapon}
 
 /**
@@ -102,7 +103,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * @param entity The entity being attacked.
    * @param damage The amount of damage to be inflicted.
    */
-  override def doAttack(entity: Entity, damage: Int): Unit = {
+  def doAttack(entity: ConcreteEnemy, damage: Int): Unit = {
     if (!equipped_weapon.isEmptyWeapon) {
       doDamage(entity: Entity, damage: Int)
     }
@@ -111,12 +112,17 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
     }
   }
 
+  def doAttack(entity: Character, damage: Int): Unit = {
+    throw new ProhibitedTarget("Characters can not attack other characters")
+  }
+
   /**
    * Gets the type name of the character.
    *
    * @return The type name of the character.
    */
   def typeName: String = _typeName
+
 }
 
 
