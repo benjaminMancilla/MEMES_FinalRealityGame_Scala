@@ -60,7 +60,7 @@ class TurnSchedulerTest extends FunSuite {
   test("TurnScheduler should update entity bars correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
     val sword1 = new Sword("Sword", 50, 10)
-    entity1.changeWeapon(sword1)
+    entity1.changeWeapon(Some(sword1))
     val entity2 = new Ninja("Hattori", 150, 25, 30)
     val entity3 = new Paladin("Dohvakin", 150, 25, 30)
     val enemy1 = new ConcreteEnemy("Goblin1", 30, 5, 40, 15)
@@ -80,7 +80,7 @@ class TurnSchedulerTest extends FunSuite {
   test("TurnScheduler should reset entity bars correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
     val sword1 = new Sword("Sword", 50, 10)
-    entity1.changeWeapon(sword1)
+    entity1.changeWeapon(Some(sword1))
     val entity2 = new Ninja("Hattori", 150, 25, 30)
     val entity3 = new Paladin("Dohvakin", 150, 25, 30)
     val enemy1 = new ConcreteEnemy("Goblin2", 30, 5, 40, 15)
@@ -97,9 +97,9 @@ class TurnSchedulerTest extends FunSuite {
 
   test("TurnScheduler should update maxbars correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
-    entity1.changeWeapon(new Sword("Sword", 50, 10))
+    entity1.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity2 = new Ninja("Hattori", 150, 25, 30)
-    entity2.changeWeapon(new Sword("Sword", 50, 10))
+    entity2.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity3 = new Paladin("Dohvakin", 150, 25, 30)
     val enemy1 = new ConcreteEnemy("Goblin2", 30, 5, 40, 15)
 
@@ -107,7 +107,7 @@ class TurnSchedulerTest extends FunSuite {
     assert(turnScheduler.turn_info(0)._3 == 40 + 10/2)
     assert(turnScheduler.turn_info(1)._3 == 30 + 10/2)
 
-    entity1.changeWeapon(new Sword("Sword", 50, 20))
+    entity1.changeWeapon(Some(new Sword("Sword", 50, 20)))
     turnScheduler.updateMaxBars()
 
     assert(turnScheduler.turn_info(0)._3 == 40 + 20/2)
@@ -116,9 +116,9 @@ class TurnSchedulerTest extends FunSuite {
 
   test("TurnScheduler should reset entity 1 bar correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
-    entity1.changeWeapon(new Sword("Sword", 50, 10))
+    entity1.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity2 = new Ninja("Hattori", 150, 25, 30)
-    entity2.changeWeapon(new Sword("Sword", 50, 10))
+    entity2.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity3 = new Paladin("Dohvakin", 150, 25, 30)
     val enemy1 = new ConcreteEnemy("Goblin2", 30, 5, 40, 15)
 
@@ -138,9 +138,9 @@ class TurnSchedulerTest extends FunSuite {
 
   test("TurnScheduler should check entity bars correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
-    entity1.changeWeapon(new Sword("Sword", 50, 10))
+    entity1.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity2 = new Ninja("Hattori", 150, 25, 30)
-    entity2.changeWeapon(new Sword("Sword", 50, 10))
+    entity2.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity3 = new Paladin("Dohvakin", 150, 25, 30)
     val enemy1 = new ConcreteEnemy("Goblin2", 30, 5, 40, 15)
 
@@ -160,9 +160,9 @@ class TurnSchedulerTest extends FunSuite {
     val entity1 = new ConcreteEnemy("Goblin1", 30, 5, 40, 15) // 40
     val entity2 = new ConcreteEnemy("Goblin2", 30, 5, 20, 15) // 20
     val entity3 = new Warrior("Conan", 200, 30, 40) // 40 + 5
-    entity3.changeWeapon(new Sword("Sword", 50, 10))
+    entity3.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity4 = new Ninja("Hattori", 150, 25, 30) // 30 + 5
-    entity4.changeWeapon(new Sword("Sword", 50, 10))
+    entity4.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity5 = new Paladin("Dohvakin", 150, 25, 30) // 30
 
     val turnScheduler = new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity4, entity5))
@@ -197,9 +197,9 @@ class TurnSchedulerTest extends FunSuite {
     val entity2 = new ConcreteEnemy("Goblin2", 30, 5, 20, 15) // 20
     val entityaux = new ConcreteEnemy("Goblin3", 30, 5, 20, 15)
     val entity3 = new Warrior("Conan", 200, 30, 40) // 40 + 5
-    entity3.changeWeapon(new Sword("Sword", 50, 10))
+    entity3.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity4 = new Ninja("Hattori", 150, 25, 30) // 30 + 5
-    entity4.changeWeapon(new Sword("Sword", 50, 10))
+    entity4.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity5 = new Paladin("Dohvakin", 150, 25, 30) // 30
 
     val turnScheduler = new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity4, entity5, entityaux))
@@ -220,9 +220,9 @@ class TurnSchedulerTest extends FunSuite {
     val entity1 = new ConcreteEnemy("Goblin1", 30, 5, 40, 15) // 40
     val entity2 = new ConcreteEnemy("Goblin2", 30, 5, 20, 15) // 20
     val entity3 = new Warrior("Conan", 200, 30, 40) // 40 + 5
-    entity3.changeWeapon(new Sword("Sword", 50, 10))
+    entity3.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity4 = new Ninja("Hattori", 150, 25, 30) // 30 + 5
-    entity4.changeWeapon(new Sword("Sword", 50, 10))
+    entity4.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity5 = new Paladin("Dohvakin", 150, 25, 30) // 30
 
     val turnScheduler = new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity4, entity5))

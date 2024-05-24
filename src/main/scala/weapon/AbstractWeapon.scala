@@ -38,7 +38,7 @@ abstract class AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) e
   }
 
   /** The owner of the weapon. */
-  private  var _owner: Option[Character] = None
+  private var _owner: Option[Character] = None
 
   /** Indicates whether the weapon has an owner. */
   private var _hasOwner: Boolean = false

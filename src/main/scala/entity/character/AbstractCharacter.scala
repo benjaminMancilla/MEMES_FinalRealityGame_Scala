@@ -2,8 +2,8 @@ package entity.character
 
 import entity.enemy.ConcreteEnemy
 import entity.{AbstractEntity, Entity}
-import exceptions.{InvalidWeaponException, ProhibitedTarget, Require}
-import weapon.{EmptyWeapon, Weapon}
+import exceptions.{ProhibitedTarget, Require}
+import weapon.Weapon
 
 /**
  * Abstract class representing a character entity in a game with basic properties and behavior.
@@ -30,21 +30,21 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
   /**
    * The currently equipped weapon of the character.
    */
-  private var _equipped_weapon: Weapon = new EmptyWeapon()
+  private var _equipped_weapon: Option[Weapon] = None
 
   /**
    * Gets the currently equipped weapon of the character.
    *
    * @return The currently equipped weapon.
    */
-  def equipped_weapon: Weapon = _equipped_weapon
+  def equipped_weapon: Option[Weapon] = _equipped_weapon
 
   /**
    * Sets the currently equipped weapon of the character.
    *
    * @param new_weapon The new weapon to be equipped.
    */
-  def equipped_weapon_=(new_weapon: Weapon): Unit = {
+  def equipped_weapon_=(new_weapon: Option[Weapon]): Unit = {
     _equipped_weapon = new_weapon
   }
 
@@ -54,7 +54,11 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * @return The value for the character's status bar.
    */
   def barValue: Int = {
-    weight + equipped_weapon.weight / 2
+    val weaponWeight = _equipped_weapon match {
+      case Some(equipped_weapon) => equipped_weapon.weight
+      case None => 0
+    }
+    weight + weaponWeight / 2
   }
 
   /**
@@ -62,31 +66,25 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    *
    * @param newWeapon The new weapon to be equipped.
    */
-  private def setWeapon(newWeapon: Weapon): Unit = {
+  private def setWeapon(newWeapon: Option[Weapon]): Unit = {
     Require.WeaponAssigment(newWeapon, this) validWeapon (newWeapon, this)
-    equipped_weapon.owner = None
+
+    equipped_weapon.foreach(_.owner = None)
     equipped_weapon = newWeapon
-    newWeapon.owner = Some(this)
+    newWeapon.foreach(_.owner = Some(this))
   }
 
-  def changeWeapon(newWeapon: Weapon): Unit = {
-    try {
-      setWeapon(newWeapon)
-    } catch {
-      case e: InvalidWeaponException =>
-        println(e.getMessage)
-        setWeapon(new EmptyWeapon())
-    }
+  def changeWeapon(newWeapon: Option[Weapon]): Unit = {
+    setWeapon(newWeapon)
+
   }
 
   /**
    * Unequips the currently equipped weapon of the character.
    */
   def unequipWeapon(): Unit = {
-    equipped_weapon.owner = None
-    val emptyW = new EmptyWeapon()
-    _equipped_weapon = emptyW
-    emptyW.owner = Some(this)
+    equipped_weapon.foreach(_.owner = None)
+    equipped_weapon = None
   }
 
   /**
@@ -95,7 +93,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * @param newWeapon The new weapon to be equipped.
    * @return true if the weapon can be equipped, false otherwise.
    */
-  def checkValidWeapon(newWeapon: Weapon): Boolean
+  def checkValidWeapon(newWeapon: Option[Weapon]): Boolean
 
   /**
    * Performs an attack on another entity.
@@ -104,7 +102,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * @param damage The amount of damage to be inflicted.
    */
   def doAttack(entity: ConcreteEnemy, damage: Int): Unit = {
-    if (!equipped_weapon.isEmptyWeapon) {
+    if (equipped_weapon.isDefined) {
       doDamage(entity: Entity, damage: Int)
     }
     else {

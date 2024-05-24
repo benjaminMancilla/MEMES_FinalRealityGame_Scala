@@ -21,7 +21,7 @@ class MagicWeaponTest extends FunSuite {
   test("AbstractMagicWeapon should update owner correctly") {
     val character = new WhiteMage("Wizard", 180, 25, 40, 100)
     val wand = new Wand("Magic Wand", 60, 12, 40)
-    character.changeWeapon(wand)
+    character.changeWeapon(Some(wand))
     assert(wand.owner.exists(_.name == "Wizard"))
   }
 

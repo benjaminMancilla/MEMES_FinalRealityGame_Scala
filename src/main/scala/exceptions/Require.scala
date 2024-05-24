@@ -83,22 +83,25 @@ object Require {
       else throw new InvalidNameException(s"The name of the entity should be at least $length long.")
   }
 
-  final case class WeaponAssigment(weapon: Weapon, character: Character){
-    def validWeapon(weapon: Weapon, character: Character): Weapon = {
-      if (character.checkValidWeapon(weapon)) {
-        if (weapon.owner.isEmpty) {
-          weapon
-        }
-
-        else {
-          val ownerName: String = weapon.owner.map(_.name).getOrElse("No owner")
-          throw new InvalidWeaponException(s"${weapon.name} is already being used by $ownerName")}
-      }
-      else{
-
-        throw new InvalidWeaponException(s"Cannot equip ${weapon.name} on this character")}
+  final case class WeaponAssigment(weapon: Option[Weapon], character: Character) {
+    def validWeapon(weaponOpt: Option[Weapon], character: Character): Option[Weapon] = {
+      weaponOpt match {
+        case Some(weapon) =>
+          if (character.checkValidWeapon(Some(weapon))) {
+            if (weapon.owner.isEmpty) {
+              Some(weapon)
+            } else {
+              val ownerName = weapon.owner.map(_.name).getOrElse("No owner")
+              throw new InvalidWeaponException(s"${weapon.name} is already being used by $ownerName")
+            }
+          } else {
+            throw new InvalidWeaponException(s"Cannot equip ${weapon.name} on this character")
+          }
+        case None =>
+          None
       }
     }
+  }
 
 
 }

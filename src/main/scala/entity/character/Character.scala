@@ -14,7 +14,7 @@ trait Character extends Entity with PICharacter {
    *
    * @param new_weapon The new weapon to be equipped.
    */
-  def changeWeapon(new_weapon: Weapon): Unit
+  def changeWeapon(new_weapon: Option[Weapon]): Unit
 
   /**
    * Unequips the currently equipped weapon of the character.
@@ -26,9 +26,9 @@ trait Character extends Entity with PICharacter {
    *
    * @return The currently equipped weapon.
    */
-  def equipped_weapon: Weapon
+  def equipped_weapon: Option[Weapon]
 
-  def checkValidWeapon(newWeapon: Weapon): Boolean
+  def checkValidWeapon(newWeapon: Option[Weapon]): Boolean
 
 }
 

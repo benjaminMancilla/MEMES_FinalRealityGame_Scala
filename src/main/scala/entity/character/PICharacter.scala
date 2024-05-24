@@ -12,7 +12,7 @@ trait PICharacter extends PIEntity {
   /**
    * The weapon equipped by the character.
    */
-  def equipped_weapon: Weapon
+  def equipped_weapon: Option[Weapon]
 
   /**
    * The type name of the character.

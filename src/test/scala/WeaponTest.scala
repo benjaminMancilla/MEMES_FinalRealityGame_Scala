@@ -29,7 +29,7 @@ class WeaponTest extends FunSuite {
   test("AbstractWeapon should update owner correctly") {
     val character = new Warrior("Knight", 200, 30, 50)
     val sword = new Sword("Broadsword", 50, 15)
-    character.changeWeapon(sword)
+    character.changeWeapon(Some(sword))
     assert(sword.owner.exists(_.name == "Knight"))
   }
 

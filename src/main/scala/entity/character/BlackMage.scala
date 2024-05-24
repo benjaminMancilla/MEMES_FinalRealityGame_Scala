@@ -6,7 +6,7 @@ class BlackMage (nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, m
   extends AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, magic_pointsI: Int) {
   val _typeName : String = "BlackMage"
 
-  def checkValidWeapon(newWeapon: Weapon): Boolean = {
-    newWeapon.canBeEquipped(this)
+  def checkValidWeapon(newWeapon: Option[Weapon]): Boolean = {
+    newWeapon.exists(_.canBeEquipped(this))
   }
 }
