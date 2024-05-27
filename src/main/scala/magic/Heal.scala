@@ -1,5 +1,5 @@
 package magic
 
-class Heal {
+class Heal extends AbstractWhiteMagic {
 
 }

@@ -54,10 +54,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * @return The value for the character's status bar.
    */
   def barValue: Int = {
-    val weaponWeight = _equipped_weapon match {
-      case Some(equipped_weapon) => equipped_weapon.weight
-      case None => 0
-    }
+    val weaponWeight = _equipped_weapon.map(_.weight).getOrElse(0)
     weight + weaponWeight / 2
   }
 

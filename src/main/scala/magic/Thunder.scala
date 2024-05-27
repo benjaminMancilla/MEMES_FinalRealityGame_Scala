@@ -1,5 +1,5 @@
 package magic
 
-class Thunder {
+class Thunder extends AbstractBlackMagic {
 
 }

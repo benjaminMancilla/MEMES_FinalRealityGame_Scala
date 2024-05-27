@@ -85,20 +85,15 @@ object Require {
 
   final case class WeaponAssigment(weapon: Option[Weapon], character: Character) {
     def validWeapon(weaponOpt: Option[Weapon], character: Character): Option[Weapon] = {
-      weaponOpt match {
-        case Some(weapon) =>
-          if (character.checkValidWeapon(Some(weapon))) {
-            if (weapon.owner.isEmpty) {
-              Some(weapon)
-            } else {
-              val ownerName = weapon.owner.map(_.name).getOrElse("No owner")
-              throw new InvalidWeaponException(s"${weapon.name} is already being used by $ownerName")
-            }
-          } else {
-            throw new InvalidWeaponException(s"Cannot equip ${weapon.name} on this character")
-          }
-        case None =>
-          None
+      weaponOpt.flatMap { weapon =>
+        if (!character.checkValidWeapon(Some(weapon))) {
+          throw new InvalidWeaponException(s"Cannot equip ${weapon.name} on this character")
+        } else {
+          weapon.owner.map { owner =>
+            val ownerName = owner.name
+            throw new InvalidWeaponException(s"${weapon.name} is already being used by $ownerName")
+          }.orElse(Some(weapon))
+        }
       }
     }
   }

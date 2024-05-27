@@ -1,5 +1,5 @@
 package magic
 
-class AbstractBlackMagic {
+class AbstractBlackMagic extends AbstractMagic with BlackMagic{
 
 }

@@ -1,5 +1,5 @@
 package magic
 
-class Fire {
+class Fire extends AbstractBlackMagic {
 
 }

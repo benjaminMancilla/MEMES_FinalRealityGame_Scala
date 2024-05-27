@@ -1,5 +1,5 @@
 package magic
 
-class Poison {
+class Poison extends AbstractWhiteMagic {
 
 }

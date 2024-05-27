@@ -1,5 +1,5 @@
 package magic
 
-class Ice {
+class Ice extends AbstractWhiteMagic {
 
 }
