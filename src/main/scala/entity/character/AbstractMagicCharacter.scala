@@ -1,6 +1,9 @@
 package entity.character
 
-import exceptions.Require
+import entity.Entity
+import entity.enemy.Enemy
+import exceptions.{EmptyWeaponException, EntityOverflow, InvalidMagicType, InvalidSpellTarget, NoMagicPoints, Require}
+import magic.{BlackMagic, DefensiveSpell, Magic, OffensiveSpell}
 
 
 /**
@@ -48,5 +51,37 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
   def currentMagicPoints_=(newMp: Int): Unit = {
     _current_magic_points = newMp
   }
+
+  def doSpellOnEnemy(target: Enemy, spell: Magic): Unit = {
+    throw new InvalidMagicType(s"$name can not use ${spell.name}")
+  }
+
+  def doSpellOnEnemy(target: Enemy, spell: DefensiveSpell): Unit = {
+    throw new InvalidSpellTarget("Can not cast defensive spells on a enemy")
+  }
+
+  def doSpellOnCharacter(target: Character, spell: Magic): Unit = {
+    throw new InvalidMagicType(s"$name can not use ${spell.name}")
+  }
+
+  def doSpellOnCharacter(target: Character, spell: OffensiveSpell): Unit = {
+    throw new InvalidSpellTarget("Can not cast offensive spells on a character")
+  }
+
+  private def castSpell(target:Entity, spell: Magic): Unit = {
+    if (currentMagicPoints < spell.manaCost) {
+      throw new NoMagicPoints("No enough magic points")
+    }
+    if (equipped_weapon.isEmpty) {
+      throw new EmptyWeaponException("Can not cast a spell with no weapon")
+    }
+    val mDmg: Int = equipped_weapon.map(_.magicAttack).getOrElse(0)
+    spell.applySpell(this,target,mDmg)
+    currentMagicPoints = currentMagicPoints-spell.manaCost
+
+  }
+
+
+
 }
 

@@ -1,6 +1,6 @@
 import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import exceptions.{InvalidNameException, InvalidStatException, InvalidWeaponException, ProhibitedTarget}
+import exceptions.{EmptyWeaponException, InvalidNameException, InvalidStatException, InvalidWeaponException, ProhibitedTarget}
 import weapon.{Axe, Bow, Staff, Sword, Wand}
 
 import scala.collection.mutable.ArrayBuffer
@@ -154,14 +154,9 @@ class CharacterTest extends munit.FunSuite {
   test("Character should not be able to attack if it is disarmed"){
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
-    val stream = new java.io.ByteArrayOutputStream()
-    Console.withOut(stream) {
+    intercept[EmptyWeaponException]{
       warrior.doAttack(enemy, 10)
     }
-    val output = stream.toString()
-    assert(output.contains("does not have an equipped weapon and cannot attack."))
-
-    assert(enemy.current_hit_points == enemy.hit_points)
 
 
   }

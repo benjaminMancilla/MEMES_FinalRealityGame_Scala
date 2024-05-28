@@ -1,4 +1,6 @@
 package weapon
+import effect.Effect
+import magic.Magic
 
 /**
  * Abstract class representing a specific type of magical weapon.
@@ -21,6 +23,7 @@ abstract class AbstractMagicWeapon(nameI: String, attackPointsI: Int, weightI: I
   }
 
   /** Retrieves the magical attack points of the magical weapon. */
-  def magicAttack: Int = _magicAttack
+  override def magicAttack: Int = _magicAttack
+
 }
 

@@ -1,6 +1,6 @@
 package entity
 
-import exceptions.{InvalidNameException, InvalidStatException, Require}
+import exceptions.Require
 
 /**
  * Abstract class representing an entity in a game with basic properties and behavior.
@@ -175,6 +175,35 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
    * @return true if the entity is controlled by the player, false otherwise.
    */
   def isPlayer: Boolean = _isPlayer
+
+  def doHealing(entity: Entity, heal: Int): Unit = {
+    doHeal(entity: Entity, heal: Int)
+  }
+
+  def doHeal(entity: Entity, heal: Int): Unit = {
+    if (!state) {
+      printf(s"$name is unable to heal, already out of combat.")
+    }
+    else {
+      println(s"$name heals ${entity.name}")
+      val extraHeal = entity.receiveHealing(heal)
+    }
+  }
+
+  def receiveHealing(heal: Int): Int = {
+    var extraHeal = -1
+    if (current_hit_points + heal >= hit_points) {
+      extraHeal = heal + current_hit_points - hit_points
+      current_hit_points = hit_points
+      state = true
+    }
+    else {
+      printf(s"$name has received $heal of heal")
+      current_hit_points += heal
+      state = true
+    }
+    extraHeal
+  }
 
 
 

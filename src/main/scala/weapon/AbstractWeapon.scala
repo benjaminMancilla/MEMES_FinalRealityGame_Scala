@@ -1,7 +1,9 @@
 package weapon
 
+import effect.Effect
 import entity.character.Character
-import exceptions.{InvalidNameException, InvalidStatException, Require}
+import exceptions.{InvalidNameException, InvalidStatException, InvalidWeaponException, NonMagicWeaponException, Require}
+import magic.Magic
 
 /**
  * Abstract class representing a specific type of weapon.
@@ -58,6 +60,10 @@ abstract class AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) e
   /** Sets the owner of the weapon. */
   def owner_=(newOwner: Option[Character]): Unit = {
     _owner = newOwner
+  }
+
+  def magicAttack: Int = {
+    throw new InvalidWeaponException("Common weapons can not access to magic")
   }
 
 }

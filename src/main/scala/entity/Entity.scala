@@ -40,5 +40,11 @@ trait Entity extends PIEntity {
    */
   def doAttack(entity: Entity, damage: Int): Unit
 
+  def doHealing(entity: Entity, heal: Int): Unit
+
+  def receiveHealing(heal: Int): Int
+
+  def doHeal(entity: Entity, heal: Int): Unit
+
 }
 

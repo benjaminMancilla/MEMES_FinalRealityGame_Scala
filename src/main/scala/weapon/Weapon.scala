@@ -1,6 +1,8 @@
 package weapon
 
 import entity.character.Character
+import magic.Magic
+import effect.Effect
 
 /**
  * Trait representing a specific weapon.
@@ -19,6 +21,8 @@ trait Weapon extends PIWeapon {
    * @param newOwner The new owner of the weapon.
    */
   def owner_=(newOwner: Option[Character]): Unit
+
+  def magicAttack: Int
 
 }
 

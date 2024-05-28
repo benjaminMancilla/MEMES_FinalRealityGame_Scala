@@ -5,13 +5,12 @@ import entity.character.MagicCharacter
 
 import scala.util.Random
 
-class Heal extends AbstractWhiteMagic with DefensiveSpell {
-  val _name: String = "Heal"
-  val _manaCost: Int = 15
+class Paralyze extends AbstractWhiteMagic with OffensiveSpell {
+  val _name: String = "Paralyze"
+  val _manaCost: Int = 25
 
   def applySpell(sorcerer: MagicCharacter, target: Entity, mDmg: Int): Unit = {
-    val heal = (target.hit_points/10) * 3
-    sorcerer.doHeal(target, heal)
+    //Apply Froze effect to target
 
   }
 

@@ -2,7 +2,7 @@ package entity.character
 
 import entity.enemy.ConcreteEnemy
 import entity.{AbstractEntity, Entity}
-import exceptions.{ProhibitedTarget, Require}
+import exceptions.{EmptyWeaponException, ProhibitedTarget, Require}
 import weapon.Weapon
 
 /**
@@ -103,7 +103,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
       doDamage(entity: Entity, damage: Int)
     }
     else {
-      printf(s"$name does not have an equipped weapon and cannot attack.")
+      throw new EmptyWeaponException("Characters can only attack when they have a weapon")
     }
   }
 

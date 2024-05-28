@@ -1,7 +1,9 @@
 import entity.character.{BlackMage, WhiteMage}
+import entity.enemy.ConcreteEnemy
 import exceptions.InvalidStatException
 import munit.FunSuite
 import weapon.{MagicWeapon, Staff, Wand}
+import magic.{Fire, Heal, Paralyze}
 
 class MagicCharacterTest extends FunSuite {
   val wand: MagicWeapon = new Wand("MagicWand", 50, 10, 20)
@@ -54,5 +56,18 @@ class MagicCharacterTest extends FunSuite {
     whiteMage.currentMagicPoints -= 50
     assert(whiteMage.currentMagicPoints == 150)
   }
+//  test("holi") {
+//    val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
+//    val wMage = new WhiteMage("Gargamel", 220, 30, 40, 200)
+//    val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
+//    val ice = new Paralyze
+//    val fire = new Fire
+//    val heal = new Heal
+//    wMage.doSpellOnEnemy(enemy, fire)
+//
+//  }
+
+
+
 
 }
