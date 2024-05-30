@@ -2,6 +2,8 @@ package entity
 
 import exceptions.Require
 import magic.{DefensiveSpell, OffensiveSpell}
+import exceptions.HealingDeadEntity
+import exceptions.InvalidSpellTarget
 
 /**
  * Abstract class representing an entity in a game with basic properties and behavior.
