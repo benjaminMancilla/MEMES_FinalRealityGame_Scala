@@ -1,7 +1,7 @@
 package magic
 
 import entity.Entity
-import entity.character.MagicCharacter
+import entity.character.magicCharacter.MagicCharacter
 
 
 /**

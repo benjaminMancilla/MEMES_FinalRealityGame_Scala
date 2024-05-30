@@ -1,7 +1,7 @@
 package magic
 
-import entity.character.{BlackMage, WhiteMage}
-import exceptions.InvalidMagicType
+import entity.character.magicCharacter.{BlackMage, WhiteMage}
+import exceptions.magic.InvalidMagicType
 
 
 /**

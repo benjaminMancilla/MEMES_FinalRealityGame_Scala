@@ -1,6 +1,6 @@
 package exceptions
 
-import weapon.Weapon
+import weapon.{InvalidWeaponException, Weapon}
 import entity.character.Character
 
 /** The `Require` object provides utilities for validating specific constraints or requirements.

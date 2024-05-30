@@ -1,6 +1,8 @@
 package weapon
 
-import entity.character.{BlackMage, Character, Ninja, Paladin, Warrior, WhiteMage}
+import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
+import entity.character.magicCharacter.{BlackMage, WhiteMage}
+import entity.character.Character
 
 /**
  * Trait representing a weapon in the game.

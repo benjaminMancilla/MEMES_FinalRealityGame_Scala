@@ -1,7 +1,7 @@
 package turn
 
 import entity.Entity
-import exceptions.EntityOverflow
+import exceptions.entity.EntityOverflow
 
 import scala.collection.mutable.ArrayBuffer
 

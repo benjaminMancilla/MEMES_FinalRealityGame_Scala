@@ -1,10 +1,10 @@
 import entity.Entity
-import entity.character.{Ninja, Paladin, Warrior}
+import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
 import entity.enemy.ConcreteEnemy
-import exceptions.EntityOverflow
+import exceptions.entity.EntityOverflow
 import munit.FunSuite
 import turn.TurnScheduler
-import weapon.Sword
+import weapon.commonWeapon.Sword
 
 import scala.collection.mutable.ArrayBuffer
 

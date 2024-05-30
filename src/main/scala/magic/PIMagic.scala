@@ -1,7 +1,7 @@
 package magic
 
 import entity.Entity
-import entity.character.{BlackMage, WhiteMage}
+import entity.character.magicCharacter.{BlackMage, WhiteMage}
 
 /**
  * Represents magic spells in the game (Public).

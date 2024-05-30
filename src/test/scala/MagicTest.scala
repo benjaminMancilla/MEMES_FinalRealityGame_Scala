@@ -1,8 +1,9 @@
-import entity.character.{BlackMage, WhiteMage}
+import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import exceptions.{InvalidMagicType, InvalidSpellTarget}
-import magic.{Fire, Heal, Paralyze, Poison, Thunder}
-import weapon.{Staff, Wand}
+import exceptions.magic.{InvalidMagicType, InvalidSpellTarget}
+import magic.blackMagic.Fire
+import magic.whiteMagic.{Heal, Paralyze, Poison, Thunder}
+import weapon.magicWeapon.{Staff, Wand}
 
 import java.io.ByteArrayOutputStream
 

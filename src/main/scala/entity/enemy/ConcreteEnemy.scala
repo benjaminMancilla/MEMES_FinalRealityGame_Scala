@@ -2,7 +2,8 @@ package entity.enemy
 
 import entity.character.Character
 import entity.{AbstractEntity, Entity}
-import exceptions.{ProhibitedTarget, Require}
+import exceptions.Require
+import exceptions.entity.ProhibitedTarget
 import magic.OffensiveSpell
 
 /**

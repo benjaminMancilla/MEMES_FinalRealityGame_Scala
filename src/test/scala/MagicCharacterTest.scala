@@ -1,9 +1,15 @@
-import entity.character.{BlackMage, Warrior, WhiteMage}
+import entity.character.commonCharacter.Warrior
+import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import exceptions.{EmptyWeaponException, InvalidStatException, NoMagicPoints, NonMagicWeaponException, ProhibitedTarget}
+import exceptions.magic.{NoMagicPoints, NonMagicWeaponException}
+import exceptions.weapon.EmptyWeaponException
+import exceptions.InvalidStatException
+import exceptions.entity.ProhibitedTarget
+import magic.blackMagic.Fire
+import magic.whiteMagic.{Heal, Paralyze, Poison, Thunder}
 import munit.FunSuite
-import weapon.{Bow, MagicWeapon, Staff, Sword, Wand}
-import magic.{Fire, Heal, Paralyze, Poison, Thunder}
+import weapon.commonWeapon.{Bow, Sword}
+import weapon.magicWeapon.{MagicWeapon, Staff, Wand}
 
 class MagicCharacterTest extends FunSuite {
   val wand: MagicWeapon = new Wand("MagicWand", 50, 10, 20)

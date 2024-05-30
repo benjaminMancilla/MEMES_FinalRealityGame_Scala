@@ -1,7 +1,7 @@
 package party
 
 import entity.character.{Character, PICharacter}
-import exceptions.EntityOverflow
+import exceptions.entity.EntityOverflow
 
 import scala.collection.mutable.ArrayBuffer
 

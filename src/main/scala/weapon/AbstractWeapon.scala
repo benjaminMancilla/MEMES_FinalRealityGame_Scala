@@ -1,7 +1,8 @@
 package weapon
 
 import entity.character.Character
-import exceptions.{NonMagicWeaponException, Require}
+import exceptions.Require
+import exceptions.magic.NonMagicWeaponException
 
 
 /**
