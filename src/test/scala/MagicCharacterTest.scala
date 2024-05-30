@@ -1,12 +1,13 @@
-import entity.character.{BlackMage, WhiteMage}
+import entity.character.{BlackMage, Warrior, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import exceptions.InvalidStatException
+import exceptions.{EmptyWeaponException, InvalidStatException, NoMagicPoints, NonMagicWeaponException, ProhibitedTarget}
 import munit.FunSuite
-import weapon.{MagicWeapon, Staff, Wand}
-import magic.{Fire, Heal, Paralyze}
+import weapon.{Bow, MagicWeapon, Staff, Sword, Wand}
+import magic.{Fire, Heal, Paralyze, Poison, Thunder}
 
 class MagicCharacterTest extends FunSuite {
   val wand: MagicWeapon = new Wand("MagicWand", 50, 10, 20)
+  val wand2: MagicWeapon = new Wand("MagicWand2", 50, 10, 20)
 
   test("Magic points can not be negative"){
     intercept[InvalidStatException]{
@@ -55,17 +56,91 @@ class MagicCharacterTest extends FunSuite {
     whiteMage.changeWeapon(Some(wand))
     whiteMage.currentMagicPoints -= 50
     assert(whiteMage.currentMagicPoints == 150)
+    whiteMage.unequipWeapon()
   }
-//  test("holi") {
-//    val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
-//    val wMage = new WhiteMage("Gargamel", 220, 30, 40, 200)
-//    val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
-//    val ice = new Paralyze
-//    val fire = new Fire
-//    val heal = new Heal
-//    wMage.doSpellOnEnemy(enemy, fire)
-//
-//  }
+
+  test("If a cast is valid, a mage should be able to cast the spell, reducing him/her magic points") {
+    val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
+    val wMage = new WhiteMage("Saruman", 220, 30, 40, 200)
+    bMage.changeWeapon(Some(wand))
+    wMage.changeWeapon(Some(wand2))
+    val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
+    val thunder = new Thunder
+    val poison = new Poison
+    bMage.castSpell(enemy, thunder)
+    wMage.castSpell(enemy, poison)
+    assert(bMage.currentMagicPoints == bMage.magicPoints-thunder.manaCost)
+    assert(wMage.currentMagicPoints == wMage.magicPoints-poison.manaCost)
+    bMage.unequipWeapon()
+    wMage.unequipWeapon()
+
+  }
+
+  test("Should not be able to cast if the sorcerer has not enough mana") {
+    val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
+    val wMage = new WhiteMage("Saruman", 220, 30, 40, 200)
+    bMage.changeWeapon(Some(wand))
+    wMage.changeWeapon(Some(wand2))
+    bMage.currentMagicPoints = 0
+    wMage.currentMagicPoints = 5
+    val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
+    val thunder = new Thunder
+    val poison = new Poison
+    intercept[NoMagicPoints] {
+      bMage.castSpell(enemy, thunder)
+    }
+    intercept[NoMagicPoints] {
+      wMage.castSpell(enemy, poison)
+    }
+    bMage.unequipWeapon()
+    wMage.unequipWeapon()
+
+  }
+
+  test("Should not be able to cast if the sorcerer has not a magic weapon") {
+    val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
+    val wMage = new WhiteMage("Saruman", 220, 30, 40, 200)
+    wMage.changeWeapon(Some(new Bow("Bow", 50, 10)))
+    val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
+    val thunder = new Thunder
+    val poison = new Poison
+    intercept[EmptyWeaponException]{
+      bMage.castSpell(enemy, thunder)
+    }
+    intercept[NonMagicWeaponException]{
+      wMage.castSpell(enemy, poison)
+    }
+    bMage.unequipWeapon()
+    wMage.unequipWeapon()
+
+  }
+
+  test("Should not be able to cast on a dead target"){
+    val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
+    val wMage = new WhiteMage("Saruman", 220, 30, 40, 200)
+    val thunder = new Thunder
+    val heal = new Heal
+    bMage.changeWeapon(Some(wand))
+    wMage.changeWeapon(Some(wand2))
+    val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
+    val ally = new Warrior("Dummy", 10, 10, 10)
+    ally.receiveDamage(100)
+    enemy.receiveDamage(300)
+    intercept[ProhibitedTarget]{
+      bMage.castSpell(enemy, thunder)
+    }
+    intercept[ProhibitedTarget]{
+      wMage.castSpell(ally, heal)
+    }
+    bMage.unequipWeapon()
+    wMage.unequipWeapon()
+
+
+  }
+
+
+
+
 
 
 

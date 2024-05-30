@@ -1,6 +1,7 @@
 package entity
 
-import exceptions.Require
+import exceptions.{HealingDeadEntity, InvalidSpellTarget, Require}
+import magic.{DefensiveSpell, OffensiveSpell}
 
 /**
  * Abstract class representing an entity in a game with basic properties and behavior.
@@ -182,7 +183,10 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
 
   def doHeal(entity: Entity, heal: Int): Unit = {
     if (!state) {
-      printf(s"$name is unable to heal, already out of combat.")
+      throw new HealingDeadEntity(s"${this.name} is dead, can not heal ${entity.name}")
+    }
+    else if (!entity.state){
+      throw new HealingDeadEntity(s"${entity.name} is dead, can not be healed by ${this.name}")
     }
     else {
       println(s"$name heals ${entity.name}")
@@ -205,6 +209,13 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     extraHeal
   }
 
+
+  def checkSpell(spell: OffensiveSpell): Unit = {
+    throw new InvalidSpellTarget(s"${spell.name} is a offensive spell, can not be cast on ${this.name}")
+  }
+  def checkSpell(spell: DefensiveSpell): Unit = {
+    throw new InvalidSpellTarget(s"${spell.name} is a defensive spell, can not be cast on ${this.name}")
+  }
 
 
 

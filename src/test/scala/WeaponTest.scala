@@ -1,4 +1,5 @@
 import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
+import exceptions.NonMagicWeaponException
 import munit.FunSuite
 import weapon.{Axe, Bow, Sword}
 class WeaponTest extends FunSuite {
@@ -83,6 +84,21 @@ class WeaponTest extends FunSuite {
     assert(sword.canBeEquipped(blackMage))
     assert(!sword.canBeEquipped(whiteMage))
 
+  }
+
+  test("Common weapon should not be able to access magic"){
+    val axe = new Axe("Axe", 10, 10)
+    val bow = new Bow("Bow", 10, 10)
+    val sword = new Sword("Sword", 10, 10)
+    intercept[NonMagicWeaponException]{
+      axe.magicAttack
+    }
+    intercept[NonMagicWeaponException]{
+      bow.magicAttack
+    }
+    intercept[NonMagicWeaponException]{
+      sword.magicAttack
+    }
 
   }
 }

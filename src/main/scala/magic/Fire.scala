@@ -1,6 +1,8 @@
 package magic
 import entity.Entity
-import entity.character.MagicCharacter
+import entity.character.{BlackMage, MagicCharacter}
+import entity.enemy.Enemy
+
 import scala.util.Random
 
 class Fire extends AbstractBlackMagic with OffensiveSpell {
@@ -13,9 +15,12 @@ class Fire extends AbstractBlackMagic with OffensiveSpell {
     val randomResult = random.nextDouble()
     if (randomResult <= 0.2) {
       //We apply the Burn effect to target
+      println("Burn") //Just for momentary tests
 
     }
 
   }
+
+  override def checkTarget(target:Entity): Unit = {target.checkSpell(this)}
 
 }

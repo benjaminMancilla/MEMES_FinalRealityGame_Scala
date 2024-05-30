@@ -2,7 +2,8 @@ package entity.enemy
 
 import entity.character.Character
 import entity.{AbstractEntity, Entity}
-import exceptions.{ ProhibitedTarget, Require}
+import exceptions.{InvalidSpellTarget, ProhibitedTarget, Require}
+import magic.OffensiveSpell
 
 /**
  * Concrete class representing an enemy entity in a game.
@@ -51,5 +52,8 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
   def doAttack(entity: Character, damage: Int): Unit = {
     doDamage(entity: Entity, damage: Int)
   }
+
+  override def checkSpell(spell: OffensiveSpell): Unit = {}
+
 }
 

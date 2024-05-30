@@ -2,7 +2,8 @@ package entity.character
 
 import entity.enemy.ConcreteEnemy
 import entity.{AbstractEntity, Entity}
-import exceptions.{EmptyWeaponException, ProhibitedTarget, Require}
+import exceptions.{EmptyWeaponException, InvalidSpellTarget, ProhibitedTarget, Require}
+import magic.DefensiveSpell
 import weapon.Weapon
 
 /**
@@ -117,6 +118,8 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * @return The type name of the character.
    */
   def typeName: String = _typeName
+
+  override def checkSpell(spell: DefensiveSpell): Unit = {}
 
 }
 

@@ -1,5 +1,7 @@
 package entity
 
+import magic.{DefensiveSpell, OffensiveSpell}
+
 
 /**
  * Trait that extends PIEntity and defines additional behavior for an entity in a game.
@@ -45,6 +47,10 @@ trait Entity extends PIEntity {
   def receiveHealing(heal: Int): Int
 
   def doHeal(entity: Entity, heal: Int): Unit
+
+  def checkSpell(spell: OffensiveSpell): Unit
+  def checkSpell(spell: DefensiveSpell): Unit
+
 
 }
 

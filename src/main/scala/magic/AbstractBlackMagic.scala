@@ -1,5 +1,7 @@
 package magic
 
-abstract class AbstractBlackMagic extends AbstractMagic with BlackMagic{
+import entity.character.BlackMage
 
+abstract class AbstractBlackMagic extends AbstractMagic with BlackMagic{
+  override def checkSorcerer(sorcerer:BlackMage): Unit = {}
 }

@@ -2,6 +2,7 @@ package magic
 
 import entity.Entity
 import entity.character.MagicCharacter
+import entity.enemy.Enemy
 
 import scala.util.Random
 
@@ -15,9 +16,12 @@ class Thunder extends AbstractBlackMagic with OffensiveSpell {
     val randomResult = random.nextDouble()
     if (randomResult <= 0.3) {
       //We apply the Paralyzed effect to target
+      println("Paralyzed") //Just for momentary tests
 
     }
 
   }
+
+  override def checkTarget(target:Entity): Unit = {target.checkSpell(this)}
 
 }

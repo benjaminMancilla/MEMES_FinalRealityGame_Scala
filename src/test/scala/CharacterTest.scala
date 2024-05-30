@@ -1,6 +1,6 @@
 import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import exceptions.{EmptyWeaponException, InvalidNameException, InvalidStatException, InvalidWeaponException, ProhibitedTarget}
+import exceptions.{EmptyWeaponException, HealingDeadEntity, InvalidNameException, InvalidStatException, InvalidWeaponException, ProhibitedTarget}
 import weapon.{Axe, Bow, Staff, Sword, Wand}
 
 import scala.collection.mutable.ArrayBuffer
@@ -184,10 +184,77 @@ class CharacterTest extends munit.FunSuite {
     assert(warrior.equipped_weapon.isEmpty)
     assert(sword.owner.isEmpty)
 
+  }
 
+  test("A character should be able to heal correctly"){
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    warrior.receiveDamage(90)
+    warrior.receiveHealing(20)
+    assert(warrior.current_hit_points == 40)
+
+  }
+
+  test("A character should not be able to overheal"){
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    warrior.receiveDamage(20)
+    warrior.receiveHealing(2000)
+    assert(warrior.current_hit_points == warrior.hit_points)
+
+  }
+
+  test("If a dead character receives healing, should revive"){
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    warrior.receiveDamage(1000)
+    assert(!warrior.state)
+    warrior.receiveHealing(10)
+    assert(warrior.current_hit_points == 10)
+    assert(warrior.state)
+
+  }
+
+  test("A character should be able to heal an entity"){
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    val warrior2 = new Warrior("Entity2", 100, 10, 20)
+    warrior2.receiveDamage(40)
+    warrior.receiveDamage(40)
+    warrior.doHeal(warrior2, 10)
+    warrior2.doHealing(warrior, 10)
+    assert(warrior2.current_hit_points == 80)
+    assert(warrior.current_hit_points == 80)
+
+  }
+
+  test("A character should not be able to heal a dead entity") {
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    val warrior2 = new Warrior("Entity2", 100, 10, 20)
+    warrior2.receiveDamage(1000)
+    intercept[HealingDeadEntity] {
+      warrior.doHeal(warrior2, 10)
+    }
+    intercept[HealingDeadEntity] {
+      warrior.doHealing(warrior2, 10)
+    }
+  }
+
+  test("A dead character should not be able to heal"){
+    val warrior = new Warrior("Entity1", 100, 10, 20)
+    val warrior2 = new Warrior("Entity2", 100, 10, 20)
+    warrior2.receiveDamage(1000)
+    intercept[HealingDeadEntity] {
+      warrior2.doHeal(warrior, 10)
+    }
+    intercept[HealingDeadEntity] {
+      warrior2.doHealing(warrior, 10)
+    }
 
 
   }
+
+
+
+
+
+
 
 
 }

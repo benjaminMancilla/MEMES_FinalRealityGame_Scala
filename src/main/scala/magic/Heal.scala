@@ -1,7 +1,7 @@
 package magic
 
 import entity.Entity
-import entity.character.MagicCharacter
+import entity.character.{MagicCharacter, Character}
 
 import scala.util.Random
 
@@ -14,5 +14,8 @@ class Heal extends AbstractWhiteMagic with DefensiveSpell {
     sorcerer.doHeal(target, heal)
 
   }
+
+  override def checkTarget(target:Entity): Unit = {target.checkSpell(this)}
+
 
 }

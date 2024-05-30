@@ -1,7 +1,8 @@
 package entity.character
 
+import entity.Entity
 import entity.enemy.Enemy
-import magic.{BlackMagic, DefensiveSpell, OffensiveSpell, WhiteMagic}
+import magic.{BlackMagic, DefensiveSpell, Magic, OffensiveSpell, WhiteMagic}
 import weapon.Weapon
 
 class WhiteMage (nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, magic_pointsI: Int)
@@ -11,8 +12,11 @@ class WhiteMage (nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, m
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean = {
     newWeapon.exists(_.canBeEquipped(this))
   }
-  def doSpellOnEnemy[T<:Enemy, S<: WhiteMagic with OffensiveSpell](target:T, spell:S): Unit = {}
-  def doSpellOnCharacter[T<:Character, S<: WhiteMagic with DefensiveSpell](target:T, spell:S): Unit = {}
+
+  override def checkSpell(spell:Magic): Unit = {
+    spell.checkSorcerer(this)
+  }
+
 
 
 }

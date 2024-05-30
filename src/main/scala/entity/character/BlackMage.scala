@@ -12,6 +12,7 @@ class BlackMage (nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, m
     newWeapon.exists(_.canBeEquipped(this))
   }
 
-  def doSpellOnEnemy[T<:Enemy, S<: BlackMagic with OffensiveSpell](target:T, spell:S): Unit = {}
-  def doSpellOnCharacter[T<:Character, S<: BlackMagic with DefensiveSpell](target:T, spell:S): Unit = {}
+  override def checkSpell(spell:Magic): Unit = {
+    spell.checkSorcerer(this)
+  }
 }

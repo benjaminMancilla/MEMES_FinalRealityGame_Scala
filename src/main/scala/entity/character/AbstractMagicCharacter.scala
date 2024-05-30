@@ -2,8 +2,8 @@ package entity.character
 
 import entity.Entity
 import entity.enemy.Enemy
-import exceptions.{EmptyWeaponException, EntityOverflow, InvalidMagicType, InvalidSpellTarget, NoMagicPoints, Require}
-import magic.{BlackMagic, DefensiveSpell, Magic, OffensiveSpell}
+import exceptions.{EmptyWeaponException, EntityOverflow, InvalidMagicType, InvalidSpellTarget, NoMagicPoints, ProhibitedTarget, Require}
+import magic.{BlackMagic, DefensiveSpell, Magic, OffensiveSpell, WhiteMagic}
 
 
 /**
@@ -52,34 +52,29 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
     _current_magic_points = newMp
   }
 
-  def doSpellOnEnemy(target: Enemy, spell: Magic): Unit = {
-    throw new InvalidMagicType(s"$name can not use ${spell.name}")
-  }
 
-  def doSpellOnEnemy(target: Enemy, spell: DefensiveSpell): Unit = {
-    throw new InvalidSpellTarget("Can not cast defensive spells on a enemy")
-  }
-
-  def doSpellOnCharacter(target: Character, spell: Magic): Unit = {
-    throw new InvalidMagicType(s"$name can not use ${spell.name}")
-  }
-
-  def doSpellOnCharacter(target: Character, spell: OffensiveSpell): Unit = {
-    throw new InvalidSpellTarget("Can not cast offensive spells on a character")
-  }
-
-  private def castSpell(target:Entity, spell: Magic): Unit = {
+  def castSpell(target:Entity, spell: Magic): Unit = {
+    checkSpell(spell)
+    spell.checkTarget(target)
     if (currentMagicPoints < spell.manaCost) {
       throw new NoMagicPoints("No enough magic points")
     }
     if (equipped_weapon.isEmpty) {
       throw new EmptyWeaponException("Can not cast a spell with no weapon")
     }
+    if (!target.state) {
+      throw new ProhibitedTarget(s"${target.name} is dead, can not cast a spell on it")
+    }
     val mDmg: Int = equipped_weapon.map(_.magicAttack).getOrElse(0)
     spell.applySpell(this,target,mDmg)
-    currentMagicPoints = currentMagicPoints-spell.manaCost
+    currentMagicPoints -= spell.manaCost
 
   }
+
+  def checkSpell(spell:Magic): Unit = {
+    throw new InvalidMagicType(s"${spell.name} spell is not compatible with ${this.name}")
+  }
+
 
 
 

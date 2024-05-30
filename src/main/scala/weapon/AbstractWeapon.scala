@@ -63,7 +63,7 @@ abstract class AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) e
   }
 
   def magicAttack: Int = {
-    throw new InvalidWeaponException("Common weapons can not access to magic")
+    throw new NonMagicWeaponException("Common weapons can not access to magic")
   }
 
 }
