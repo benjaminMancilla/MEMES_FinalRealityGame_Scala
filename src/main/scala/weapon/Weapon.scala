@@ -1,8 +1,6 @@
 package weapon
 
 import entity.character.Character
-import magic.Magic
-import effect.Effect
 
 /**
  * Trait representing a specific weapon.

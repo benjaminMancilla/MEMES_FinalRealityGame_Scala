@@ -4,8 +4,6 @@ import entity.character.PICharacter
 
 import scala.collection.mutable.ArrayBuffer
 
-import scala.collection.mutable.ArrayBuffer
-
 /**
  * Trait representing a player's party in a game.
  * A party consists of a fixed number of characters.

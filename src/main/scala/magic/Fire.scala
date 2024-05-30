@@ -1,8 +1,7 @@
 package magic
-import entity.Entity
-import entity.character.{BlackMage, MagicCharacter}
-import entity.enemy.Enemy
 
+import entity.Entity
+import entity.character.MagicCharacter
 import scala.util.Random
 
 /**

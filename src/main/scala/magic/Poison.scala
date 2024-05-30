@@ -2,9 +2,6 @@ package magic
 
 import entity.Entity
 import entity.character.MagicCharacter
-import entity.enemy.Enemy
-
-import scala.util.Random
 
 /**
  * Represents the Poison spell in the game.

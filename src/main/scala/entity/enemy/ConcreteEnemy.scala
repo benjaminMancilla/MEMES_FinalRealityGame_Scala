@@ -2,7 +2,7 @@ package entity.enemy
 
 import entity.character.Character
 import entity.{AbstractEntity, Entity}
-import exceptions.{InvalidSpellTarget, ProhibitedTarget, Require}
+import exceptions.{ProhibitedTarget, Require}
 import magic.OffensiveSpell
 
 /**
@@ -48,6 +48,8 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
 
   /**
    * An enemy can not perform an attack on other enemy.
+   * @param entity // target entity, an enemy
+   * @param damage // damage that the enemy would receive
    *
    * @return ProhibitedTarget exception.
    */

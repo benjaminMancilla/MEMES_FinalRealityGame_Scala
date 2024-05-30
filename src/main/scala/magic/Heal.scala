@@ -1,9 +1,7 @@
 package magic
 
 import entity.Entity
-import entity.character.{MagicCharacter, Character}
-
-import scala.util.Random
+import entity.character.MagicCharacter
 
 /**
  * Represents the Heal spell in the game.

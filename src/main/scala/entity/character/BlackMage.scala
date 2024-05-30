@@ -1,7 +1,6 @@
 package entity.character
-import entity.Entity
-import entity.enemy.Enemy
-import magic.{BlackMagic, DefensiveSpell, Magic, OffensiveSpell, WhiteMagic}
+
+import magic.Magic
 import weapon.Weapon
 
 /**

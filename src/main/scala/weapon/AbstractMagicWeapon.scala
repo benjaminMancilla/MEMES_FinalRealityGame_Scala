@@ -1,7 +1,6 @@
 package weapon
-import effect.Effect
+
 import exceptions.Require
-import magic.Magic
 
 /**
  * Abstract class representing a specific type of magical weapon.

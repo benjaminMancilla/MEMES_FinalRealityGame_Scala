@@ -1,11 +1,8 @@
 package magic
 
-import entity.Entity
-import entity.character.Character
-import entity.character.{BlackMage, MagicCharacter, WhiteMage}
-import entity.enemy.Enemy
-import exceptions.{InvalidMagicType, InvalidSpellTarget, NonMagicWeaponException}
-import weapon.{MagicWeapon, Weapon}
+import entity.character.{BlackMage, WhiteMage}
+import exceptions.InvalidMagicType
+
 
 /**
  * Represents an abstract magic spell in the game.

@@ -2,7 +2,7 @@ package entity.character
 
 import entity.enemy.ConcreteEnemy
 import entity.{AbstractEntity, Entity}
-import exceptions.{EmptyWeaponException, InvalidSpellTarget, ProhibitedTarget, Require}
+import exceptions.{EmptyWeaponException, ProhibitedTarget, Require}
 import magic.DefensiveSpell
 import weapon.Weapon
 

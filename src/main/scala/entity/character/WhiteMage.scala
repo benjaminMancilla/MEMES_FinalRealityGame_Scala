@@ -1,8 +1,6 @@
 package entity.character
 
-import entity.Entity
-import entity.enemy.Enemy
-import magic.{BlackMagic, DefensiveSpell, Magic, OffensiveSpell, WhiteMagic}
+import magic.Magic
 import weapon.Weapon
 
 /**
@@ -34,10 +32,11 @@ class WhiteMage(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, ma
   }
 
   /**
-   * Overrides the method to check if a spell is compatible with the white mage.
+   * Checks if the black mage can cast the given spell.
    *
-   * @param spell The spell to be checked.
-   * @throws InvalidMagicType if the spell is not compatible with the white mage.
+   * Overrides the `checkSpell` method defined in the `AbstractMagicCharacter` class.
+   *
+   * @param spell The spell to be cast.
    */
   override def checkSpell(spell: Magic): Unit = {
     spell.checkSorcerer(this)

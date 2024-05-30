@@ -1,10 +1,5 @@
 package entity.character
 
-import entity.Entity
-import entity.enemy.Enemy
-import exceptions.EntityOverflow
-import magic.Magic
-
 /**
  * Trait representing a magic character entity in a game.
  * A magic character is a character with additional properties related to magic, such as magic points and current magic points.

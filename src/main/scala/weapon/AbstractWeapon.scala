@@ -1,9 +1,8 @@
 package weapon
 
-import effect.Effect
 import entity.character.Character
-import exceptions.{InvalidNameException, InvalidStatException, InvalidWeaponException, NonMagicWeaponException, Require}
-import magic.Magic
+import exceptions.{NonMagicWeaponException, Require}
+
 
 /**
  * Abstract class representing a specific type of weapon.

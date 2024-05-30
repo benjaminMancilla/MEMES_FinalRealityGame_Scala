@@ -1,6 +1,6 @@
 package entity
 
-import exceptions.{HealingDeadEntity, InvalidSpellTarget, Require}
+import exceptions.Require
 import magic.{DefensiveSpell, OffensiveSpell}
 
 /**

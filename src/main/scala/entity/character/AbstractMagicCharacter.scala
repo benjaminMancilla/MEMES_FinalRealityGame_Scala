@@ -1,9 +1,9 @@
 package entity.character
 
 import entity.Entity
-import entity.enemy.Enemy
-import exceptions.{EmptyWeaponException, EntityOverflow, InvalidMagicType, InvalidSpellTarget, NoMagicPoints, ProhibitedTarget, Require}
-import magic.{BlackMagic, DefensiveSpell, Magic, OffensiveSpell, WhiteMagic}
+
+import exceptions.{EmptyWeaponException, InvalidMagicType, NoMagicPoints, ProhibitedTarget, Require}
+import magic.Magic
 
 
 /**
