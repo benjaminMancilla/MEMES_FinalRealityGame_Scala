@@ -1,14 +1,20 @@
 import entity.character.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
-import exceptions.NonMagicWeaponException
+import exceptions.{InvalidNameException, InvalidStatException, NonMagicWeaponException}
 import munit.FunSuite
 import weapon.{Axe, Bow, Sword}
 class WeaponTest extends FunSuite {
 
   test("AbstractWeapon should not initialize with invalid parameters"){
-    val axe = new Axe("", -1, -20) : Axe
-    assert(axe.name == "Weapon")
-    assert(axe.attackPoints == 10)
-    assert(axe.weight == 10)
+    intercept[InvalidStatException]{
+      new Axe("Axe", -1, 20)
+    }
+    intercept[InvalidStatException]{
+      new Axe("Axe", 10, -20)
+    }
+    intercept[InvalidNameException]{
+      new Axe("", 10, -20)
+    }
+
   }
 
 

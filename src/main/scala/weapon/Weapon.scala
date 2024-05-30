@@ -22,6 +22,8 @@ trait Weapon extends PIWeapon {
    */
   def owner_=(newOwner: Option[Character]): Unit
 
+  /** The magical attack points of the weapon. For MagicWeapons will return an
+   * Int, for common weapon will throw an Exception, common weapons should not be able to have magic properties */
   def magicAttack: Int
 
 }

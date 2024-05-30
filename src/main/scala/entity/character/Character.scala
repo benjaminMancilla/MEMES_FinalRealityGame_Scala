@@ -28,6 +28,12 @@ trait Character extends Entity with PICharacter {
    */
   def equipped_weapon: Option[Weapon]
 
+  /**
+   * Determines if certain weapon can be equipped by a the Character.
+   *
+   * @param newWeapon The new weapon that is going to be equipped.
+   * @return `true` if the character can equip the weapon.
+   */
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean
 
 }

@@ -22,28 +22,15 @@ import magic.Magic
 abstract class AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) extends Weapon {
 
   /** The name of the weapon. */
-  protected val _name: String = try {Require.Name(nameI) lengthAtLeast 3}
-  catch {
-    case _: InvalidNameException => "Weapon"
-  }
-
+  protected val _name: String = {Require.Name(nameI) lengthAtLeast 3}
   /** The attack points of the weapon. */
-  private val _attackPoints: Int = try {Require.Stat(attackPointsI, "attackPoints") in (0 to 1000)}
-  catch {
-    case _: InvalidStatException => 10
-  }
+  private val _attackPoints: Int = {Require.Stat(attackPointsI, "attackPoints") in (0 to 1000)}
 
   /** The weight of the weapon. */
-  protected val _weight: Int = try {Require.Stat(weightI, "weight") in (0 to 1000)}
-  catch {
-    case _: InvalidStatException => 10
-  }
+  protected val _weight: Int = {Require.Stat(weightI, "weight") in (0 to 1000)}
 
   /** The owner of the weapon. */
   private var _owner: Option[Character] = None
-
-  /** Indicates whether the weapon has an owner. */
-  private var _hasOwner: Boolean = false
 
   /** Retrieves the name of the weapon. */
   def name: String = _name
@@ -62,6 +49,7 @@ abstract class AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) e
     _owner = newOwner
   }
 
+  /** The default result for accessing magic is an Exception, normal weapons have not access to magic */
   def magicAttack: Int = {
     throw new NonMagicWeaponException("Common weapons can not access to magic")
   }

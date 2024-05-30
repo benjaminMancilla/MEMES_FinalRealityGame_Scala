@@ -6,6 +6,6 @@ package weapon
  */
 trait PIMagicWeapon extends PIWeapon {
 
-  /** The magical attack points of the weapon. */
+  /** The magical attack points of the weapon. Returns an Int */
   def magicAttack: Int
 }

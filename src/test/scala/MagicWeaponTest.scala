@@ -1,12 +1,15 @@
 import entity.character.{BlackMage, MagicCharacter, Ninja, Paladin, Warrior, WhiteMage}
+import exceptions.InvalidStatException
 import munit.FunSuite
 import weapon.{Axe, Bow, Staff, Sword, Wand}
 
 class MagicWeaponTest extends FunSuite {
 
   test("Negative magic points are not allowed"){
-    val staff = new Staff("Magic Staff", 10, 10 , -19)
-    assert(staff.magicAttack == 0)
+    intercept[InvalidStatException] {
+      new Staff("Magic Staff", 10, 10, -19)
+    }
+
   }
 
   test("AbstractMagicWeapon should initialize correctly") {

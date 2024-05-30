@@ -61,17 +61,26 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
 
   /**
    * Changes the equipped weapon of the character.
+   * Checks with the Require if the new weapon is valid, for that, it needs to do not
+   * have already an owner, plus it has to be a compatible weapon with the character.
+   *
+   * If the check is cleared, the actual weapon in unequipped (now it has no owner)
+   * then the new weapon is the equipped weapon and the owner is updated.
    *
    * @param newWeapon The new weapon to be equipped.
    */
   private def setWeapon(newWeapon: Option[Weapon]): Unit = {
-    Require.WeaponAssigment(newWeapon, this) validWeapon (newWeapon, this)
+    Require.WeaponAssignment(newWeapon, this) validWeapon (newWeapon, this)
 
     equipped_weapon.foreach(_.owner = None)
     equipped_weapon = newWeapon
     newWeapon.foreach(_.owner = Some(this))
   }
 
+  /**
+   * Public method of setWeapon
+   * @param newWeapon The new weapon to be equipped.
+   */
   def changeWeapon(newWeapon: Option[Weapon]): Unit = {
     setWeapon(newWeapon)
 
@@ -94,9 +103,9 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean
 
   /**
-   * Performs an attack on another entity.
+   * Performs an attack on another enemy.
    *
-   * @param entity The entity being attacked.
+   * @param entity The enemy being attacked.
    * @param damage The amount of damage to be inflicted.
    */
   def doAttack(entity: ConcreteEnemy, damage: Int): Unit = {
@@ -108,6 +117,12 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
     }
   }
 
+  /**
+   * If the attack is performed on a Character, we get an exception.
+   *
+   * @param entity The enemy being attacked.
+   * @param damage The amount of damage to be inflicted.
+   */
   def doAttack(entity: Character, damage: Int): Unit = {
     throw new ProhibitedTarget("Characters can not attack other characters")
   }
@@ -119,6 +134,13 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    */
   def typeName: String = _typeName
 
+
+
+  /**
+   * Characters can only receive defensive spells
+   *
+   * @return Unit
+   */
   override def checkSpell(spell: DefensiveSpell): Unit = {}
 
 }

@@ -45,14 +45,30 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
     weight
   }
 
+
+  /**
+   * An enemy can not perform an attack on other enemy.
+   *
+   * @return ProhibitedTarget exception.
+   */
   def doAttack(entity: ConcreteEnemy, damage: Int): Unit = {
     throw new ProhibitedTarget("An enemy can not attack other enemies")
   }
 
+  /**
+   * Same logic than the general entity attack
+   *
+   * @return Unit
+   */
   def doAttack(entity: Character, damage: Int): Unit = {
     doDamage(entity: Entity, damage: Int)
   }
 
+  /**
+   * Enemies can only receive offensive spells
+   *
+   * @return Unit
+   */
   override def checkSpell(spell: OffensiveSpell): Unit = {}
 
 }

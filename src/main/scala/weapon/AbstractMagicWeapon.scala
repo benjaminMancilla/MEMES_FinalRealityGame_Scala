@@ -1,5 +1,6 @@
 package weapon
 import effect.Effect
+import exceptions.Require
 import magic.Magic
 
 /**
@@ -16,11 +17,7 @@ abstract class AbstractMagicWeapon(nameI: String, attackPointsI: Int, weightI: I
   extends AbstractWeapon(nameI: String, attackPointsI: Int, weightI: Int) with MagicWeapon {
 
   /** The magical attack points of the magical weapon. */
-  private val _magicAttack: Int = try {
-    if (magicAttackI >= 0) magicAttackI else throw new IllegalArgumentException("Weapon magic attack can not be negative.")
-  } catch {
-    case _: IllegalArgumentException => 0
-  }
+  private val _magicAttack: Int = {Require.Stat(magicAttackI, "magicAttack") in (0 to 1000)}
 
   /** Retrieves the magical attack points of the magical weapon. */
   override def magicAttack: Int = _magicAttack

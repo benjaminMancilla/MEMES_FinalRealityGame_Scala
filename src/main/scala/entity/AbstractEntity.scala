@@ -37,7 +37,6 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   private val _weight: Int = {Require.Stat(weightI, "weight") atLeast  0 }
 
 
-
   /**
    * Indicates whether the entity is controlled by the player.
    * Must be implemented by subclasses.
@@ -177,10 +176,22 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
    */
   def isPlayer: Boolean = _isPlayer
 
+  /**
+   * Performs healing on another entity.
+   *
+   * @param entity The entity being healed.
+   * @param heal The amount of healing to be performed.
+   */
   def doHealing(entity: Entity, heal: Int): Unit = {
     doHeal(entity: Entity, heal: Int)
   }
 
+  /**
+   * Logic of healing on another entity.
+   *
+   * @param entity The entity performing the healing.
+   * @param heal The amount of healing to be performed.
+   */
   def doHeal(entity: Entity, heal: Int): Unit = {
     if (!state) {
       throw new HealingDeadEntity(s"${this.name} is dead, can not heal ${entity.name}")
@@ -194,6 +205,12 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     }
   }
 
+  /**
+   * Receives healing from a spell or ability.
+   *
+   * @param heal The amount of healing received.
+   * @return The remaining hit points after receiving the healing.
+   */
   def receiveHealing(heal: Int): Int = {
     var extraHeal = -1
     if (current_hit_points + heal >= hit_points) {
@@ -209,14 +226,21 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     extraHeal
   }
 
-
+  /**
+   * Checks if the target entity is valid for an offensive spell.
+   *
+   * @param spell The offensive spell being cast.
+   */
   def checkSpell(spell: OffensiveSpell): Unit = {
     throw new InvalidSpellTarget(s"${spell.name} is a offensive spell, can not be cast on ${this.name}")
   }
+  /**
+   * Checks if the target entity is valid for a defensive spell.
+   *
+   * @param spell The defensive spell being cast.
+   */
   def checkSpell(spell: DefensiveSpell): Unit = {
     throw new InvalidSpellTarget(s"${spell.name} is a defensive spell, can not be cast on ${this.name}")
   }
-
-
 
 }

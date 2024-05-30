@@ -52,7 +52,12 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
     _current_magic_points = newMp
   }
 
-
+  /**
+   * Casts a spell on a target entity.
+   *
+   * @param target The target entity on which the spell is cast.
+   * @param spell The spell to be cast.
+   */
   def castSpell(target:Entity, spell: Magic): Unit = {
     checkSpell(spell)
     spell.checkTarget(target)
@@ -71,6 +76,11 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
 
   }
 
+  /**
+   * Checks if the magic character can cast the given spell.
+   *
+   * @param spell The spell to be cast.
+   */
   def checkSpell(spell:Magic): Unit = {
     throw new InvalidMagicType(s"${spell.name} spell is not compatible with ${this.name}")
   }
