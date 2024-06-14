@@ -1,5 +1,6 @@
 package magic.whiteMagic
 
+import effect.Paralyzed
 import entity.Entity
 import entity.character.magicCharacter.MagicCharacter
 import magic.OffensiveSpell
@@ -21,15 +22,14 @@ class Paralyze extends AbstractWhiteMagic with OffensiveSpell {
    * Applies the Paralyze spell's effect to the target.
    *
    * The effect of the Paralyze spell is to apply the Paralyzed effect to the target.
-   * However, the implementation for this effect is not yet implemented, so this method
-   * currently prints a placeholder message for testing purposes.
    *
-   * @param sorcerer The magic character casting the spell.
-   * @param target The entity that the spell is being cast on.
-   * @param mDmg The magic damage (unused parameter, as Paralyze is not a damaging spell).
+   * @param sorcerer The magicE character casting the spell.
+   * @param target The entityE that the spell is being cast on.
+   * @param mDmg The magicE damage (unused parameter, as Paralyze is not a damaging spell).
    */
   def applySpell(sorcerer: MagicCharacter, target: Entity, mDmg: Int): Unit = {
-    // Apply the Paralyzed effect to the target (not implemented yet)
+
+    target.addEffect(new Paralyzed())
     println("Paralyzed") // Placeholder for momentary tests
   }
 
@@ -38,7 +38,7 @@ class Paralyze extends AbstractWhiteMagic with OffensiveSpell {
    *
    * This method ensures that the target can be affected by the Paralyze spell.
    *
-   * @param target The entity that the spell is being cast on.
+   * @param target The entityE that the spell is being cast on.
    */
   override def checkTarget(target: Entity): Unit = { target.checkSpell(this) }
 

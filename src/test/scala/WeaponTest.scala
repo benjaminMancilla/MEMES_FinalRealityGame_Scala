@@ -1,6 +1,6 @@
 import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
 import entity.character.magicCharacter.{BlackMage, WhiteMage}
-import exceptions.magic.NonMagicWeaponException
+import exceptions.magicE.NonMagicWeaponException
 import exceptions.{InvalidNameException, InvalidStatException}
 import munit.FunSuite
 import weapon.commonWeapon.{Axe, Bow, Sword}
@@ -94,7 +94,7 @@ class WeaponTest extends FunSuite {
 
   }
 
-  test("Common weapon should not be able to access magic"){
+  test("Common weaponE should not be able to access magicE"){
     val axe = new Axe("Axe", 10, 10)
     val bow = new Bow("Bow", 10, 10)
     val sword = new Sword("Sword", 10, 10)

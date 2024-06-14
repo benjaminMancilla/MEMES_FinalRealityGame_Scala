@@ -4,35 +4,35 @@ import entity.Entity
 import weapon.Weapon
 
 /**
- * Trait representing a character entity in a game.
- * A character is an entity with additional properties such as an equipped weapon.
+ * Trait representing a character entityE in a game.
+ * A character is an entityE with additional properties such as an equipped weaponE.
  */
 trait Character extends Entity with PICharacter {
 
   /**
-   * Changes the equipped weapon of the character.
+   * Changes the equipped weaponE of the character.
    *
-   * @param new_weapon The new weapon to be equipped.
+   * @param new_weapon The new weaponE to be equipped.
    */
   def changeWeapon(new_weapon: Option[Weapon]): Unit
 
   /**
-   * Unequips the currently equipped weapon of the character.
+   * Unequips the currently equipped weaponE of the character.
    */
   def unequipWeapon(): Unit
 
   /**
-   * Gets the currently equipped weapon of the character.
+   * Gets the currently equipped weaponE of the character.
    *
-   * @return The currently equipped weapon.
+   * @return The currently equipped weaponE.
    */
   def equipped_weapon: Option[Weapon]
 
   /**
-   * Determines if certain weapon can be equipped by a the Character.
+   * Determines if certain weaponE can be equipped by a the Character.
    *
-   * @param newWeapon The new weapon that is going to be equipped.
-   * @return `true` if the character can equip the weapon.
+   * @param newWeapon The new weaponE that is going to be equipped.
+   * @return `true` if the character can equip the weaponE.
    */
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean
 

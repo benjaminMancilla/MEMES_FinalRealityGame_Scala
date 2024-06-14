@@ -1,8 +1,8 @@
 import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
 import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import exceptions.entity.{HealingDeadEntity, ProhibitedTarget}
-import exceptions.weapon.{EmptyWeaponException, InvalidWeaponException}
+import exceptions.entityE.{HealingDeadEntity, ProhibitedTarget}
+import exceptions.weaponE.{EmptyWeaponException, InvalidWeaponException}
 import exceptions.{InvalidNameException, InvalidStatException}
 import weapon.commonWeapon.{Axe, Bow, Sword}
 import weapon.magicWeapon.{Staff, Wand}
@@ -57,7 +57,7 @@ class CharacterTest extends munit.FunSuite {
     ninja.unequipWeapon()
   }
 
-  test("AbstractCharacter should change equipped weapon correctly") {
+  test("AbstractCharacter should change equipped weaponE correctly") {
     val warrior = new Warrior("Barbarian", 180, 25, 45)
     warrior.changeWeapon(Some(sword))
     val newWeapon = new Sword("Mace", 50, 10)
@@ -69,7 +69,7 @@ class CharacterTest extends munit.FunSuite {
   entity1.changeWeapon(Some(new Sword("Mace", 50, 10)))
   private val entity2 = new ConcreteEnemy("Entity2", 80, 10, 30, 10)
 
-  test("doAttack should reduce the hit points of the attacked entity") {
+  test("doAttack should reduce the hit points of the attacked entityE") {
     val initialHitPoints = entity2.current_hit_points
     entity1.doAttack(entity2, 30)
     assert(entity2.current_hit_points < initialHitPoints)
@@ -83,7 +83,7 @@ class CharacterTest extends munit.FunSuite {
     assert(entity2.current_hit_points == initialHitPoints)
   }
 
-  test("receiveDamage should reduce the current hit points of the entity") {
+  test("receiveDamage should reduce the current hit points of the entityE") {
     val initialHitPoints = entity1.current_hit_points
     entity1.receiveDamage(20)
     assert(entity1.current_hit_points < initialHitPoints)
@@ -94,7 +94,7 @@ class CharacterTest extends munit.FunSuite {
     assert(!entity1.state)
   }
 
-  test("doDamage should detect how much extra damage is dealt when killing an entity") {
+  test("doDamage should detect how much extra damage is dealt when killing an entityE") {
     val entity3 = new Warrior("Entity1", 100, 10, 20)
     entity3.changeWeapon(Some(new Sword("Mace", 50, 10)))
     val entity4 = new ConcreteEnemy("Entity2", 80, 10, 30, 10)
@@ -120,7 +120,7 @@ class CharacterTest extends munit.FunSuite {
     assert(entity6.current_hit_points == 0)
   }
 
-  test("Character can not use a weapon with owner") {
+  test("Character can not use a weaponE with owner") {
     val entity = new Warrior("Entity1", 100, 10, 20)
     val sword =  new Sword("Sword", 50, 10)
     entity.changeWeapon(Some(sword))
@@ -130,7 +130,7 @@ class CharacterTest extends munit.FunSuite {
     }
   }
 
-  test("Character can not use a weapon that does not fit their class") {
+  test("Character can not use a weaponE that does not fit their class") {
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val ninja = new Ninja("Entity1", 100, 10, 20)
     val paladin = new Paladin("Entity1", 100, 10, 20)
@@ -174,7 +174,7 @@ class CharacterTest extends munit.FunSuite {
 
   }
 
-  test("Character should be able to unequip the weapon"){
+  test("Character should be able to unequip the weaponE"){
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val sword =  new Sword("Sword", 50, 10)
     warrior.changeWeapon(Some(sword))
@@ -216,7 +216,7 @@ class CharacterTest extends munit.FunSuite {
 
   }
 
-  test("A character should be able to heal an entity"){
+  test("A character should be able to heal an entityE"){
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val warrior2 = new Warrior("Entity2", 100, 10, 20)
     warrior2.receiveDamage(40)
@@ -228,7 +228,7 @@ class CharacterTest extends munit.FunSuite {
 
   }
 
-  test("A character should not be able to heal a dead entity") {
+  test("A character should not be able to heal a dead entityE") {
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val warrior2 = new Warrior("Entity2", 100, 10, 20)
     warrior2.receiveDamage(1000)

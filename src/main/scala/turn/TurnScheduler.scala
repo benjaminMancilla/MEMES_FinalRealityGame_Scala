@@ -1,7 +1,7 @@
 package turn
 
 import entity.Entity
-import exceptions.entity.EntityOverflow
+import exceptions.entityE.EntityOverflow
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -22,12 +22,12 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
   checkEntitiesRestrictions()
 
   /**
-   * The wait time for each entity before their next turn.
+   * The wait time for each entityE before their next turn.
    */
   private val _turn_wait: ArrayBuffer[Int] = createTurnWaitIndex(turn_entitiesI.size)
 
   /**
-   * The ready time for each entity, along with their index in the turn_entities array.
+   * The ready time for each entityE, along with their index in the turn_entities array.
    */
   private val _turn_ready: ArrayBuffer[(Int, Int)] = ArrayBuffer.empty
 
@@ -50,7 +50,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     }
   }
 
-  // Update the index values after removing an entity.
+  // Update the index values after removing an entityE.
   private def updateIndex(removedIndex: Int): Unit = {
     // Remove the index from the wait list and ready list.
     _turn_wait.filterInPlace(_ != removedIndex)
@@ -72,7 +72,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     }
   }
 
-  // Search for the index of an entity in the ready list.
+  // Search for the index of an entityE in the ready list.
   private def searchIndexTurnReady(lookedValue: Int): Int = {
     var index: Int = 0
     while (index < _turn_ready.size) {
@@ -93,7 +93,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     arrayBuffer
   }
 
-  // Create turn information for each entity.
+  // Create turn information for each entityE.
   private def createTurnInfo(turn_entities: ArrayBuffer[Entity]): ArrayBuffer[(Entity, Int, Int, Boolean)] = {
     val tuples_list: ArrayBuffer[(Entity, Int, Int, Boolean)] = ArrayBuffer.empty[(Entity, Int, Int, Boolean)]
     val entity_list: ArrayBuffer[Entity] = turn_entities
@@ -130,7 +130,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     _turn_ready.clear()
   }
 
-  // Reset the action bar value for a specific entity to its initial state.
+  // Reset the action bar value for a specific entityE to its initial state.
   def resetBarValue(entity: Entity): Unit = {
     val index = _turn_info.indexWhere { case (e, _, _, _) => e == entity }
     if (index != -1) {
@@ -184,7 +184,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     readyEntities
   }
 
-  // Add a new entity to the turn scheduler.
+  // Add a new entityE to the turn scheduler.
   def addEntity(new_char: Entity): Unit =  {
     if (_turn_info.exists(tuple => tuple._1 == new_char)) {}
     else {
@@ -194,7 +194,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     checkEntitiesRestrictions()
   }
 
-  // Remove an entity from the turn scheduler.
+  // Remove an entityE from the turn scheduler.
   def removeEntity(old_char: Entity): Unit = {
     val indexInfoTuple = _turn_info.zipWithIndex.find { case ((entityElement, _, _, _), _) => entityElement == old_char }
     indexInfoTuple.foreach { case (_, index) =>
@@ -204,7 +204,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     checkEntitiesRestrictions()
   }
 
-  // Add an entity to the ready list.
+  // Add an entityE to the ready list.
   private def addReady(new_tuple:(Int, Int)): Unit =  {
     if (_turn_ready.isEmpty) {
       _turn_ready += new_tuple
@@ -220,13 +220,13 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
     }
   }
 
-  // Retrieve the next entity to perform an action.
+  // Retrieve the next entityE to perform an action.
   def nextAttacker: Entity = {
     val next_attacker: Entity = _turn_info(_turn_ready(0)._1)._1
     next_attacker
   }
 
-  // Dequeue the next entity that is ready to perform an action.
+  // Dequeue the next entityE that is ready to perform an action.
   def dequeueReady(): Entity = {
     val next_attacker = nextAttacker
     val dequeueIndex = _turn_ready(0)._1
@@ -236,7 +236,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
 
   }
 
-  // Calculate the maximum action bar value for an entity.
+  // Calculate the maximum action bar value for an entityE.
   def maxBarValue(entity:Entity): Int = {
     entity.barValue
   }

@@ -1,4 +1,4 @@
-package exceptions.entity
+package exceptions.entityE
 
 /**
  * Exception thrown when there are to many or to few entities in combat.

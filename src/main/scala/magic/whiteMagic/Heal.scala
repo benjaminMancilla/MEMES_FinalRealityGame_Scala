@@ -23,9 +23,9 @@ class Heal extends AbstractWhiteMagic with DefensiveSpell {
    * The effect of the Heal spell is to restore a portion of the target's hit points based on its maximum hit points.
    * Specifically, the heal amount is calculated as 30% of the target's maximum hit points.
    *
-   * @param sorcerer The magic character casting the spell.
-   * @param target The entity that the spell is being cast on.
-   * @param mDmg The magic damage (unused parameter, as Heal is a restorative spell).
+   * @param sorcerer The magicE character casting the spell.
+   * @param target The entityE that the spell is being cast on.
+   * @param mDmg The magicE damage (unused parameter, as Heal is a restorative spell).
    */
   def applySpell(sorcerer: MagicCharacter, target: Entity, mDmg: Int): Unit = {
     val heal = (target.hit_points / 10) * 3
@@ -37,7 +37,7 @@ class Heal extends AbstractWhiteMagic with DefensiveSpell {
    *
    * This method ensures that the target can be affected by the Heal spell.
    *
-   * @param target The entity that the spell is being cast on.
+   * @param target The entityE that the spell is being cast on.
    */
   override def checkTarget(target: Entity): Unit = { target.checkSpell(this) }
 

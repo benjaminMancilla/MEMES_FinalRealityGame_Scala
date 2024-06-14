@@ -19,9 +19,9 @@ trait TraitTurnScheduler extends PITurnScheduler {
   def resetAllBarValues(): Unit
 
   /**
-   * Resets the action bar value for a specific entity to its initial state.
+   * Resets the action bar value for a specific entityE to its initial state.
    *
-   * @param entity The entity whose action bar value needs to be reset.
+   * @param entity The entityE whose action bar value needs to be reset.
    */
   def resetBarValue(entity: Entity): Unit
 
@@ -38,23 +38,23 @@ trait TraitTurnScheduler extends PITurnScheduler {
   def checkWaitEntities(): Unit
 
   /**
-   * Adds a new entity to the turn scheduler.
+   * Adds a new entityE to the turn scheduler.
    *
-   * @param new_char The new entity to be added.
+   * @param new_char The new entityE to be added.
    */
   def addEntity(new_char: Entity): Unit
 
   /**
-   * Removes an entity from the turn scheduler.
+   * Removes an entityE from the turn scheduler.
    *
-   * @param old_char The entity to be removed.
+   * @param old_char The entityE to be removed.
    */
   def removeEntity(old_char: Entity): Unit
 
   /**
-   * Dequeues the next entity that is ready to perform an action.
+   * Dequeues the next entityE that is ready to perform an action.
    *
-   * @return The next entity ready to perform an action.
+   * @return The next entityE ready to perform an action.
    */
   def dequeueReady(): Entity
 

@@ -1,5 +1,6 @@
 package magic.whiteMagic
 
+import effect.Poisoned
 import entity.Entity
 import entity.character.magicCharacter.MagicCharacter
 import magic.OffensiveSpell
@@ -24,12 +25,12 @@ class Poison extends AbstractWhiteMagic with OffensiveSpell {
    * However, the implementation for this effect is not yet implemented, so this method
    * currently prints a placeholder message for testing purposes.
    *
-   * @param sorcerer The magic character casting the spell.
-   * @param target The entity that the spell is being cast on.
-   * @param mDmg The magic damage (unused parameter, as Poison is not a damaging spell).
+   * @param sorcerer The magicE character casting the spell.
+   * @param target The entityE that the spell is being cast on.
+   * @param mDmg The magicE damage (unused parameter, as Poison is not a damaging spell).
    */
   def applySpell(sorcerer: MagicCharacter, target: Entity, mDmg: Int): Unit = {
-    // Apply the Poisoned effect to the target (not implemented yet)
+    target.addEffect(new Poisoned(magicDamage = mDmg))
     println("Poisoned") // Placeholder for momentary tests
   }
 
@@ -38,7 +39,7 @@ class Poison extends AbstractWhiteMagic with OffensiveSpell {
    *
    * This method ensures that the target can be affected by the Poison spell.
    *
-   * @param target The entity that the spell is being cast on.
+   * @param target The entityE that the spell is being cast on.
    */
   override def checkTarget(target: Entity): Unit = { target.checkSpell(this) }
 

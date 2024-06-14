@@ -11,8 +11,8 @@ abstract class AbstractEffect(turnsEffectI: Int) extends Effect {
 
   def applyEffect(target: Entity): Unit
 
-  private def turnEffect: Int = _turnEffect
-  private def turnEffect_=(newTurnEffect: Int): Unit = {
+  def turnEffect: Int = _turnEffect
+  def turnEffect_=(newTurnEffect: Int): Unit = {
     _turnEffect = newTurnEffect
   }
 

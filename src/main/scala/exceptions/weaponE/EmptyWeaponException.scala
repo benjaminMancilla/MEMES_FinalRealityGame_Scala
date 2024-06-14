@@ -1,7 +1,7 @@
-package exceptions.weapon
+package exceptions.weaponE
 
 /**
- * Exception thrown when a Character tries to attack with no weapon.
+ * Exception thrown when a Character tries to attack with no weaponE.
  *
  * @param message A description of the error.
  */

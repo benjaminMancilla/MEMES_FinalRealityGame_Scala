@@ -18,27 +18,27 @@ trait PITurnScheduler {
   def turn_entities: ArrayBuffer[Entity]
 
   /**
-   * The wait time for each entity before their next turn.
+   * The wait time for each entityE before their next turn.
    */
   def turn_wait: ArrayBuffer[Int]
 
   /**
-   * The ready time for each entity, along with their index in the turn_entities array.
+   * The ready time for each entityE, along with their index in the turn_entities array.
    */
   def turn_ready: ArrayBuffer[(Int, Int)]
 
   /**
-   * Calculates the maximum value of the action bar for a given entity.
+   * Calculates the maximum value of the action bar for a given entityE.
    *
-   * @param entity The entity for which to calculate the maximum action bar value.
-   * @return The maximum action bar value for the entity.
+   * @param entity The entityE for which to calculate the maximum action bar value.
+   * @return The maximum action bar value for the entityE.
    */
   def maxBarValue(entity: Entity): Int
 
   /**
-   * Determines the next entity to perform an action based on the action bar values.
+   * Determines the next entityE to perform an action based on the action bar values.
    *
-   * @return The next entity to perform an action.
+   * @return The next entityE to perform an action.
    */
   def nextAttacker: Entity
 

@@ -1,7 +1,7 @@
-package exceptions.entity
+package exceptions.entityE
 
 /**
- * Exception thrown when entity tries to hit an ally (for enemies and characters).
+ * Exception thrown when entityE tries to hit an ally (for enemies and characters).
  *
  * @param message A description of the error.
  */

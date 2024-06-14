@@ -1,4 +1,4 @@
-package exceptions.magic
+package exceptions.magicE
 
 /**
  * "An exception is thrown when a MagicCharacter tries to use a MagicType that is not compatible with their own."

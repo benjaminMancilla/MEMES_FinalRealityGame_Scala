@@ -6,7 +6,7 @@ import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import weapon.AbstractWeapon
 
 /**
- * Represents an axe weapon in the game.
+ * Represents an axe weaponE in the game.
  *
  * The `Axe` class extends the `AbstractWeapon` class and provides specific implementations
  * for the axe's characteristics and the characters that can equip it.

@@ -7,7 +7,7 @@ import weapon.magicWeapon.{Staff, Wand}
 
 class MagicWeaponTest extends FunSuite {
 
-  test("Negative magic points are not allowed"){
+  test("Negative magicE points are not allowed"){
     intercept[InvalidStatException] {
       new Staff("Magic Staff", 10, 10, -19)
     }

@@ -6,7 +6,7 @@ import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import weapon.AbstractWeapon
 
 /**
- * Represents a sword weapon in the game.
+ * Represents a sword weaponE in the game.
  *
  * The `Sword` class extends the `AbstractWeapon` class and provides specific implementations
  * for the sword's characteristics and the characters that can equip it.

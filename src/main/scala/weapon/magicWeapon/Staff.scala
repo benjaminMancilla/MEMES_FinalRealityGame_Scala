@@ -5,16 +5,16 @@ import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
 import entity.character.magicCharacter.{BlackMage, WhiteMage}
 
 /**
- * Represents a staff weapon in the game.
+ * Represents a staff weaponE in the game.
  *
  * The `Staff` class extends the `AbstractMagicWeapon` class and provides specific implementations
  * for the staff's characteristics and the characters that can equip it.
  *
- * @constructor Creates a new `Staff` with the specified name, attack points, weight, and magic attack.
+ * @constructor Creates a new `Staff` with the specified name, attack points, weight, and magicE attack.
  * @param name The name of the staff.
  * @param attackPoints The attack points of the staff.
  * @param weight The weight of the staff.
- * @param magicAttack The magic attack points of the staff.
+ * @param magicAttack The magicE attack points of the staff.
  */
 class Staff(name: String, attackPoints: Int, weight: Int, magicAttack: Int)
   extends AbstractMagicWeapon(name, attackPoints, weight, magicAttack) {

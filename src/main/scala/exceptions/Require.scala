@@ -1,7 +1,9 @@
 package exceptions
 
-import weapon.{InvalidWeaponException, Weapon}
+import exceptions.weaponE.InvalidWeaponException
+import weapon.Weapon
 import entity.character.Character
+
 
 /** The `Require` object provides utilities for validating specific constraints or requirements.
  *
@@ -110,26 +112,26 @@ object Require {
      */
     def lengthAtLeast(length: Int): String =
       if (name.length >= length) name
-      else throw new InvalidNameException(s"The name of the entity should be at least $length characters long.")
+      else throw new InvalidNameException(s"The name of the entityE should be at least $length characters long.")
   }
 
   /**
-   * Represents and validates the assignment of a weapon to a character.
+   * Represents and validates the assignment of a weaponE to a character.
    *
-   * This class facilitates the validation of a weapon assignment against the character's
+   * This class facilitates the validation of a weaponE assignment against the character's
    * compatibility and ownership constraints. An [[InvalidWeaponException]] is thrown if
    * the validation fails.
    *
    * Note:
    * The class is marked final and cannot be extended.
    *
-   * @param weapon The weapon to be assigned, wrapped in an Option.
-   * @param character The character to which the weapon is to be assigned.
+   * @param weapon The weaponE to be assigned, wrapped in an Option.
+   * @param character The character to which the weaponE is to be assigned.
    */
   final case class WeaponAssignment(weapon: Option[Weapon], character: Character) {
 
     /**
-     * Validates if the weapon can be assigned to the character.
+     * Validates if the weaponE can be assigned to the character.
      *
      * @example
      * {{{
@@ -146,10 +148,10 @@ object Require {
      *   // => throws InvalidWeaponException
      * }}}
      *
-     * @param weaponOpt The optional weapon to be validated.
-     * @param character The character to which the weapon is to be assigned.
-     * @return The weapon wrapped in an Option if valid for the character.
-     * @throws InvalidWeaponException for invalid weapon assignments.
+     * @param weaponOpt The optional weaponE to be validated.
+     * @param character The character to which the weaponE is to be assigned.
+     * @return The weaponE wrapped in an Option if valid for the character.
+     * @throws InvalidWeaponException for invalid weaponE assignments.
      */
     def validWeapon(weaponOpt: Option[Weapon], character: Character): Option[Weapon] = {
       weaponOpt.flatMap { weapon =>

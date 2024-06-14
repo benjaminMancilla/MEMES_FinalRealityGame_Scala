@@ -3,7 +3,7 @@ package entity.enemy
 import entity.Entity
 
 /**
- * Trait representing an enemy entity in a game.
+ * Trait representing an enemy entityE in a game.
  * An enemy is a character that can attack.
  */
 trait Enemy extends Entity {

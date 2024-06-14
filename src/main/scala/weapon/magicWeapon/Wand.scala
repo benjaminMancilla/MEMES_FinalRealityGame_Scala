@@ -5,16 +5,16 @@ import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
 import entity.character.magicCharacter.{BlackMage, WhiteMage}
 
 /**
- * Represents a wand weapon in the game.
+ * Represents a wand weaponE in the game.
  *
  * The `Wand` class extends the `AbstractMagicWeapon` class and provides specific implementations
  * for the wand's characteristics and the characters that can equip it.
  *
- * @constructor Creates a new `Wand` with the specified name, attack points, weight, and magic attack.
+ * @constructor Creates a new `Wand` with the specified name, attack points, weight, and magicE attack.
  * @param name The name of the wand.
  * @param attackPoints The attack points of the wand.
  * @param weight The weight of the wand.
- * @param magicAttack The magic attack points of the wand.
+ * @param magicAttack The magicE attack points of the wand.
  */
 class Wand(name: String, attackPoints: Int, weight: Int, magicAttack: Int)
   extends AbstractMagicWeapon(name, attackPoints, weight, magicAttack) {

@@ -4,7 +4,7 @@ import magic.Magic
 import weapon.Weapon
 
 /**
- * Represents a Black Mage entity in the game, specializing in offensive magic.
+ * Represents a Black Mage entityE in the game, specializing in offensive magicE.
  *
  * The `BlackMage` class extends the `AbstractMagicCharacter` class and represents a character
  * with abilities to cast offensive spells. It inherits properties and behaviors from its superclass
@@ -14,7 +14,7 @@ import weapon.Weapon
  * @param hit_pointsI The initial hit points of the black mage.
  * @param defenseI The defense level of the black mage.
  * @param weightI The weight of the black mage.
- * @param magic_pointsI The total magic points of the black mage.
+ * @param magic_pointsI The total magicE points of the black mage.
  */
 class BlackMage(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, magic_pointsI: Int)
   extends AbstractMagicCharacter(nameI, hit_pointsI, defenseI, weightI, magic_pointsI) {
@@ -23,10 +23,10 @@ class BlackMage(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, ma
   val _typeName: String = "BlackMage"
 
   /**
-   * Checks if a given weapon can be equipped by the black mage.
+   * Checks if a given weaponE can be equipped by the black mage.
    *
-   * @param newWeapon The new weapon to be checked.
-   * @return `true` if the weapon can be equipped, `false` otherwise.
+   * @param newWeapon The new weaponE to be checked.
+   * @return `true` if the weaponE can be equipped, `false` otherwise.
    */
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean = {
     newWeapon.exists(_.canBeEquipped(this))

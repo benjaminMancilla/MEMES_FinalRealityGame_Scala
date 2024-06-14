@@ -1,5 +1,6 @@
 package magic.blackMagic
 
+import effect.Burned
 import entity.Entity
 import entity.character.magicCharacter.MagicCharacter
 import magic.OffensiveSpell
@@ -25,16 +26,16 @@ class Fire extends AbstractBlackMagic with OffensiveSpell {
    * The effect of the Fire spell is to inflict damage on the target. Additionally, there is a 20% chance
    * to apply the Burn effect, although the implementation for this effect is not yet implemented.
    *
-   * @param sorcerer The magic character casting the spell.
-   * @param target The entity that the spell is being cast on.
-   * @param mDmg The magic damage inflicted by the spell.
+   * @param sorcerer The magicE character casting the spell.
+   * @param target The entityE that the spell is being cast on.
+   * @param mDmg The magicE damage inflicted by the spell.
    */
   def applySpell(sorcerer: MagicCharacter, target: Entity, mDmg: Int): Unit = {
     sorcerer.doAttack(target, mDmg)
     val random = new Random()
     val randomResult = random.nextDouble()
     if (randomResult <= 0.2) {
-      // We apply the Burn effect to the target (not implemented yet)
+      target.addEffect(new Burned(magicDamage = mDmg))
       println("Burn") // Placeholder for momentary tests
     }
   }
@@ -44,7 +45,7 @@ class Fire extends AbstractBlackMagic with OffensiveSpell {
    *
    * This method ensures that the target can be affected by the Fire spell.
    *
-   * @param target The entity that the spell is being cast on.
+   * @param target The entityE that the spell is being cast on.
    */
   override def checkTarget(target: Entity): Unit = {target.checkSpell(this)}
 

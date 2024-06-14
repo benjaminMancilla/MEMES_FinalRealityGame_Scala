@@ -4,7 +4,7 @@ import entity.character.AbstractCharacter
 import weapon.Weapon
 
 /**
- * Represents a Ninja entity in the game, known for its agility and stealth.
+ * Represents a Ninja entityE in the game, known for its agility and stealth.
  *
  * The `Ninja` class extends the `AbstractCharacter` class and represents a character with ninja-like abilities.
  * It inherits properties and behaviors from its superclass and implements additional functionalities specific to ninjas.
@@ -21,10 +21,10 @@ class Ninja(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
   val _typeName: String = "Ninja"
 
   /**
-   * Checks if a given weapon can be equipped by the ninja.
+   * Checks if a given weaponE can be equipped by the ninja.
    *
-   * @param newWeapon The new weapon to be checked.
-   * @return `true` if the weapon can be equipped, `false` otherwise.
+   * @param newWeapon The new weaponE to be checked.
+   * @return `true` if the weaponE can be equipped, `false` otherwise.
    */
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean = {
     newWeapon.exists(_.canBeEquipped(this))

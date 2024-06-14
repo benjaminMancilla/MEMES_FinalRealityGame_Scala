@@ -2,14 +2,14 @@ package entity.character
 
 import entity.enemy.ConcreteEnemy
 import entity.{AbstractEntity, Entity}
-import exceptions.weapon.EmptyWeaponException
+import exceptions.weaponE.EmptyWeaponException
 import exceptions.Require
-import exceptions.entity.ProhibitedTarget
+import exceptions.entityE.ProhibitedTarget
 import magic.DefensiveSpell
 import weapon.Weapon
 
 /**
- * Abstract class representing a character entity in a game with basic properties and behavior.
+ * Abstract class representing a character entityE in a game with basic properties and behavior.
  * This class extends the AbstractEntity class and implements the Character trait.
  *
  * @param nameI       The name of the character.
@@ -31,21 +31,21 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
   protected val _isPlayer: Boolean = true
 
   /**
-   * The currently equipped weapon of the character.
+   * The currently equipped weaponE of the character.
    */
   private var _equipped_weapon: Option[Weapon] = None
 
   /**
-   * Gets the currently equipped weapon of the character.
+   * Gets the currently equipped weaponE of the character.
    *
-   * @return The currently equipped weapon.
+   * @return The currently equipped weaponE.
    */
   def equipped_weapon: Option[Weapon] = _equipped_weapon
 
   /**
-   * Sets the currently equipped weapon of the character.
+   * Sets the currently equipped weaponE of the character.
    *
-   * @param new_weapon The new weapon to be equipped.
+   * @param new_weapon The new weaponE to be equipped.
    */
   def equipped_weapon_=(new_weapon: Option[Weapon]): Unit = {
     _equipped_weapon = new_weapon
@@ -62,14 +62,14 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
   }
 
   /**
-   * Changes the equipped weapon of the character.
-   * Checks with the Require if the new weapon is valid, for that, it needs to do not
-   * have already an owner, plus it has to be a compatible weapon with the character.
+   * Changes the equipped weaponE of the character.
+   * Checks with the Require if the new weaponE is valid, for that, it needs to do not
+   * have already an owner, plus it has to be a compatible weaponE with the character.
    *
-   * If the check is cleared, the actual weapon in unequipped (now it has no owner)
-   * then the new weapon is the equipped weapon and the owner is updated.
+   * If the check is cleared, the actual weaponE in unequipped (now it has no owner)
+   * then the new weaponE is the equipped weaponE and the owner is updated.
    *
-   * @param newWeapon The new weapon to be equipped.
+   * @param newWeapon The new weaponE to be equipped.
    */
   private def setWeapon(newWeapon: Option[Weapon]): Unit = {
     Require.WeaponAssignment(newWeapon, this) validWeapon (newWeapon, this)
@@ -81,7 +81,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
 
   /**
    * Public method of setWeapon
-   * @param newWeapon The new weapon to be equipped.
+   * @param newWeapon The new weaponE to be equipped.
    */
   def changeWeapon(newWeapon: Option[Weapon]): Unit = {
     setWeapon(newWeapon)
@@ -89,7 +89,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
   }
 
   /**
-   * Unequips the currently equipped weapon of the character.
+   * Unequips the currently equipped weaponE of the character.
    */
   def unequipWeapon(): Unit = {
     equipped_weapon.foreach(_.owner = None)
@@ -97,10 +97,10 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
   }
 
   /**
-   * Checks if a weapon can be equipped by the character.
+   * Checks if a weaponE can be equipped by the character.
    *
-   * @param newWeapon The new weapon to be equipped.
-   * @return true if the weapon can be equipped, false otherwise.
+   * @param newWeapon The new weaponE to be equipped.
+   * @return true if the weaponE can be equipped, false otherwise.
    */
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean
 
@@ -115,7 +115,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
       doDamage(entity: Entity, damage: Int)
     }
     else {
-      throw new EmptyWeaponException("Characters can only attack when they have a weapon")
+      throw new EmptyWeaponException("Characters can only attack when they have a weaponE")
     }
   }
 

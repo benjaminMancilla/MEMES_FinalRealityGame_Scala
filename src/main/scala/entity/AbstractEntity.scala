@@ -1,97 +1,105 @@
 package entity
 
+import effect.Effect
 import exceptions.Require
 import magic.{DefensiveSpell, OffensiveSpell}
-import exceptions.entity.HealingDeadEntity
-import exceptions.magic.InvalidSpellTarget
+import exceptions.entityE.HealingDeadEntity
+import exceptions.magicE.InvalidSpellTarget
+
+import scala.collection.mutable
 
 /**
- * Abstract class representing an entity in a game with basic properties and behavior.
+ * Abstract class representing an entityE in a game with basic properties and behavior.
  * This class extends the Entity trait and implements the PIEntity trait.
- * An entity can be a character controlled by the player or an enemy.
+ * An entityE can be a character controlled by the player or an enemy.
  *
- * @param nameI       The name of the entity.
- * @param hit_pointsI The initial hit points of the entity.
- * @param defenseI    The defense level of the entity.
- * @param weightI     The weight of the entity.
+ * @param nameI       The name of the entityE.
+ * @param hit_pointsI The initial hit points of the entityE.
+ * @param defenseI    The defense level of the entityE.
+ * @param weightI     The weight of the entityE.
  */
 abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, weightI:Int) extends Entity with PIEntity {
 
   /**
-   * Name of the entity.
+   * Name of the entityE.
    */
   private val _name: String = {Require.Name(nameI) lengthAtLeast 3}
 
   /**
-   * Hit points of the entity.
+   * Hit points of the entityE.
    */
   private val _hit_points: Int = {Require.Stat(hit_pointsI, "hit_points") in (1 to 10000)}
 
 
   /**
-   * Defense level of the entity.
+   * Defense level of the entityE.
    */
   private val _defense: Int = {Require.Stat(defenseI, "defense") atLeast  0 }
 
   /**
-   * Weight of the entity.
+   * Weight of the entityE.
    */
   private val _weight: Int = {Require.Stat(weightI, "weight") atLeast  0 }
 
 
   /**
-   * Indicates whether the entity is controlled by the player.
+   * Indicates whether the entityE is controlled by the player.
    * Must be implemented by subclasses.
    */
   protected val _isPlayer: Boolean
 
   /**
-   * Current hit points of the entity.
+   * Current hit points of the entityE.
    */
   private var _current_hit_points: Int = _hit_points
 
   /**
-   * State of the entity (true for alive, false for dead).
+   * State of the entityE (true for alive, false for dead).
    */
   private var _state: Boolean = true
 
   /**
-   * Gets the name of the entity.
+   * Current active effects, it can be empty.
+   */
+  private val _active_effects: mutable.Set[Effect] = mutable.Set()
+
+  /**
+   * Gets the name of the entityE.
    *
-   * @return The name of the entity.
+   * @return The name of the entityE.
    */
   def name: String = _name
 
   /**
-   * Gets the hit points of the entity.
+   * Gets the hit points of the entityE.
    *
-   * @return The hit points of the entity.
+   * @return The hit points of the entityE.
    */
   def hit_points: Int = _hit_points
 
   /**
-   * Gets the defense level of the entity.
+   * Gets the defense level of the entityE.
    *
-   * @return The defense level of the entity.
+   * @return The defense level of the entityE.
    */
   def defense: Int = _defense
 
   /**
-   * Gets the weight of the entity.
+   * Gets the weight of the entityE.
    *
-   * @return The weight of the entity.
+   * @return The weight of the entityE.
    */
   def weight: Int = _weight
 
   /**
-   * Gets the current hit points of the entity.
+   * Gets the current hit points of the entityE.
    *
-   * @return The current hit points of the entity.
+   * @return The current hit points of the entityE.
    */
   def current_hit_points: Int = _current_hit_points
 
   /**
-   * Sets the current hit points of the entity.
+   * Sets the current hit points of the entityE.
    *
    * @param new_current_hit_points The new value for the current hit points.
    */
@@ -100,25 +108,25 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   /**
-   * Gets the state of the entity.
+   * Gets the state of the entityE.
    *
-   * @return The state of the entity (true for alive, false for dead).
+   * @return The state of the entityE (true for alive, false for dead).
    */
   def state: Boolean = _state
 
   /**
-   * Sets the state of the entity.
+   * Sets the state of the entityE.
    *
-   * @param new_character_state The new state of the entity (true for alive, false for dead).
+   * @param new_character_state The new state of the entityE (true for alive, false for dead).
    */
   def state_=(new_character_state: Boolean): Unit = {
     _state = new_character_state
   }
 
   /**
-   * Performs an attack on another entity.
+   * Performs an attack on another entityE.
    *
-   * @param entity The entity being attacked.
+   * @param entity The entityE being attacked.
    * @param damage The amount of damage to be inflicted.
    */
   def doDamage(entity: Entity, damage: Int): Unit = {
@@ -162,9 +170,9 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   /**
-   * Performs an attack on another entity.
+   * Performs an attack on another entityE.
    *
-   * @param entity The entity being attacked.
+   * @param entity The entityE being attacked.
    * @param damage The amount of damage to be inflicted.
    */
   def doAttack(entity: Entity, damage: Int): Unit = {
@@ -172,16 +180,16 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   /**
-   * Indicates whether the entity is controlled by the player or not.
+   * Indicates whether the entityE is controlled by the player or not.
    *
-   * @return true if the entity is controlled by the player, false otherwise.
+   * @return true if the entityE is controlled by the player, false otherwise.
    */
   def isPlayer: Boolean = _isPlayer
 
   /**
-   * Performs healing on another entity.
+   * Performs healing on another entityE.
    *
-   * @param entity The entity being healed.
+   * @param entity The entityE being healed.
    * @param heal The amount of healing to be performed.
    */
   def doHealing(entity: Entity, heal: Int): Unit = {
@@ -189,9 +197,9 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   /**
-   * Logic of healing on another entity.
+   * Logic of healing on another entityE.
    *
-   * @param entity The entity performing the healing.
+   * @param entity The entityE performing the healing.
    * @param heal The amount of healing to be performed.
    */
   def doHeal(entity: Entity, heal: Int): Unit = {
@@ -229,7 +237,7 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   /**
-   * Checks if the target entity is valid for an offensive spell.
+   * Checks if the target entityE is valid for an offensive spell.
    *
    * @param spell The offensive spell being cast.
    */
@@ -237,12 +245,36 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     throw new InvalidSpellTarget(s"${spell.name} is a offensive spell, can not be cast on ${this.name}")
   }
   /**
-   * Checks if the target entity is valid for a defensive spell.
+   * Checks if the target entityE is valid for a defensive spell.
    *
    * @param spell The defensive spell being cast.
    */
   def checkSpell(spell: DefensiveSpell): Unit = {
     throw new InvalidSpellTarget(s"${spell.name} is a defensive spell, can not be cast on ${this.name}")
+  }
+
+  /**
+   * Gets the active effects Set
+   *
+   * @return effects Set.
+   */
+  def active_effects: Set[Effect] = _active_effects.toSet
+
+  /**
+   * Add effect to current active effects.
+   *
+   * @param effect New added effect.
+   */
+  def addEffect(effect: Effect): Unit = {
+    _active_effects += effect
+  }
+
+  def updateEffects(): Unit = {
+    _active_effects.foreach { effect =>
+      effect.applyEffect(this)
+      effect.passTurn()
+    }
+    _active_effects.filterInPlace(_.turnEffect > 0)
   }
 
 }

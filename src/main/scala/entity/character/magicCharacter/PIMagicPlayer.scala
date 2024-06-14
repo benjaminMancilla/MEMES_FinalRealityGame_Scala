@@ -3,18 +3,18 @@ package entity.character.magicCharacter
 import entity.character.PICharacter
 
 /**
- * Trait representing a magic player character entity in a game.
- * A magic player is a character with additional properties related to magic, such as magic points and current magic points.
+ * Trait representing a magicE player character entityE in a game.
+ * A magicE player is a character with additional properties related to magicE, such as magicE points and current magicE points.
  */
 trait PIMagicPlayer extends PICharacter {
 
   /**
-   * The total magic points of the magic player.
+   * The total magicE points of the magicE player.
    */
   def magicPoints: Int
 
   /**
-   * The current magic points of the magic player.
+   * The current magicE points of the magicE player.
    */
   def currentMagicPoints: Int
 

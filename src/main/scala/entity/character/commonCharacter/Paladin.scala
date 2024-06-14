@@ -4,7 +4,7 @@ import entity.character.AbstractCharacter
 import weapon.Weapon
 
 /**
- * Represents a Paladin entity in the game, known for its strength and righteousness.
+ * Represents a Paladin entityE in the game, known for its strength and righteousness.
  *
  * The `Paladin` class extends the `AbstractCharacter` class and represents a character with paladin-like abilities.
  * It inherits properties and behaviors from its superclass and implements additional functionalities specific to paladins.
@@ -21,10 +21,10 @@ class Paladin(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
   val _typeName: String = "Paladin"
 
   /**
-   * Checks if a given weapon can be equipped by the paladin.
+   * Checks if a given weaponE can be equipped by the paladin.
    *
-   * @param newWeapon The new weapon to be checked.
-   * @return `true` if the weapon can be equipped, `false` otherwise.
+   * @param newWeapon The new weaponE to be checked.
+   * @return `true` if the weaponE can be equipped, `false` otherwise.
    */
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean = {
     newWeapon.exists(_.canBeEquipped(this))

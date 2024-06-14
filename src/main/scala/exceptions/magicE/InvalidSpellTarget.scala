@@ -1,4 +1,4 @@
-package exceptions.magic
+package exceptions.magicE
 
 /**
  * "Exception thrown when a spell is cast on an invalid target (defensive spell on an Enemy or offensive on a Character."

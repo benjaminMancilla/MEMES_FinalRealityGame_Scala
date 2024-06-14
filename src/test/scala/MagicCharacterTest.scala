@@ -1,12 +1,12 @@
 import entity.character.commonCharacter.Warrior
 import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import entity.enemy.ConcreteEnemy
-import exceptions.magic.{NoMagicPoints, NonMagicWeaponException}
-import exceptions.weapon.EmptyWeaponException
+import exceptions.magicE.{NoMagicPoints, NonMagicWeaponException}
+import exceptions.weaponE.EmptyWeaponException
 import exceptions.InvalidStatException
-import exceptions.entity.ProhibitedTarget
-import magic.blackMagic.Fire
-import magic.whiteMagic.{Heal, Paralyze, Poison, Thunder}
+import exceptions.entityE.ProhibitedTarget
+import magic.blackMagic.{Fire, Thunder}
+import magic.whiteMagic.{Heal, Paralyze, Poison}
 import munit.FunSuite
 import weapon.commonWeapon.{Bow, Sword}
 import weapon.magicWeapon.{MagicWeapon, Staff, Wand}
@@ -43,14 +43,14 @@ class MagicCharacterTest extends FunSuite {
     whiteMage.unequipWeapon()
   }
 
-  test("BlackMage should have correct default magic points") {
+  test("BlackMage should have correct default magicE points") {
     val blackMage = new BlackMage("Dumbledore", 200, 25, 35, 300)
     blackMage.changeWeapon(Some(wand))
     assert(blackMage.magicPoints == 300)
     blackMage.unequipWeapon()
   }
 
-  test("WhiteMage should have correct default magic points") {
+  test("WhiteMage should have correct default magicE points") {
     val whiteMage = new WhiteMage("Saruman", 180, 20, 30, 250)
     whiteMage.changeWeapon(Some(wand))
     assert(whiteMage.magicPoints == 250)
@@ -65,7 +65,7 @@ class MagicCharacterTest extends FunSuite {
     whiteMage.unequipWeapon()
   }
 
-  test("If a cast is valid, a mage should be able to cast the spell, reducing him/her magic points") {
+  test("If a cast is valid, a mage should be able to cast the spell, reducing him/her magicE points") {
     val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
     val wMage = new WhiteMage("Saruman", 220, 30, 40, 200)
     bMage.changeWeapon(Some(wand))
@@ -103,7 +103,7 @@ class MagicCharacterTest extends FunSuite {
 
   }
 
-  test("Should not be able to cast if the sorcerer has not a magic weapon") {
+  test("Should not be able to cast if the sorcerer has not a magicE weaponE") {
     val bMage = new BlackMage("Gargamel", 220, 30, 40, 200)
     val wMage = new WhiteMage("Saruman", 220, 30, 40, 200)
     wMage.changeWeapon(Some(new Bow("Bow", 50, 10)))

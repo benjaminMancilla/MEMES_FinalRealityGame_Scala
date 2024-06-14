@@ -6,7 +6,7 @@ import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import weapon.AbstractWeapon
 
 /**
- * Represents a bow weapon in the game.
+ * Represents a bow weaponE in the game.
  *
  * The `Bow` class extends the `AbstractWeapon` class and provides specific implementations
  * for the bow's characteristics and the characters that can equip it.

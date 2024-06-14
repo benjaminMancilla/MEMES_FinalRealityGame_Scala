@@ -1,7 +1,7 @@
 import entity.Entity
 import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
 import entity.enemy.ConcreteEnemy
-import exceptions.entity.EntityOverflow
+import exceptions.entityE.EntityOverflow
 import munit.FunSuite
 import turn.TurnScheduler
 import weapon.commonWeapon.Sword
@@ -57,7 +57,7 @@ class TurnSchedulerTest extends FunSuite {
     }
   }
 
-  test("TurnScheduler should update entity bars correctly") {
+  test("TurnScheduler should update entityE bars correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
     val sword1 = new Sword("Sword", 50, 10)
     entity1.changeWeapon(Some(sword1))
@@ -77,7 +77,7 @@ class TurnSchedulerTest extends FunSuite {
     assert(turnScheduler.turn_wait.size == 4)
   }
 
-  test("TurnScheduler should reset entity bars correctly") {
+  test("TurnScheduler should reset entityE bars correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
     val sword1 = new Sword("Sword", 50, 10)
     entity1.changeWeapon(Some(sword1))
@@ -114,7 +114,7 @@ class TurnSchedulerTest extends FunSuite {
     assert(turnScheduler.turn_info(1)._3 == 30 + 10/2)
   }
 
-  test("TurnScheduler should reset entity 1 bar correctly") {
+  test("TurnScheduler should reset entityE 1 bar correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
     entity1.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity2 = new Ninja("Hattori", 150, 25, 30)
@@ -136,7 +136,7 @@ class TurnSchedulerTest extends FunSuite {
 
   }
 
-  test("TurnScheduler should check entity bars correctly") {
+  test("TurnScheduler should check entityE bars correctly") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
     entity1.changeWeapon(Some(new Sword("Sword", 50, 10)))
     val entity2 = new Ninja("Hattori", 150, 25, 30)

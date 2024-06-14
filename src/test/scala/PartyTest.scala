@@ -1,7 +1,7 @@
 import entity.character.commonCharacter.{Ninja, Warrior}
 import entity.character.magicCharacter.BlackMage
 import entity.character.Character
-import exceptions.entity.EntityOverflow
+import exceptions.entityE.EntityOverflow
 import munit.FunSuite
 import party.ConcreteParty
 

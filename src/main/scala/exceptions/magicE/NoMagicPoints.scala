@@ -1,4 +1,4 @@
-package exceptions.magic
+package exceptions.magicE
 
 /**
  * Exception thrown when a MagicCharacter tries to cast an spell with not enough mana.

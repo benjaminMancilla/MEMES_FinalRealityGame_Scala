@@ -3,11 +3,11 @@ package entity.enemy
 import entity.character.Character
 import entity.{AbstractEntity, Entity}
 import exceptions.Require
-import exceptions.entity.ProhibitedTarget
+import exceptions.entityE.ProhibitedTarget
 import magic.OffensiveSpell
 
 /**
- * Concrete class representing an enemy entity in a game.
+ * Concrete class representing an enemy entityE in a game.
  * An enemy is a character that can attack.
  *
  * @param nameI       The name of the enemy.
@@ -49,7 +49,7 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
 
   /**
    * An enemy can not perform an attack on other enemy.
-   * @param entity // target entity, an enemy
+   * @param entity // target entityE, an enemy
    * @param damage // damage that the enemy would receive
    *
    * @return ProhibitedTarget exception.
@@ -59,7 +59,7 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
   }
 
   /**
-   * Same logic than the general entity attack
+   * Same logic than the general entityE attack
    *
    * @return Unit
    */
