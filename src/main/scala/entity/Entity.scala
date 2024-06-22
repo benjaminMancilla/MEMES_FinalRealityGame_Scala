@@ -3,6 +3,8 @@ package entity
 import effect.Effect
 import magic.{DefensiveSpell, OffensiveSpell}
 
+import scala.collection.mutable.ListBuffer
+
 
 /**
  * Trait that extends PIEntity and defines additional behavior for an entityE in a game.
@@ -82,6 +84,8 @@ trait Entity extends PIEntity {
    * @param effect New added effect.
    */
   def addEffect(effect: Effect): Unit
+
+  def skipTurn_=(bool: Boolean): Unit
 
 }
 

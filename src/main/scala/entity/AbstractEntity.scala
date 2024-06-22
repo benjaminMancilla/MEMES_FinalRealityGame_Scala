@@ -2,11 +2,13 @@ package entity
 
 import effect.Effect
 import exceptions.Require
+import exceptions.effectE.RepeatedEffect
 import magic.{DefensiveSpell, OffensiveSpell}
 import exceptions.entityE.HealingDeadEntity
 import exceptions.magicE.InvalidSpellTarget
 
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
 /**
  * Abstract class representing an entityE in a game with basic properties and behavior.
@@ -61,7 +63,9 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   /**
    * Current active effects, it can be empty.
    */
-  private val _active_effects: mutable.Set[Effect] = mutable.Set()
+  private val _activeEffects: ListBuffer[Effect] = ListBuffer()
+
+  private var _skipTurn: Boolean = false
 
   /**
    * Gets the name of the entityE.
@@ -258,7 +262,7 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
    *
    * @return effects Set.
    */
-  def active_effects: Set[Effect] = _active_effects.toSet
+  def activeEffects: ListBuffer[Effect] = _activeEffects
 
   /**
    * Add effect to current active effects.
@@ -266,15 +270,24 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
    * @param effect New added effect.
    */
   def addEffect(effect: Effect): Unit = {
-    _active_effects += effect
+    if (_activeEffects.exists(_.effectName == effect.effectName)) {
+      throw new RepeatedEffect(s"Effect ${effect.effectName} is already active and cannot be added again.")
+    } else {
+      _activeEffects += effect
+    }
   }
 
   def updateEffects(): Unit = {
-    _active_effects.foreach { effect =>
+    _activeEffects.foreach { effect =>
       effect.applyEffect(this)
-      effect.passTurn()
     }
-    _active_effects.filterInPlace(_.turnEffect > 0)
+    _activeEffects.filterInPlace(_.turnEffect > 0)
+  }
+
+  def skipTurn: Boolean = _skipTurn
+
+  def skipTurn_=(bool: Boolean): Unit = {
+    _skipTurn = bool
   }
 
 }

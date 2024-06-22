@@ -2,9 +2,10 @@ package effect
 
 import entity.Entity
 
-class Paralyzed(turnsEffectI: Int = 1) extends AbstractEffect(turnsEffectI) {
+class Paralyzed(turnsEffectI: Int = 1) extends AbstractEffect(turnsEffectI) with StateEffect {
+  override protected val _effectName: String = "Paralyze effect"
   def applyEffect(target: Entity): Unit = {
-    // No action needed since paralysis simply skips the turn
+    target.skipTurn = true
     passTurn()
   }
 

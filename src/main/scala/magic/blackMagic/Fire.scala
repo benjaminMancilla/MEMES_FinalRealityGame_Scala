@@ -35,7 +35,7 @@ class Fire extends AbstractBlackMagic with OffensiveSpell {
     val random = new Random()
     val randomResult = random.nextDouble()
     if (randomResult <= 0.2) {
-      target.addEffect(new Burned(magicDamage = mDmg))
+      target.addEffect(new Burned(magicDamageI = mDmg))
       println("Burn") // Placeholder for momentary tests
     }
   }

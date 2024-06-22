@@ -2,11 +2,18 @@ package effect
 
 import entity.Entity
 import exceptions.Require
+import exceptions.effectE.InvalidTurnAmount
 
 abstract class AbstractEffect(turnsEffectI: Int) extends Effect {
+  protected val _effectName: String = "Generic effect"
   private var _turnEffect: Int = {Require.Stat(turnsEffectI, "turnEffect") atLeast 1}
   def passTurn(): Unit = {
-    turnEffect = turnEffect-1
+    if (turnEffect>0){
+      turnEffect = turnEffect-1
+    }
+    else {
+      throw new InvalidTurnAmount(s"${this.effectName} has an invalid amount of remaining turns equal to ${this.turnEffect}")
+    }
   }
 
   def applyEffect(target: Entity): Unit
@@ -15,5 +22,7 @@ abstract class AbstractEffect(turnsEffectI: Int) extends Effect {
   def turnEffect_=(newTurnEffect: Int): Unit = {
     _turnEffect = newTurnEffect
   }
+
+  def effectName : String = _effectName
 
 }

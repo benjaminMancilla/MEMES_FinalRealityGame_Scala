@@ -7,6 +7,7 @@ trait Effect {
   def applyEffect(target: Entity): Unit
   def turnEffect: Int
   def turnEffect_=(newTurnEffect: Int): Unit
+  def effectName: String
 
 
 }

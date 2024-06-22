@@ -30,7 +30,7 @@ class Poison extends AbstractWhiteMagic with OffensiveSpell {
    * @param mDmg The magicE damage (unused parameter, as Poison is not a damaging spell).
    */
   def applySpell(sorcerer: MagicCharacter, target: Entity, mDmg: Int): Unit = {
-    target.addEffect(new Poisoned(magicDamage = mDmg))
+    target.addEffect(new Poisoned(magicDamageI = mDmg))
     println("Poisoned") // Placeholder for momentary tests
   }
 
