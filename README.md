@@ -11,40 +11,34 @@ This project is licensed under the
 
 # Tarea 2 | README
 
-## Diseño
+## Design
 
-Un cambio importante que hice fue el de remover la clase EmptyWeapon que representaba no tener equipado nada, el uso de esto simplificada muchas cosas
-pero al momento de tratar excepciones la estructura se volvia poco orientada a objetos, ya que se tenia que explicitamente checkear si el tipo de arma
-era un EmptyWeapon, para esto tenia un metodo booleano que tiraba true para empty weapon y false para las demas. Todo esto era legal pero el diseño era pobre,
-parecido a lo que pasa en los glitch de algunos juegos antiguos, tal vez existia algun bug que podia hacer que un character pudiera atacar sin arma, ya que 
-para romper toda esta logica basta con confundirse en alguno de estos metodos. Ahora que la equipped weapon es un Option[Weapon] no existe forma que esto ocurra.
+An important change I made was to remove the EmptyWeapon class that represented having nothing equipped. While this simplification helped in many ways, when dealing with exceptions, the structure became less object-oriented. Explicitly checking whether the weapon type was an EmptyWeapon required a boolean method that returned true for an empty weapon and false for others. While this was functional, the design was poor, akin to glitches in some old games. There might have been a bug allowing a character to attack without a weapon. Breaking this logic was as easy as making a mistake in any of these methods. Now that the equipped weapon is an Option[Weapon], this cannot happen.
 
-Para la asignacion hice simplemente un doble dispatch, tambien utilizo overloading, esto es legal, ya que entre las distintas clases concretas de Character no existe
-superposicion (son "paralelas"), lo que no hice fue definir los 5 metodos (uno para el checkeo de cada tipo de character) false en la clase abstracta, ya que el overriding si puede confundir, en este caso se necesitarian nombres distintos para que esto no ocurra, y ahi se complica un poco mas la implementacion. Por lo que lo deje asi, es mas "copy paste" pero encuentro que es mejor, si se agrega en el futuro una nueva clase de character hay que activamente implementar el metodo en todas las armas, por lo que el desarrollador tendria que pensar mas de 2 veces si el nuevo personaje sera capaz o no de equiparse cierta arma.
+For assignment, I simply implemented double dispatch and also used overloading, which is legal since among the different concrete classes of Character, there is no overlap (they are "parallel"). However, I didn't define the five methods (one for checking each type of character) as false in the abstract class. Overriding could lead to confusion, and different names would be needed to avoid this, complicating the implementation. So, I left it as is—it's more "copy-paste" but I believe it's better. If a new character class is added in the future, the developer would have to actively implement the method for all weapons, making them think twice about whether the new character should be able to equip a certain weapon.
 
-En todo el codigo utilizo excepciones personalizadas mas un mensaje bastante especifico del error, esto sera muy util mas adelante cuando tengamos que programar el controlador. Los nombres de estas son bastante especificos para entender que caso borde tratan, en el caso de haber dudas la documentacion detalla un poco mas.
+Throughout the code, I use custom exceptions with specific error messages. This will be very useful later when programming the controller. The names of these exceptions are quite specific to understand which edge case they handle. In case of doubts, the documentation provides more details.
 
-Lo mas como de haber cambiando el equipped weapon de los Character a un Option[Weapon] es que desequipar es trivial, basta con dejar None el owner de su antigua weapon y que la nueva weapon sea None, antes cada vez que desquipada tenia que crear una nueva emptyweapon, lo cual era algo poco "elegante" para el metodo.
+One major benefit of changing the equipped weapon of Character to an Option[Weapon] is that unequipping is now trivial. Simply setting the owner of the old weapon to None and the new weapon to None suffices. Previously, every time a weapon was unequipped, a new EmptyWeapon had to be created, which was somewhat inelegant for the method.
 
-Para evitar ataque entre aliados opte a una estrategia simple aprovechando overloading. Las entities tienen 2 metodos para atacar, una a enemigos y la otra a character, para cada una de estas clases simplemente hago overriding para que el metodo que tenga como objetivo a uno de su misma clase tire excepcion, y la otra que tenga la logica necesaria para un ataque efectivo. Nota importante es que en abstract entity igual existe un metodo doAttack(entity), esto si puede generar confusion, en la practica (y digo en la practica porque hice todos los tests necesarios y funciona bien) nunca se utiliza este metodo general como tal, pero lo deje puesto ya que pueden existir entidades que no entran dentro de estas 2 categorias (por ejemplo un obstaculo, objeto, etc), donde a mi parecer un ataque deberia ser valido a estas entidades extrañas siempre y cuando sean entidades claro.
+To prevent attacks between allies, I opted for a simple strategy using overloading. Entities have two attack methods, one for enemies and the other for characters. I override each of these methods in their respective classes so that the method targeting an entity of the same class throws an exception, while the other contains the necessary logic for an effective attack. It's important to note that there is a doAttack(entity) method in the abstract entity as well. In practice (and I say in practice because I've done all the necessary tests and it works well), this general method is never used as such. However, I left it in place because there may be entities that do not fit into these two categories (for example, an obstacle, object, etc.), where an attack should be valid on these strange entities as long as they are entities, of course.
 
-Para la magia fue tambien agregar mas doubleDispatch, mas que nada para checkear si el objetivo era valido y si el hechizero cumplia con el mismo tipo de la magia. El resto en el cuerpo de los metodos (castSpell especialmente) es bastante directo.
+For magic, I also added more double dispatch, mainly to check if the target was valid and if the spellcaster met the same type as the spell. The rest in the body of the methods (especially castSpell) is fairly straightforward.
 
-Para el tema de la curacion lo deje tambien general en la clase abstract entity, lo unico que accede a esto es el spell de heal, pero pienso que en un futuro hipotetico se podrian agregar items, acciones, eventos o cualquier otra cosa que puede curar tanto a un character como a un enemy o inclusive otra entidad, por ello decidi dejarlo ahi.
+For healing, I left it general in the abstract entity class. The only thing that accesses this is the heal spell, but I think hypothetically in the future, items, actions, events, or anything else could be added that can heal both a character and an enemy or even another entity. Hence, I decided to leave it there.
 
-Algo importante es que agregue el metodo getter magicPoints a todas las armas (Osea al trait Weapon), la logica es que se puede tratar de acceder a la magia desde cualquier arma, sin embargo, si esto ocurre conllevara a un error (excepcion), las armas magicas hacen un override a esto, quitando el error y agregando a la funcionalidad del getter como tal, esto funciona facilmente como un dispatch para las cosas magicas que acceden a la equipedWeapon.
+An important aspect is that I added the getter method magicPoints to all weapons (i.e., to the Weapon trait). The logic is that magic can be accessed from any weapon, but if this happens, it will result in an error (exception). Magic weapons override this, removing the error and adding functionality to the getter method. This works easily as a dispatch for magical things accessing the equippedWeapon.
 
-Tambien MOMENTANEAMENTE para los metodos applySpell en vez de aplicar el efecto como tal puse un print, ya que igual queria testear si se llegaba a esa linea de codigo (aunque esta no hiciera nada), en el futuro basta con quitar el print y remplazarlo por la implementacion real del efecto.
+Also, TEMPORARILY for the applySpell methods, instead of applying the effect itself, I put a print statement. This was done because I wanted to test if that line of code was reached (even if it did nothing). In the future, simply removing the print and replacing it with the real implementation of the effect will suffice.
 
-## Paquetes
+## Packages
 
-Para las excepciones la logica es, si el protagonista de la excepcion es X entonces esta va en el paquete X. Para las excepciones mas generales, las dejamos en el paquete general de exception.
+For exceptions, the logic is if the main subject of the exception is X, then it goes into package X. For more general exceptions, they are kept in the general exception package.
 
-Para la magia deje las cosas generales en magic, y las cosas especificas de un color (white o black) en sus respectivos paquetes. Ser defensivo u ofensivo no es algo exclusivo de un tipo de magia, por lo que se deja en el paquete general.
+For magic, I kept general things in 'magic', and specific things for a type (white or black) in their respective packages. Being defensive or offensive is not exclusive to a type of magic, so it's in the general package.
 
-Lo mismo con las weapon, las comunes (que solo son clases concretas en mi caso, no cree un trait para las armas no magicas) van en su paquete y las magicas tambien.
+The same goes for weapons—common ones (which are only concrete classes in my case; I didn't create a trait for non-magical weapons) go in their package, and magical ones do too.
 
-Esto mismo ocurre con los character.
+This also applies to characters.
 
-Quiero mencionar que estas 2 ultimas cosas no las queria hacer, pero se me desconto por tener el codigo organizado asi, asi que me veo obligado a hacerlo D:
-En general uso los paquetes para cosas generales, por lo menos la parte magica no me parece tan alejada de la normal, por lo que lo considero una extension, ya en el caso de que sea dificil generalizar ahi creo paquetes mas especificos.
+I want to mention that I didn't want to do these last two things, but it was deducted for having the code organized this way, so I'm obliged to do it D: In general, I use packages for general things, at least the magic part doesn't seem so far from the norm, so I consider it an extension. In cases where generalization is difficult, I create more specific packages.
