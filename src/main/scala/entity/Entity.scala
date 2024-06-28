@@ -1,5 +1,6 @@
 package entity
 
+import controller.visitor.ActionVisitor
 import effect.Effect
 import magic.{DefensiveSpell, OffensiveSpell}
 
@@ -86,6 +87,8 @@ trait Entity extends PIEntity {
   def addEffect(effect: Effect): Unit
 
   def skipTurn_=(bool: Boolean): Unit
+
+  def accept(visitor: ActionVisitor): Unit
 
 }
 

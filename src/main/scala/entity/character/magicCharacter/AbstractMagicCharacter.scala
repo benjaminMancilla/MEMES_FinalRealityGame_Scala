@@ -1,5 +1,6 @@
 package entity.character.magicCharacter
 
+import controller.visitor.ActionVisitor
 import entity.Entity
 import entity.character.AbstractCharacter
 import exceptions.Require
@@ -87,6 +88,8 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
   def checkSpell(spell:Magic): Unit = {
     throw new InvalidMagicType(s"${spell.name} spell is not compatible with ${this.name}")
   }
+
+  def accept(visitor: ActionVisitor): Unit = visitor.visitMagicCharacter(this)
 
 
 

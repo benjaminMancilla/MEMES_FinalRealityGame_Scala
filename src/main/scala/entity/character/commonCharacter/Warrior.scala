@@ -15,7 +15,7 @@ import weapon.Weapon
  * @param weightI The weight of the warrior.
  */
 class Warrior(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
-  extends AbstractCharacter(nameI, hit_pointsI, defenseI, weightI) {
+  extends AbstractCommonCharacter(nameI, hit_pointsI, defenseI, weightI) {
 
   /** The type name of the warrior. */
   val _typeName: String = "Warrior"

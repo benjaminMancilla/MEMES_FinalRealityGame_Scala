@@ -15,7 +15,7 @@ import weapon.Weapon
  * @param weightI The weight of the paladin.
  */
 class Paladin(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
-  extends AbstractCharacter(nameI, hit_pointsI, defenseI, weightI) {
+  extends AbstractCommonCharacter(nameI, hit_pointsI, defenseI, weightI) {
 
   /** The type name of the paladin. */
   val _typeName: String = "Paladin"

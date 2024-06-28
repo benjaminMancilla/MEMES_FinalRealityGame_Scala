@@ -138,14 +138,25 @@ class MagicTest extends munit.FunSuite{
   }
 
   test("Offensive spells can only target enemies"){
-    val target = new ConcreteEnemy("Dummy", 10000, 10, 10, 10)
-    val bool = TestUtils.noExceptionThrown {
-      whiteMage.castSpell(target, para)
-      whiteMage.castSpell(target, poison)
-      blackMage.castSpell(target, fire)
-      blackMage.castSpell(target, thunder)
-    }
-    assert(bool)
+    var target = new ConcreteEnemy("Dummy", 10000, 10, 10, 10)
+    var hp_count = 0
+    hp_count = target.current_hit_points
+
+    whiteMage.castSpell(target, para)
+    assert(target.current_hit_points <= hp_count)
+    hp_count = target.current_hit_points
+    whiteMage.castSpell(target, poison)
+    assert(target.current_hit_points <= hp_count)
+    hp_count = target.current_hit_points
+    blackMage.castSpell(target, fire)
+    assert(target.current_hit_points <= hp_count)
+    hp_count = target.current_hit_points
+
+    target = new ConcreteEnemy("Dummy", 10000, 10, 10, 10)
+
+    blackMage.castSpell(target, thunder)
+    assert(target.current_hit_points <= hp_count)
+
     intercept[InvalidSpellTarget]{
       whiteMage.castSpell(blackMage, para)
     }

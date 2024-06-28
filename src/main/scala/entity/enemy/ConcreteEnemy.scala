@@ -1,5 +1,6 @@
 package entity.enemy
 
+import controller.visitor.ActionVisitor
 import entity.character.Character
 import entity.{AbstractEntity, Entity}
 import exceptions.Require
@@ -73,6 +74,8 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
    * @return Unit
    */
   override def checkSpell(spell: OffensiveSpell): Unit = {}
+
+  def accept(visitor: ActionVisitor): Unit = visitor.visitEnemy(this)
 
 }
 

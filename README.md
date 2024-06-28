@@ -42,3 +42,7 @@ The same goes for weapons—common ones (which are only concrete classes in my c
 This also applies to characters.
 
 I want to mention that I didn't want to do these last two things, but it was deducted for having the code organized this way, so I'm obliged to do it D: In general, I use packages for general things, at least the magic part doesn't seem so far from the norm, so I consider it an extension. In cases where generalization is difficult, I create more specific packages.
+
+## State Diagram
+
+![State_Diagram](docs/FlujoMEMES1.jpg)

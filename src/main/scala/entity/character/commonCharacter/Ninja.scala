@@ -1,6 +1,4 @@
 package entity.character.commonCharacter
-
-import entity.character.AbstractCharacter
 import weapon.Weapon
 
 /**
@@ -15,7 +13,7 @@ import weapon.Weapon
  * @param weightI The weight of the ninja.
  */
 class Ninja(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
-  extends AbstractCharacter(nameI, hit_pointsI, defenseI, weightI) {
+  extends AbstractCommonCharacter(nameI, hit_pointsI, defenseI, weightI) {
 
   /** The type name of the ninja. */
   val _typeName: String = "Ninja"
@@ -29,4 +27,5 @@ class Ninja(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int)
   def checkValidWeapon(newWeapon: Option[Weapon]): Boolean = {
     newWeapon.exists(_.canBeEquipped(this))
   }
+
 }
