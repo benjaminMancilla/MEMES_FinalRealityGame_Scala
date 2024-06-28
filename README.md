@@ -45,4 +45,4 @@ I want to mention that I didn't want to do these last two things, but it was ded
 
 ## State Diagram
 
-![State_Diagram](docs/FlujoMEMES1.jpg)
+![State_Diagram](docs/Diagrama%20MEMES2.jpg)
