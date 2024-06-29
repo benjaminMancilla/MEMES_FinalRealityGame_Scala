@@ -20,4 +20,6 @@ class UpdateBarState(controller: GameController, turnScheduler: TurnScheduler) e
     }
     controller.setState(new StartState(controller, turnScheduler))
   }
+
+
 }

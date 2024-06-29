@@ -8,11 +8,38 @@ import turn.TurnScheduler
 
 class ActionState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends GameState {
   private val visitor = new GeneralActionVisitor()
+  private var nextState: Option[GameState] = None
+
   override def handleInput(input: String): Unit = {
-    // Manejar las acciones del jugador o enemigo
+    entity.accept(visitor)
+    val validOptions: List[String] = visitor.buffer
+
+    if (validOptions.contains(input)) {
+      input match {
+        case "Attack" =>
+          nextState = Some(new SelectTargetState(controller, turnScheduler, entity))
+        case "Weapon" =>
+          nextState = Some(new SelectWeaponState(controller, turnScheduler, entity))
+        case "Magic" =>
+          nextState = Some(new SelectSpellState(controller, turnScheduler, entity))
+        case "Pass" =>
+          nextState = Some(new ResetBarState(controller, turnScheduler, entity))
+        case _ =>
+        // Handle invalid input if necessary
+      }
+    }
+    else if (validOptions.isEmpty){
+      nextState = Some(new SelectTargetState(controller, turnScheduler, entity))
+    }
+    else{
+      // nextState stays empty
+    }
   }
 
   override def update(): Unit = {
-    controller.setState(new ResetBarState(controller, turnScheduler, entity))
+    nextState.foreach(controller.setState)
+    //If ActionState does not get a valid input nextState stays None.
+    //Then, update does nothing, staying in a loop until it gets a valid
+    //input.
   }
 }
