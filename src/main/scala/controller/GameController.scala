@@ -1,5 +1,6 @@
 package controller
 import controller.state.GameState
+import weapon.Weapon
 
 trait GameController {
   def setState(state: GameState): Unit
@@ -9,5 +10,7 @@ trait GameController {
   def update(): Unit
 
   def actionBarIncrease : Int
+
+  def weaponInventory: List[Weapon]
 
 }

@@ -2,7 +2,8 @@ package entity
 
 import controller.visitor.ActionVisitor
 import effect.Effect
-import magic.{DefensiveSpell, OffensiveSpell}
+import magic.{DefensiveSpell, Magic, OffensiveSpell}
+import weapon.Weapon
 
 import scala.collection.mutable.ListBuffer
 
@@ -42,7 +43,6 @@ trait Entity extends PIEntity {
   /**
    * Performs an attack on another entityE.
    * @param entity The entityE being attacked.
-   * @param damage The amount of damage to be inflicted.
    */
   def doAttack(entity: Entity): Unit
 
@@ -89,6 +89,9 @@ trait Entity extends PIEntity {
   def skipTurn_=(bool: Boolean): Unit
 
   def accept(visitor: ActionVisitor): Unit
+
+  def castSpell(target:Entity, spell: Magic): Unit
+  def changeWeapon(newWeapon: Option[Weapon]): Unit
 
 }
 

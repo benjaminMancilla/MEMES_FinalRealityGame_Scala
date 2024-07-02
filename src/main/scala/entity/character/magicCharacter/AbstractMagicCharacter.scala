@@ -62,7 +62,7 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
    * @param target The target entityE on which the spell is cast.
    * @param spell The spell to be cast.
    */
-  def castSpell(target:Entity, spell: Magic): Unit = {
+  override def castSpell(target:Entity, spell: Magic): Unit = {
     checkSpell(spell)
     spell.checkTarget(target)
     if (currentMagicPoints < spell.manaCost) {

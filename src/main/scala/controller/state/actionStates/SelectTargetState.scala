@@ -7,25 +7,8 @@ import exceptions.entityE.ProhibitedTarget
 import exceptions.weaponE.EmptyWeaponException
 import turn.TurnScheduler
 
-class SelectTargetState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
-
-  private val maxTargetIndex: Int = turnScheduler.turn_info.size
-  private var nextState: Option[GameState] = None
-  private var tryTarget: Int = -1
-  override def handleInput(input: String): Unit = {
-    try {
-      val number = input.toInt
-      if (number >= 0 && number <= maxTargetIndex) {
-        tryTarget = number
-      }
-      else {// Invalid Target
-        }
-    } catch {
-      case e: NumberFormatException =>
-        //Pon un numero po tontin
-
-    }
-  }
+class SelectTargetState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity)
+  extends AbstractSelectTargetState(turnScheduler: TurnScheduler) {
 
   override def update(): Unit = {
     if (tryTarget == -1) {
@@ -34,9 +17,7 @@ class SelectTargetState(controller: GameController, turnScheduler: TurnScheduler
     }
     try {
       entity.doAttack(turnScheduler.turn_info(tryTarget)._1)
-      if (!turnScheduler.turn_info(tryTarget)._1.state) {
-        turnScheduler.removeEntity(turnScheduler.turn_info(tryTarget)._1)
-      }
+      updateAffectedEntity()
       nextState = Some(new ResetBarState(controller, turnScheduler, entity))
     } catch {
       case e: EmptyWeaponException =>

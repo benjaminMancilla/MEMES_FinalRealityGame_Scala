@@ -3,6 +3,8 @@ package exceptions
 import exceptions.weaponE.InvalidWeaponException
 import weapon.Weapon
 import entity.character.Character
+import exceptions.stateE.InvalidWeaponInventory
+import party.Party
 
 
 /** The `Require` object provides utilities for validating specific constraints or requirements.
@@ -165,6 +167,19 @@ object Require {
         }
       }
     }
+  }
+
+  final case class WeaponInventory(inventory: List[Weapon], party: Party, name: String) {
+    private val partySize: Int = party.characters.size
+    private val weaponSize: Int = inventory.size
+    def sizeAtLeast(): List[Weapon] = {
+      if (partySize>weaponSize){
+        throw new InvalidWeaponInventory(s"Not enough weapons for the party, at least 1 per character")
+      }
+      inventory
+
+    }
+
   }
 
 }

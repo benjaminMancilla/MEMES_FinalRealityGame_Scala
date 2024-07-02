@@ -3,28 +3,29 @@ package controller.visitor
 import entity.character.Character
 import entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
 import entity.enemy.Enemy
+import exceptions.stateE.InvalidSpellSelector
 
-class GeneralActionVisitor extends ActionVisitor {
+class SelectSpellVisitor extends ActionVisitor {
   var buffer: List[String] = List.empty[String]
 
   def visitEnemy(enemy: Enemy): Unit = {
-    buffer = List.empty[String]
+    throw new InvalidSpellSelector(s"${enemy.name} is an enemy, does not have magic.")
   }
 
   def visitRegularCharacter(character: Character): Unit = {
-    buffer = List("Attack", "Weapon", "Pass")
+    throw new InvalidSpellSelector(s"${character.name} is a common character, does not have magic.")
   }
 
   def visitMagicCharacter(character: MagicCharacter): Unit = {
-    buffer = List("Attack", "Weapon", "Pass", "Magic")
+    throw new InvalidSpellSelector(s"${character.name} is a unknown magic character, does not known have magic.")
   }
 
   def visitBlackMagicCharacter(character: BlackMage): Unit = {
-    visitMagicCharacter(character: MagicCharacter)
+    buffer = List("Fire", "Thunder")
   }
 
   def visitWhiteMagicCharacter(character: WhiteMage): Unit = {
-    visitMagicCharacter(character: MagicCharacter)
+    buffer = List("Poison", "Paralyze", "Heal")
   }
 
 }

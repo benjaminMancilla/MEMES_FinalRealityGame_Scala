@@ -83,7 +83,7 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * Public method of setWeapon
    * @param newWeapon The new weaponE to be equipped.
    */
-  def changeWeapon(newWeapon: Option[Weapon]): Unit = {
+  override def changeWeapon(newWeapon: Option[Weapon]): Unit = {
     setWeapon(newWeapon)
 
   }

@@ -3,9 +3,11 @@ package entity
 import effect.Effect
 import exceptions.Require
 import exceptions.effectE.RepeatedEffect
-import magic.{DefensiveSpell, OffensiveSpell}
+import magic.{DefensiveSpell, Magic, OffensiveSpell}
 import exceptions.entityE.HealingDeadEntity
-import exceptions.magicE.InvalidSpellTarget
+import exceptions.magicE.{InvalidSpellTarget, NonMagicalCaster}
+import exceptions.weaponE.InvalidWeaponException
+import weapon.Weapon
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
@@ -285,6 +287,14 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
 
   def skipTurn_=(bool: Boolean): Unit = {
     _skipTurn = bool
+  }
+
+  def castSpell(target:Entity, spell: Magic): Unit = {
+    throw new NonMagicalCaster(s"${this.name} is not a Magic character, has not access to magic")
+  }
+
+  def changeWeapon(newWeapon: Option[Weapon]): Unit = {
+    throw new InvalidWeaponException(s"${this.name} can not have weapon")
   }
 
 }
