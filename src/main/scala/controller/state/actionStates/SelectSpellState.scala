@@ -17,7 +17,7 @@ class SelectSpellState(controller: GameController, turnScheduler: TurnScheduler,
 
   override def handleInput(input: String): Unit = {
     try{
-      entity.accept(visitor)
+      controller.turnScheduler.nextAttacker.accept(visitor)
     } catch {
       case e: InvalidSpellSelector =>
         nextState = Some(new ActionState(controller, turnScheduler, entity))

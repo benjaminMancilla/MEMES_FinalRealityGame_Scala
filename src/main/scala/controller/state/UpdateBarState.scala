@@ -8,13 +8,17 @@ import scala.util.control.Breaks.{break, breakable}
 class UpdateBarState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
 
   override def update(): Unit = {
-    turnScheduler.updateMaxBars()
+    println("UPDATEBAR")
+    controller.turnScheduler.updateMaxBars()
     breakable{
       while(true){
-        if(turnScheduler.turn_ready.nonEmpty){
+        if(controller.turnScheduler.turn_ready.nonEmpty){
+          println("SE DEBEE ROMPEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+
           break()
         }
-        turnScheduler.updateActionProgress(controller.actionBarIncrease)
+        controller.turnScheduler.updateActionProgress(controller.actionBarIncrease)
+        controller.turnScheduler.checkWaitEntities()
       }
     }
     controller.setState(new StartTurnState(controller, turnScheduler))

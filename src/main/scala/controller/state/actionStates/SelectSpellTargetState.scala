@@ -10,7 +10,7 @@ import magic.Magic
 import turn.TurnScheduler
 
 class SelectSpellTargetState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity, spell: Magic)
-  extends AbstractSelectTargetState(turnScheduler: TurnScheduler){
+  extends AbstractSelectTargetState(controller: GameController, turnScheduler: TurnScheduler){
 
 
   override def update(): Unit = {
@@ -19,7 +19,7 @@ class SelectSpellTargetState(controller: GameController, turnScheduler: TurnSche
       return
     }
     try {
-      entity.castSpell(turnScheduler.turn_info(tryTarget)._1, spell)
+      controller.turnScheduler.nextAttacker.castSpell(controller.turnScheduler.turn_info(tryTarget)._1, spell)
       updateAffectedEntity()
       nextState = Some(new ResetBarState(controller, turnScheduler, entity))
     } catch {

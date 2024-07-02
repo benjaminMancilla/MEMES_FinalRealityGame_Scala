@@ -6,7 +6,7 @@ import entity.Entity
 import exceptions.weaponE.{InvalidCarrier, InvalidWeaponException}
 import turn.TurnScheduler
 
-class SelectWeaponState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractSelectTargetState(turnScheduler) {
+class SelectWeaponState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractSelectTargetState(controller, turnScheduler) {
 
   override val maxTargetIndex: Int = controller.weaponInventory.size
   override def update(): Unit = {
@@ -15,7 +15,7 @@ class SelectWeaponState(controller: GameController, turnScheduler: TurnScheduler
       return
     }
     try{
-      entity.changeWeapon(Some(controller.weaponInventory(tryTarget)))
+      controller.turnScheduler.nextAttacker.changeWeapon(Some(controller.weaponInventory(tryTarget)))
 
     } catch {
       case e: InvalidCarrier =>

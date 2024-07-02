@@ -12,7 +12,7 @@ class ActionState(controller: GameController, turnScheduler: TurnScheduler, enti
   private var nextState: Option[GameState] = None
 
   override def handleInput(input: String): Unit = {
-    entity.accept(visitor)
+    controller.turnScheduler.nextAttacker.accept(visitor)
     val validOptions: List[String] = visitor.buffer
 
     if (validOptions.contains(input)) {

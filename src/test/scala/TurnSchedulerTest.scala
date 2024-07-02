@@ -75,6 +75,7 @@ class TurnSchedulerTest extends FunSuite {
 
     assert(turnScheduler.turn_ready.isEmpty)
     assert(turnScheduler.turn_wait.size == 4)
+    assert(turnScheduler.turn_info(0)._2 == 5)
   }
 
   test("TurnScheduler should reset entityE bars correctly") {

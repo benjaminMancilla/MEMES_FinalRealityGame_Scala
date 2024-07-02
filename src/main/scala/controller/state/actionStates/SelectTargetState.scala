@@ -8,7 +8,7 @@ import exceptions.weaponE.EmptyWeaponException
 import turn.TurnScheduler
 
 class SelectTargetState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity)
-  extends AbstractSelectTargetState(turnScheduler: TurnScheduler) {
+  extends AbstractSelectTargetState(controller:GameController, turnScheduler: TurnScheduler) {
 
   override def update(): Unit = {
     if (tryTarget == -1) {
@@ -16,7 +16,7 @@ class SelectTargetState(controller: GameController, turnScheduler: TurnScheduler
       return
     }
     try {
-      entity.doAttack(turnScheduler.turn_info(tryTarget)._1)
+      controller.turnScheduler.nextAttacker.doAttack(controller.turnScheduler.turn_info(tryTarget)._1)
       updateAffectedEntity()
       nextState = Some(new ResetBarState(controller, turnScheduler, entity))
     } catch {

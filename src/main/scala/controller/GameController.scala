@@ -1,6 +1,10 @@
 package controller
 import controller.state.GameState
+import entity.Entity
+import turn.TurnScheduler
 import weapon.Weapon
+
+import scala.collection.mutable.ArrayBuffer
 
 trait GameController {
   def setState(state: GameState): Unit
@@ -12,5 +16,9 @@ trait GameController {
   def actionBarIncrease : Int
 
   def weaponInventory: List[Weapon]
+
+  def turnCurrentSate: ArrayBuffer[(Entity, Int, Int, Boolean)]
+
+  def turnScheduler: TurnScheduler
 
 }
