@@ -3,8 +3,7 @@ package controller.state
 import controller.GameController
 import turn.TurnScheduler
 
-class StartState(controller: GameController, turnScheduler: TurnScheduler) extends GameState {
-  override def handleInput(input: String): Unit = {}
+class StartState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
 
   override def update(): Unit = {
     if (turnScheduler.turn_ready.isEmpty) {

@@ -4,7 +4,7 @@ import controller.GameController
 import entity.Entity
 import turn.TurnScheduler
 
-class ResetBarState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends GameState {
+class ResetBarState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
   override def handleInput(input: String): Unit = {}
 
   override def update(): Unit = {

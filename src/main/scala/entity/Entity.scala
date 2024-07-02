@@ -44,7 +44,7 @@ trait Entity extends PIEntity {
    * @param entity The entityE being attacked.
    * @param damage The amount of damage to be inflicted.
    */
-  def doAttack(entity: Entity, damage: Int): Unit
+  def doAttack(entity: Entity): Unit
 
   /**
    * Performs healing on another entityE.

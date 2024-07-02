@@ -6,8 +6,7 @@ import entity.Entity
 import turn.TurnScheduler
 
 
-class ApplyEffectState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends GameState {
-  override def handleInput(input: String): Unit = {}
+class ApplyEffectState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
 
   override def update(): Unit = {
     if (entity.activeEffects.isEmpty){

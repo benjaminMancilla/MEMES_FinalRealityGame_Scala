@@ -50,12 +50,11 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
 
   /**
    * An enemy can not perform an attack on other enemy.
-   * @param entity // target entityE, an enemy
-   * @param damage // damage that the enemy would receive
+   * @param entity // target entity, an enemy
    *
    * @return ProhibitedTarget exception.
    */
-  def doAttack(entity: ConcreteEnemy, damage: Int): Unit = {
+  def doAttack(entity: ConcreteEnemy): Unit = {
     throw new ProhibitedTarget("An enemy can not attack other enemies")
   }
 
@@ -64,7 +63,8 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
    *
    * @return Unit
    */
-  def doAttack(entity: Character, damage: Int): Unit = {
+  def doAttack(entity: Character): Unit = {
+    val damage: Int = attack
     doDamage(entity: Entity, damage: Int)
   }
 
@@ -76,6 +76,8 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
   override def checkSpell(spell: OffensiveSpell): Unit = {}
 
   def accept(visitor: ActionVisitor): Unit = visitor.visitEnemy(this)
+
+  def autoTurn: Unit = {}
 
 }
 

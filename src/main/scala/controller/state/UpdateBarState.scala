@@ -5,8 +5,7 @@ import turn.TurnScheduler
 
 import scala.util.control.Breaks.{break, breakable}
 
-class UpdateBarState(controller: GameController, turnScheduler: TurnScheduler) extends GameState {
-  override def handleInput(input: String): Unit = {}
+class UpdateBarState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
 
   override def update(): Unit = {
     turnScheduler.updateMaxBars()
@@ -18,7 +17,7 @@ class UpdateBarState(controller: GameController, turnScheduler: TurnScheduler) e
         turnScheduler.updateActionProgress(controller.actionBarIncrease)
       }
     }
-    controller.setState(new StartState(controller, turnScheduler))
+    controller.setState(new StartTurnState(controller, turnScheduler))
   }
 
 

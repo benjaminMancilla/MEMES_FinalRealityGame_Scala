@@ -174,14 +174,11 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   /**
-   * Performs an attack on another entityE.
+   * Performs an attack on another entity.
    *
-   * @param entity The entityE being attacked.
-   * @param damage The amount of damage to be inflicted.
+   * @param entity The entity being attacked.
    */
-  def doAttack(entity: Entity, damage: Int): Unit = {
-    doDamage(entity: Entity, damage: Int)
-  }
+  def doAttack(entity: Entity): Unit = {}
 
   /**
    * Indicates whether the entityE is controlled by the player or not.

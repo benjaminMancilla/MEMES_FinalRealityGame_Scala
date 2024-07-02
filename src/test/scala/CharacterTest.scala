@@ -57,7 +57,7 @@ class CharacterTest extends munit.FunSuite {
     ninja.unequipWeapon()
   }
 
-  test("AbstractCharacter should change equipped weaponE correctly") {
+  test("AbstractCharacter should change equipped weapon correctly") {
     val warrior = new Warrior("Barbarian", 180, 25, 45)
     warrior.changeWeapon(Some(sword))
     val newWeapon = new Sword("Mace", 50, 10)
@@ -69,21 +69,21 @@ class CharacterTest extends munit.FunSuite {
   entity1.changeWeapon(Some(new Sword("Mace", 50, 10)))
   private val entity2 = new ConcreteEnemy("Entity2", 80, 10, 30, 10)
 
-  test("doAttack should reduce the hit points of the attacked entityE") {
+  test("doAttack should reduce the hit points of the attacked entity") {
     val initialHitPoints = entity2.current_hit_points
-    entity1.doAttack(entity2, 30)
+    entity1.doAttack(entity2)
     assert(entity2.current_hit_points < initialHitPoints)
-    assert(entity2.current_hit_points == 60)
+    assert(entity2.current_hit_points == 40)
   }
 
   test("doAttack should not reduce hit points if the attacker is out of combat") {
     entity1.state = false
     val initialHitPoints = entity2.current_hit_points
-    entity1.doAttack(entity2, 30)
+    entity1.doAttack(entity2)
     assert(entity2.current_hit_points == initialHitPoints)
   }
 
-  test("receiveDamage should reduce the current hit points of the entityE") {
+  test("receiveDamage should reduce the current hit points of the entity") {
     val initialHitPoints = entity1.current_hit_points
     entity1.receiveDamage(20)
     assert(entity1.current_hit_points < initialHitPoints)
@@ -94,25 +94,25 @@ class CharacterTest extends munit.FunSuite {
     assert(!entity1.state)
   }
 
-  test("doDamage should detect how much extra damage is dealt when killing an entityE") {
-    val entity3 = new Warrior("Entity1", 100, 10, 20)
-    entity3.changeWeapon(Some(new Sword("Mace", 50, 10)))
+  test("doDamage should detect how much extra damage is dealt when killing an entity") {
+    val entity3 = new Warrior("Entity1", 500, 10, 20)
+    entity3.changeWeapon(Some(new Sword("Mace", 500, 10)))
     val entity4 = new ConcreteEnemy("Entity2", 80, 10, 30, 10)
     val stream = new java.io.ByteArrayOutputStream()
     Console.withOut(stream) {
-      entity3.doAttack(entity4, 500)
+      entity3.doAttack(entity4)
     }
     val output = stream.toString()
     assert(output.contains("Entity1 attacks Entity2"))
     assert(output.contains("Entity1 has defeated Entity2 with a 410 of extra DMG!!!!!"))
     assert(entity4.current_hit_points == 0)
 
-    val entity5 = new Warrior("Entity1", 100, 10, 20)
-    entity5.changeWeapon(Some(new Sword("Mace", 50, 10)))
+    val entity5 = new Warrior("Entity1", 10, 10, 20)
+    entity5.changeWeapon(Some(new Sword("Mace", 90, 10)))
     val entity6 = new ConcreteEnemy("Entity2", 80, 10, 30, 10)
     val stream2 = new java.io.ByteArrayOutputStream()
     Console.withOut(stream2) {
-      entity5.doAttack(entity6, 90)
+      entity5.doAttack(entity6)
     }
     val output2 = stream2.toString()
     assert(output2.contains("Entity1 attacks Entity2"))
@@ -120,7 +120,7 @@ class CharacterTest extends munit.FunSuite {
     assert(entity6.current_hit_points == 0)
   }
 
-  test("Character can not use a weaponE with owner") {
+  test("Character can not use a weapon with owner") {
     val entity = new Warrior("Entity1", 100, 10, 20)
     val sword =  new Sword("Sword", 50, 10)
     entity.changeWeapon(Some(sword))
@@ -130,7 +130,7 @@ class CharacterTest extends munit.FunSuite {
     }
   }
 
-  test("Character can not use a weaponE that does not fit their class") {
+  test("Character can not use a weapon that does not fit their class") {
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val ninja = new Ninja("Entity1", 100, 10, 20)
     val paladin = new Paladin("Entity1", 100, 10, 20)
@@ -148,9 +148,6 @@ class CharacterTest extends munit.FunSuite {
       intercept[InvalidWeaponException] {
         characters(i).changeWeapon(Some(weapons(i)))
       }
-
-
-
     }
 
   }
@@ -159,7 +156,7 @@ class CharacterTest extends munit.FunSuite {
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val enemy = new ConcreteEnemy("Entity1", 100, 10, 20, 10)
     intercept[EmptyWeaponException]{
-      warrior.doAttack(enemy, 10)
+      warrior.doAttack(enemy)
     }
 
 
@@ -174,7 +171,7 @@ class CharacterTest extends munit.FunSuite {
 
   }
 
-  test("Character should be able to unequip the weaponE"){
+  test("Character should be able to unequip the weapon"){
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val sword =  new Sword("Sword", 50, 10)
     warrior.changeWeapon(Some(sword))

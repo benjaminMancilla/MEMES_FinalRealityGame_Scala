@@ -3,7 +3,7 @@ package controller.state
 import controller.GameController
 import turn.TurnScheduler
 
-class EndTurnState(controller: GameController, turnScheduler: TurnScheduler) extends GameState {
+class EndTurnState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
   override def handleInput(input: String): Unit = {}
 
   override def update(): Unit = {

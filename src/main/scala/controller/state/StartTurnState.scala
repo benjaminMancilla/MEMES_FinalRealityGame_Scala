@@ -3,8 +3,7 @@ package controller.state
 import controller.GameController
 import turn.TurnScheduler
 
-class StartTurnState(controller: GameController, turnScheduler: TurnScheduler) extends GameState {
-  override def handleInput(input: String): Unit = {}
+class StartTurnState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
 
   override def update(): Unit = {
     val entity = turnScheduler.dequeueReady()

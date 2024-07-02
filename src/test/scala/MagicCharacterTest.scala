@@ -5,11 +5,11 @@ import exceptions.magicE.{NoMagicPoints, NonMagicWeaponException}
 import exceptions.weaponE.EmptyWeaponException
 import exceptions.InvalidStatException
 import exceptions.entityE.ProhibitedTarget
-import magic.blackMagic.{Fire, Thunder}
-import magic.whiteMagic.{Heal, Paralyze, Poison}
+import magic.blackMagic.Thunder
+import magic.whiteMagic.{Heal, Poison}
 import munit.FunSuite
-import weapon.commonWeapon.{Bow, Sword}
-import weapon.magicWeapon.{MagicWeapon, Staff, Wand}
+import weapon.commonWeapon.Bow
+import weapon.magicWeapon.{MagicWeapon, Wand}
 
 class MagicCharacterTest extends FunSuite {
   val wand: MagicWeapon = new Wand("MagicWand", 50, 10, 20)

@@ -5,10 +5,17 @@ import entity.character.magicCharacter.MagicCharacter
 import entity.enemy.Enemy
 
 class GeneralActionVisitor extends ActionVisitor {
-  var buffer: List[String] = List[String].empty
-  def visitEnemy(enemy: Enemy): Unit = {buffer = List[String].empty}
-  def visitRegularCharacter(character: Character): Unit = { buffer = List[String]("Attack", "Weapon", "Pass")}
-  def visitMagicCharacter(character: MagicCharacter): Unit = { buffer = List[String]("Attack", "Weapon", "Pass", "Magic")}
+  var buffer: List[String] = List.empty[String]
 
+  def visitEnemy(enemy: Enemy): Unit = {
+    buffer = List.empty[String]
+  }
 
+  def visitRegularCharacter(character: Character): Unit = {
+    buffer = List("Attack", "Weapon", "Pass")
+  }
+
+  def visitMagicCharacter(character: MagicCharacter): Unit = {
+    buffer = List("Attack", "Weapon", "Pass", "Magic")
+  }
 }

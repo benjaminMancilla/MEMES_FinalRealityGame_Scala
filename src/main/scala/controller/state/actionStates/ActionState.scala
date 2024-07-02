@@ -1,12 +1,13 @@
 package controller.state.actionStates
 
 import controller.GameController
-import controller.state.{GameState, ResetBarState}
+import controller.state.{AbstractState, GameState, ResetBarState}
 import controller.visitor.GeneralActionVisitor
 import entity.Entity
 import turn.TurnScheduler
 
-class ActionState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends GameState {
+class ActionState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
+  override def needInput() = true
   private val visitor = new GeneralActionVisitor()
   private var nextState: Option[GameState] = None
 

@@ -31,7 +31,7 @@ class Fire extends AbstractBlackMagic with OffensiveSpell {
    * @param mDmg The magicE damage inflicted by the spell.
    */
   def applySpell(sorcerer: MagicCharacter, target: Entity, mDmg: Int): Unit = {
-    sorcerer.doAttack(target, mDmg)
+    sorcerer.doDamage(target, mDmg)
     val random = new Random()
     val randomResult = random.nextDouble()
     if (randomResult <= 0.2) {

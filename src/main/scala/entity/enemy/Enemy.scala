@@ -13,6 +13,6 @@ trait Enemy extends Entity {
    */
   def attack: Int
 
-  def autoTurn
+  def autoTurn(): Unit
 
 }

@@ -38,15 +38,15 @@ class EnemyTest extends FunSuite {
     val enemy = new ConcreteEnemy("Troll", 80, 15, 60, 25)
     val enemy2 = new ConcreteEnemy("Goblin", 30, 5, 40, 15)
     intercept[ProhibitedTarget]{
-      enemy.doAttack(enemy2, 10)
+      enemy.doAttack(enemy2)
     }
   }
 
   test("An enemy should be able to attack a Character"){
     val enemy = new ConcreteEnemy("Troll", 80, 15, 60, 25)
     val warrior = new Warrior("Juan", 100, 10, 10)
-    enemy.doAttack(warrior, 20)
-    assert(warrior.current_hit_points == 90)
+    enemy.doAttack(warrior)
+    assert(warrior.current_hit_points == 85)
   }
 
 }

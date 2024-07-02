@@ -108,10 +108,10 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * Performs an attack on another enemy.
    *
    * @param entity The enemy being attacked.
-   * @param damage The amount of damage to be inflicted.
    */
-  def doAttack(entity: ConcreteEnemy, damage: Int): Unit = {
+  def doAttack(entity: ConcreteEnemy): Unit = {
     if (equipped_weapon.isDefined) {
+      val damage: Int = equipped_weapon.map(_.attackPoints).getOrElse(0)
       doDamage(entity: Entity, damage: Int)
     }
     else {
