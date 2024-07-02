@@ -6,34 +6,38 @@ import controller.visitor.GeneralActionVisitor
 import entity.Entity
 import turn.TurnScheduler
 
-class ActionState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
+class ActionState(controller: GameController) extends AbstractState {
   override def needInput() = true
   private val visitor = new GeneralActionVisitor()
   private var nextState: Option[GameState] = None
 
   override def handleInput(input: String): Unit = {
+    println("ACTIONSTATE")
     controller.turnScheduler.nextAttacker.accept(visitor)
     val validOptions: List[String] = visitor.buffer
+    println(validOptions)
+    println(input)
+    println(validOptions.contains(input))
 
     if (validOptions.contains(input)) {
       input match {
         case "Attack" =>
-          nextState = Some(new SelectTargetState(controller, turnScheduler, entity))
+          nextState = Some(new SelectTargetState(controller))
         case "Weapon" =>
-          nextState = Some(new SelectWeaponState(controller, turnScheduler, entity))
+          nextState = Some(new SelectWeaponState(controller))
         case "Magic" =>
-          nextState = Some(new SelectSpellState(controller, turnScheduler, entity))
+          nextState = Some(new SelectSpellState(controller))
         case "Pass" =>
-          nextState = Some(new ResetBarState(controller, turnScheduler, entity))
+          nextState = Some(new ResetBarState(controller))
         case _ =>
         // Handle invalid input if necessary
       }
     }
     else if (validOptions.isEmpty){
-      nextState = Some(new SelectTargetState(controller, turnScheduler, entity))
+      nextState = Some(new SelectTargetState(controller))
     }
     else{
-      // nextState stays empty
+      nextState = Some(this)
     }
   }
 

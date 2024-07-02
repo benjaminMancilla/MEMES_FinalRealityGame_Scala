@@ -21,4 +21,6 @@ trait GameController {
 
   def turnScheduler: TurnScheduler
 
+  def currentState: GameState
+
 }

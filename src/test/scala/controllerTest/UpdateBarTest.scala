@@ -1,5 +1,0 @@
-package controllerTest
-
-class UpdateBarTest {
-
-}

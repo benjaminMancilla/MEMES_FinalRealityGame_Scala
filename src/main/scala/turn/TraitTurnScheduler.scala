@@ -58,5 +58,7 @@ trait TraitTurnScheduler extends PITurnScheduler {
    */
   def dequeueReady(): Entity
 
+  def updateEntity(entity: Entity): Unit
+
 }
 

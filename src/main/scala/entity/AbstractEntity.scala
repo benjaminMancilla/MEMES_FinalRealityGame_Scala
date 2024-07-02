@@ -297,4 +297,12 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     throw new InvalidWeaponException(s"${this.name} can not have weapon")
   }
 
+  def removeSkipTurn(): Unit = {
+    _skipTurn = false
+  }
+
+  def clearEffects(): Unit = {
+    _activeEffects.clear()
+  }
+
 }

@@ -5,7 +5,7 @@ import turn.TurnScheduler
 
 import scala.util.control.Breaks.{break, breakable}
 
-class UpdateBarState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
+class UpdateBarState(controller: GameController) extends AbstractState {
 
   override def update(): Unit = {
     println("UPDATEBAR")
@@ -21,7 +21,7 @@ class UpdateBarState(controller: GameController, turnScheduler: TurnScheduler) e
         controller.turnScheduler.checkWaitEntities()
       }
     }
-    controller.setState(new StartTurnState(controller, turnScheduler))
+    controller.setState(new StartTurnState(controller))
   }
 
 

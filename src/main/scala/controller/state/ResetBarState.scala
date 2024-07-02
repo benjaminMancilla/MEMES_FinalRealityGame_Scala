@@ -5,11 +5,11 @@ import controller.visitor.StateVisitor
 import entity.Entity
 import turn.TurnScheduler
 
-class ResetBarState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
+class ResetBarState(controller: GameController) extends AbstractState {
   println("RESET")
   override def update(): Unit = {
-    controller.turnScheduler.resetBarValue(entity)
-    controller.setState(new EndTurnState(controller, turnScheduler))
+    controller.turnScheduler.resetBarValue(controller.turnScheduler.nextAttacker)
+    controller.setState(new EndTurnState(controller))
   }
 }
 

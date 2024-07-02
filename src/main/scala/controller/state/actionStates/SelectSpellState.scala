@@ -10,17 +10,18 @@ import magic.blackMagic.{Fire, Thunder}
 import magic.whiteMagic.{Heal, Paralyze, Poison}
 import turn.TurnScheduler
 
-class SelectSpellState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
+class SelectSpellState(controller: GameController) extends AbstractState {
   override def needInput() = true
   private val visitor = new SelectSpellVisitor()
   private var nextState: Option[GameState] = None
 
   override def handleInput(input: String): Unit = {
+    println("SELECTSPELL")
     try{
       controller.turnScheduler.nextAttacker.accept(visitor)
     } catch {
       case e: InvalidSpellSelector =>
-        nextState = Some(new ActionState(controller, turnScheduler, entity))
+        nextState = Some(new ActionState(controller))
     }
 
     val validOptions: List[String] = visitor.buffer
@@ -28,15 +29,15 @@ class SelectSpellState(controller: GameController, turnScheduler: TurnScheduler,
     if (validOptions.contains(input)) {
       input match {
         case "Fire" =>
-          nextState = Some(new SelectSpellTargetState(controller, turnScheduler, entity, new Fire))
+          nextState = Some(new SelectSpellTargetState(controller, new Fire))
         case "Thunder" =>
-          nextState = Some(new SelectSpellTargetState(controller, turnScheduler, entity, new Thunder))
+          nextState = Some(new SelectSpellTargetState(controller, new Thunder))
         case "Poison" =>
-          nextState = Some(new SelectSpellTargetState(controller, turnScheduler, entity, new Poison))
+          nextState = Some(new SelectSpellTargetState(controller, new Poison))
         case "Paralyze" =>
-          nextState = Some(new SelectSpellTargetState(controller, turnScheduler, entity, new Paralyze))
+          nextState = Some(new SelectSpellTargetState(controller, new Paralyze))
         case "Heal" =>
-          nextState = Some(new SelectSpellTargetState(controller, turnScheduler, entity, new Heal))
+          nextState = Some(new SelectSpellTargetState(controller, new Heal))
         case _ =>
         // Handle invalid input if necessary
       }

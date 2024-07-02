@@ -253,4 +253,14 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
   // Get the turn information for all entities.
   def turn_info: ArrayBuffer[(Entity, Int, Int, Boolean)] = _turn_info
 
+  def updateEntity(entity: Entity): Unit = {
+    val index = _turn_info.indexWhere { case (e, _, _, _) => e == entity }
+    if (index != -1) {
+      val currentBar = _turn_info(index)._2
+      val currentMax = _turn_info(index)._3
+      val isReady = _turn_info(index)._4
+      _turn_info.update(index, (entity, currentBar, currentMax, isReady))
+    }
+  }
+
 }

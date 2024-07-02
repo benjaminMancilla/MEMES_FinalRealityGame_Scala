@@ -2,29 +2,21 @@ package controller.state
 
 import controller.GameController
 import controller.state.actionStates.ActionState
+import controller.state.command.EffectCommand
 import entity.Entity
 import turn.TurnScheduler
 
 
-class ApplyEffectState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity) extends AbstractState {
+class ApplyEffectState(controller: GameController) extends AbstractState {
+  override def needInput() = false
 
   override def update(): Unit = {
     println("EFFECT")
-    if (controller.turnScheduler.nextAttacker.activeEffects.isEmpty){
-      controller.setState(new ActionState(controller, turnScheduler, entity))
-      return
-    }
-    for(effect <- controller.turnScheduler.nextAttacker.activeEffects){
-      effect.applyEffect(controller.turnScheduler.nextAttacker)
-      if (!controller.turnScheduler.nextAttacker.state){
-        controller.setState(new EndTurnState(controller, turnScheduler))
-        return
-      }
-    }
-    if (controller.turnScheduler.nextAttacker.skipTurn) {
-      controller.setState(new EndTurnState(controller, turnScheduler))
-      return
-    }
-    controller.setState(new ActionState(controller, turnScheduler, entity))
+    val target = controller.turnScheduler.nextAttacker
+
+    val effectCommand = new EffectCommand(target, controller)
+    val nextStateOption = effectCommand.execute()
+
+    nextStateOption.foreach(controller.setState)
   }
 }

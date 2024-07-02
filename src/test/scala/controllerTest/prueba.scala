@@ -35,12 +35,18 @@ object prueba {
       for ((entity, actionBarValue, otherValue, state) <- controller.turnCurrentSate) {
         println(s"Entity: ${entity.name}, Action Bar: $actionBarValue, Other Value: $otherValue, State: $state")
       }
-      val input = scala.io.StdIn.readLine()
-      controller.handleInput(input)
-      controller.update()
-      for ((entity, actionBarValue, otherValue, state) <- controller.turnCurrentSate) {
-        println(s"Entity: ${entity.name}, Action Bar: $actionBarValue, Other Value: $otherValue, State: $state")
+      if (controller.currentState.needInput()) {
+        val input = scala.io.StdIn.readLine()
+        controller.handleInput(input)
       }
+      controller.update()
+      try {
+        println(controller.turnScheduler.nextAttacker.name)
+      } catch {
+        case _: IndexOutOfBoundsException =>
+        // No hacer nada
+      }
+
     }
   }
 }

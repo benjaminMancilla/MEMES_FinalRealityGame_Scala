@@ -1,35 +1,28 @@
 package controller.state.actionStates
 
 import controller.GameController
+import controller.state.command.AttackCommand
 import controller.state.{AbstractState, GameState, ResetBarState}
 import entity.Entity
 import exceptions.entityE.ProhibitedTarget
 import exceptions.weaponE.EmptyWeaponException
 import turn.TurnScheduler
 
-class SelectTargetState(controller: GameController, turnScheduler: TurnScheduler, entity: Entity)
-  extends AbstractSelectTargetState(controller:GameController, turnScheduler: TurnScheduler) {
+class SelectTargetState(controller: GameController)
+  extends AbstractSelectTargetState(controller: GameController) {
 
   override def update(): Unit = {
+    println("SELECTTARGET")
     if (tryTarget == -1) {
-      nextState.foreach(controller.setState)
       return
     }
-    try {
-      controller.turnScheduler.nextAttacker.doAttack(controller.turnScheduler.turn_info(tryTarget)._1)
-      updateAffectedEntity()
-      nextState = Some(new ResetBarState(controller, turnScheduler, entity))
-    } catch {
-      case e: EmptyWeaponException =>
-        println(s"EmptyWeaponException: ${e.getMessage}")
-        println("Equip a weapon if you want to attack!")
-        nextState = Some(new SelectWeaponState(controller, turnScheduler, entity))
 
+    val attacker = controller.turnScheduler.nextAttacker
+    val target = controller.turnScheduler.turn_info(tryTarget)._1
 
-      case e: ProhibitedTarget =>
-        println(s"ProhibitedTarget: ${e.getMessage}")
-        println("You can not attack your team!")
-    }
-    nextState.foreach(controller.setState)
+    val attackCommand = new AttackCommand(attacker, target, controller)
+    val nextStateOption = attackCommand.execute()
+
+    nextStateOption.foreach(controller.setState)
   }
 }

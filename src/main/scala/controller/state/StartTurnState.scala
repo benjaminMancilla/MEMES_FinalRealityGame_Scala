@@ -3,11 +3,10 @@ package controller.state
 import controller.GameController
 import turn.TurnScheduler
 
-class StartTurnState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
+class StartTurnState(controller: GameController) extends AbstractState {
 
   override def update(): Unit = {
     println("STARTTURN")
-    val entity = controller.turnScheduler.nextAttacker
-    controller.setState(new ApplyEffectState(controller, turnScheduler, entity))
+    controller.setState(new ApplyEffectState(controller))
   }
 }

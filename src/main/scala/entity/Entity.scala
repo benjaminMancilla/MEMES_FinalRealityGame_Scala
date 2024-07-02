@@ -91,7 +91,12 @@ trait Entity extends PIEntity {
   def accept(visitor: ActionVisitor): Unit
 
   def castSpell(target:Entity, spell: Magic): Unit
+
   def changeWeapon(newWeapon: Option[Weapon]): Unit
+
+  def removeSkipTurn(): Unit
+
+  def clearEffects(): Unit
 
 }
 

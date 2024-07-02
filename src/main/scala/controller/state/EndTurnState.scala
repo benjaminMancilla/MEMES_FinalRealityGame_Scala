@@ -5,11 +5,12 @@ import controller.visitor.StateVisitor
 import entity.Entity
 import turn.TurnScheduler
 
-class EndTurnState(controller: GameController, turnScheduler: TurnScheduler) extends AbstractState {
+class EndTurnState(controller: GameController) extends AbstractState {
   private val visitor: StateVisitor = new StateVisitor
 
   override def update(): Unit = {
     println("END")
+    controller.turnScheduler.dequeueReady()
     var characterCounter: Int = 0
     var enemyCounter: Int = 0
     for (tuple <- controller.turnScheduler.turn_info){
@@ -23,13 +24,13 @@ class EndTurnState(controller: GameController, turnScheduler: TurnScheduler) ext
       }
     }
     if (characterCounter == 0){
-      controller.setState(new VictoryState(controller, turnScheduler))
+      controller.setState(new VictoryState(controller))
       return
     }
     if (enemyCounter == 0){
-      controller.setState(new DefeatState(controller, turnScheduler))
+      controller.setState(new DefeatState(controller))
       return
     }
-    controller.setState(new UpdateBarState(controller, turnScheduler))
+    controller.setState(new UpdateBarState(controller))
   }
 }
