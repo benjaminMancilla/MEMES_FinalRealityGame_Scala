@@ -6,7 +6,7 @@ import controller.visitor.GeneralActionVisitor
 import entity.Entity
 import turn.TurnScheduler
 
-class ActionState(controller: GameController) extends AbstractState {
+class ActionState(controller: GameController) extends AbstractState(controller) {
   override def needInput() = true
   private val visitor = new GeneralActionVisitor()
   private var nextState: Option[GameState] = None

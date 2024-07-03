@@ -35,7 +35,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
   private def checkEntitiesRestrictions(): Unit = {
     if (_turn_info.size > 8) {
       throw new EntityOverflow("Max number of entities is exceeded.")
-    } else if (_turn_info.size < 4) {
+    } else if (_turn_info.size < 2) {
       throw new EntityOverflow("Min number of entities is exceeded.")
     } else {
       var characterCounter: Int = 0
@@ -44,7 +44,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
           characterCounter+=1
         }
       }
-      if (characterCounter != 3) {
+      if (characterCounter > 3) {
         throw new EntityOverflow("Max number of characters (3) is exceeded.")
       }
     }

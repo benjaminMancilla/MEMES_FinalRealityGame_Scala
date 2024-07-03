@@ -7,7 +7,7 @@ import entity.Entity
 import turn.TurnScheduler
 
 
-class ApplyEffectState(controller: GameController) extends AbstractState {
+class ApplyEffectState(controller: GameController) extends AbstractState(controller) {
   override def needInput() = false
 
   override def update(): Unit = {

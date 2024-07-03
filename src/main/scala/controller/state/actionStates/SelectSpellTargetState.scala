@@ -19,7 +19,7 @@ class SelectSpellTargetState(controller: GameController, spell: Magic)
 
     val spellCommand = new SpellCommand(attacker, target, controller, spell)
     val nextStateOption = spellCommand.execute()
-    updateAffectedEntity()
+    updateAffectedEntity(tryTarget)
 
     nextStateOption.foreach(controller.setState)
   }

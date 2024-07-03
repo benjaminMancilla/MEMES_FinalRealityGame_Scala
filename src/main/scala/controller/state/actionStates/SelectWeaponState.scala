@@ -18,7 +18,7 @@ class SelectWeaponState(controller: GameController) extends AbstractSelectTarget
 
     val weaponCommand = new ChangeWeaponCommand(entity, controller, Some(weapon))
     val nextStateOption = weaponCommand.execute()
-    updateAffectedEntity()
+    updateAffectedEntity(tryTarget)
 
     nextStateOption.foreach(controller.setState)
   }

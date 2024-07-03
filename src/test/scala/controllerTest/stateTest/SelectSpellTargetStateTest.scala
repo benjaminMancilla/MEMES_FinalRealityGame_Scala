@@ -149,7 +149,7 @@ class SelectSpellTargetStateTest extends ControllerTest {
     controller.turnScheduler.dequeueReady()
     var updateCalled = false
     val state = new SelectSpellTargetState(controller, new Fire()) {
-      override def updateAffectedEntity(): Unit = {
+      override def updateAffectedEntity(index: Int): Unit = {
         updateCalled = true
       }
     }

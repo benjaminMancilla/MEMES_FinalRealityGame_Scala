@@ -67,7 +67,7 @@ class SelectWeaponStateTest extends ControllerTest {
     controller.addWeapon(weapon)
 
     val state = new SelectWeaponState(controller) {
-      override def updateAffectedEntity(): Unit = {
+      override def updateAffectedEntity(index: Int): Unit = {
         updateCalled = true
       }
     }

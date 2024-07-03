@@ -4,7 +4,7 @@ import controller.GameController
 import party.Party
 import turn.TurnScheduler
 
-class DefeatState(controller: GameController) extends AbstractState {
+class DefeatState(controller: GameController) extends AbstractState(controller) {
   override def handleInput(input: String): Unit = {
     // Manejar entrada del usuario en caso de derrota
   }

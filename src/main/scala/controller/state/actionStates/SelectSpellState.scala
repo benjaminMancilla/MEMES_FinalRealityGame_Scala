@@ -10,7 +10,7 @@ import magic.blackMagic.{Fire, Thunder}
 import magic.whiteMagic.{Heal, Paralyze, Poison}
 import turn.TurnScheduler
 
-class SelectSpellState(controller: GameController) extends AbstractState {
+class SelectSpellState(controller: GameController) extends AbstractState(controller) {
   override def needInput() = true
   private val visitor = new SelectSpellVisitor()
   private var nextState: Option[GameState] = None

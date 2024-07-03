@@ -23,21 +23,13 @@ class TurnSchedulerTest extends FunSuite {
 
   }
 
-  test("TurnScheduler should not initialize with less than 3 characters, 4 entities or with more than 8 entities") {
+  test("TurnScheduler should not initialize with less than 2 entities or with more than 8 entities (or 3 characters)") {
     val entity1 = new Warrior("Conan", 200, 30, 40)
     val entity2 = new Ninja("Hattori", 150, 25, 30)
     val entity3 = new ConcreteEnemy("Juan", 100, 20, 30, 10)
 
     intercept[EntityOverflow] {
-      new TurnScheduler(ArrayBuffer(entity1, entity2))
-    }
-
-    intercept[EntityOverflow] {
-      new TurnScheduler(ArrayBuffer(entity1, entity2, entity1))
-    }
-
-    intercept[EntityOverflow] {
-      new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity3))
+      new TurnScheduler(ArrayBuffer(entity1))
     }
 
     intercept[EntityOverflow] {
@@ -48,9 +40,6 @@ class TurnSchedulerTest extends FunSuite {
       new TurnScheduler(ArrayBuffer(entity1, entity2, entity2, entity3, entity3, entity3, entity3, entity3, entity3))
     }
 
-    intercept[EntityOverflow] {
-      new TurnScheduler(ArrayBuffer(entity1, entity2, entity3, entity3, entity3, entity3, entity3))
-    }
 
     intercept[EntityOverflow] {
       new TurnScheduler(ArrayBuffer.empty[Entity])

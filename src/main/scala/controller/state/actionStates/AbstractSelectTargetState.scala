@@ -4,7 +4,7 @@ import controller.GameController
 import controller.state.{AbstractState, GameState}
 import turn.TurnScheduler
 
-class AbstractSelectTargetState(controller: GameController) extends AbstractState {
+class AbstractSelectTargetState(controller: GameController) extends AbstractState(controller) {
   override def needInput() = true
 
   protected val maxTargetIndex: Int = controller.turnScheduler.turn_info.size
@@ -17,11 +17,7 @@ class AbstractSelectTargetState(controller: GameController) extends AbstractStat
 
   }
 
-  protected def updateAffectedEntity(): Unit = {
-    if (!controller.turnScheduler.turn_info(tryTarget)._1.state) {
-      controller.turnScheduler.removeEntity(controller.turnScheduler.turn_info(tryTarget)._1)
-    }
-  }
+
 
   private def auxHandleInput(input:String, size:Int): Unit = {
     try {

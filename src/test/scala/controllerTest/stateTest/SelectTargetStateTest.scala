@@ -73,7 +73,7 @@ class SelectTargetStateTest extends ControllerTest {
     controller.turnScheduler.dequeueReady()
     var updateCalled = false
     val state = new SelectTargetState(controller) {
-      override def updateAffectedEntity(): Unit = {
+      override def updateAffectedEntity(index: Int): Unit = {
         updateCalled = true
       }
     }
