@@ -20,7 +20,7 @@ class ChangeWeaponCommandTest extends ControllerTest {
     controller.turnScheduler.dequeueReady()
     val newWeapon = new Staff("Staff", 60, 10, 40)
     val entity = controller.turnScheduler.nextAttacker
-    val changeWeaponCommand = new ChangeWeaponCommand(entity, controller, newWeapon)
+    val changeWeaponCommand = new ChangeWeaponCommand(entity, controller, Some(newWeapon))
 
     val nextStateOption = changeWeaponCommand.execute()
     assert(nextStateOption.isDefined)
@@ -36,7 +36,7 @@ class ChangeWeaponCommandTest extends ControllerTest {
     val invalidCarrierWeapon = new Sword("InvalidSword", 10, 10)
     // Forcing an InvalidCarrier situation (hypothetically)
     val entity = controller.turnScheduler.nextAttacker
-    val changeWeaponCommand = new ChangeWeaponCommand(entity, controller, invalidCarrierWeapon)
+    val changeWeaponCommand = new ChangeWeaponCommand(entity, controller, Some(invalidCarrierWeapon))
 
     val nextStateOption = changeWeaponCommand.execute()
     assert(nextStateOption.isDefined)
@@ -51,7 +51,7 @@ class ChangeWeaponCommandTest extends ControllerTest {
     controller.turnScheduler.dequeueReady()
     val invalidWeapon = new Bow("InvalidBow", 10, 10)
     val entity = controller.turnScheduler.nextAttacker
-    val changeWeaponCommand = new ChangeWeaponCommand(entity, controller, invalidWeapon)
+    val changeWeaponCommand = new ChangeWeaponCommand(entity, controller, Some(invalidWeapon))
 
     val nextStateOption = changeWeaponCommand.execute()
     assert(nextStateOption.isEmpty)

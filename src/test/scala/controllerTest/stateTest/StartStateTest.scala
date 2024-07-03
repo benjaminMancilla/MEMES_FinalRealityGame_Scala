@@ -16,7 +16,6 @@ class StartStateTest extends ControllerTest {
   }
 
   test("StartState should transition to StartTurnState if there are entities ready") {
-    // Asegurarse de que hay al menos una entidad lista
     controller.turnScheduler.updateActionProgress(1000)
     controller.turnScheduler.checkWaitEntities()
 

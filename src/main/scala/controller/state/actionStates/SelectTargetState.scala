@@ -2,11 +2,6 @@ package controller.state.actionStates
 
 import controller.GameController
 import controller.state.command.AttackCommand
-import controller.state.{AbstractState, GameState, ResetBarState}
-import entity.Entity
-import exceptions.entityE.ProhibitedTarget
-import exceptions.weaponE.EmptyWeaponException
-import turn.TurnScheduler
 
 class SelectTargetState(controller: GameController)
   extends AbstractSelectTargetState(controller: GameController) {

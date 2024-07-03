@@ -1,7 +1,7 @@
 package controllerTest.commandTest
 
 import controller.state.ResetBarState
-import controller.state.actionStates.SelectWeaponState
+import controller.state.actionStates.{SelectTargetState, SelectWeaponState}
 import controller.state.command.AttackCommand
 import controllerTest.ControllerTest
 import weapon.commonWeapon.Sword
@@ -33,13 +33,14 @@ class AttackCommandTest extends ControllerTest  {
     assert(nextStateOption.get.isInstanceOf[SelectWeaponState])
   }
 
-  test("AttackCommand should return None when ProhibitedTarget exception is thrown") {
+  test("AttackCommand should return the currentState when ProhibitedTarget exception is thrown") {
     val ally = controller.turnScheduler.turn_info(1)._1
     val attacker = controller.turnScheduler.turn_info(0)._1
     val attackCommand = new AttackCommand(attacker, ally, controller)
 
     val nextStateOption = attackCommand.execute()
-    assert(nextStateOption.isEmpty)
+    print(nextStateOption)
+    assert(nextStateOption.get.isInstanceOf[SelectTargetState])
   }
 
   test("AttackCommand should update entities in the turn scheduler") {

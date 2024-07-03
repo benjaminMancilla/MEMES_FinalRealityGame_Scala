@@ -2,6 +2,8 @@ package turn
 
 import entity.Entity
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
  * Trait representing a turn scheduler with additional functionality for managing turn-based combat mechanics in a game.
  * This trait extends the PITurnScheduler trait.
@@ -59,6 +61,8 @@ trait TraitTurnScheduler extends PITurnScheduler {
   def dequeueReady(): Entity
 
   def updateEntity(entity: Entity): Unit
+
+  val _turn_info: ArrayBuffer[(Entity, Int, Int, Boolean)]
 
 }
 

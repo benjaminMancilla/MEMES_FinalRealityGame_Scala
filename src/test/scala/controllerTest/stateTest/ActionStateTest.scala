@@ -10,6 +10,9 @@ class ActionStateTest extends ControllerTest{
   test("ActionState should handle valid input 'Attack'") {
     controller.turnScheduler.updateActionProgress(1000)
     controller.turnScheduler.checkWaitEntities()
+    controller.turnScheduler.dequeueReady()
+    controller.turnScheduler.dequeueReady()
+    controller.turnScheduler.dequeueReady()
     val state = new ActionState(controller)
     val input = "Attack"
 

@@ -23,4 +23,6 @@ trait GameController {
 
   def currentState: GameState
 
+  def addWeapon(weapon: Weapon): Unit
+
 }

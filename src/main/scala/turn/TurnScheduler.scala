@@ -17,7 +17,7 @@ class TurnScheduler(turn_entitiesI: ArrayBuffer[Entity]) extends TraitTurnSchedu
   /**
    * Information about the entities participating in combat, including their current action bar values and states.
    */
-  private val _turn_info : ArrayBuffer[(Entity, Int, Int, Boolean)] = createTurnInfo(turn_entitiesI)
+  val _turn_info : ArrayBuffer[(Entity, Int, Int, Boolean)] = createTurnInfo(turn_entitiesI)
   // Check restrictions on the number of entities and characters in the turn scheduler.
   checkEntitiesRestrictions()
 

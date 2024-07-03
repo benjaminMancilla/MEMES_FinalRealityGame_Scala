@@ -13,12 +13,12 @@ class SelectWeaponState(controller: GameController) extends AbstractSelectTarget
       nextState.foreach(controller.setState)
       return
     }
-    controller.turnScheduler.nextAttacker.changeWeapon(Some(controller.weaponInventory(tryTarget)))
     val entity = controller.turnScheduler.nextAttacker
     val weapon = controller.weaponInventory(tryTarget)
 
-    val weaponCommand = new ChangeWeaponCommand(entity, controller, weapon)
+    val weaponCommand = new ChangeWeaponCommand(entity, controller, Some(weapon))
     val nextStateOption = weaponCommand.execute()
+    updateAffectedEntity()
 
     nextStateOption.foreach(controller.setState)
   }

@@ -1,5 +1,6 @@
 package entity.character.magicCharacter
 
+import controller.visitor.ActionVisitor
 import magic.Magic
 import weapon.Weapon
 
@@ -42,5 +43,7 @@ class BlackMage(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, ma
   override def checkSpell(spell: Magic): Unit = {
     spell.checkSorcerer(this)
   }
+
+  override def accept(visitor: ActionVisitor): Unit = visitor.visitBlackMagicCharacter(this)
 }
 

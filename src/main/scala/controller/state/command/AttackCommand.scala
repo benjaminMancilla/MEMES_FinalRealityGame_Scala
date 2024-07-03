@@ -1,7 +1,7 @@
 package controller.state.command
 
 import controller.GameController
-import controller.state.actionStates.SelectWeaponState
+import controller.state.actionStates.{SelectTargetState, SelectWeaponState}
 import controller.state.{GameState, ResetBarState}
 import entity.Entity
 import exceptions.entityE.ProhibitedTarget
@@ -24,7 +24,7 @@ class AttackCommand(attacker: Entity, target: Entity, controller: GameController
       case e: ProhibitedTarget =>
         println(s"ProhibitedTarget: ${e.getMessage}")
         println("You cannot attack your team!")
-        None
+        Some(new SelectTargetState(controller))
     }
   }
 }

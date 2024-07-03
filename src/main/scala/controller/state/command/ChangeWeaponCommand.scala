@@ -7,10 +7,10 @@ import entity.Entity
 import exceptions.weaponE.{InvalidCarrier, InvalidWeaponException}
 import weapon.Weapon
 
-class ChangeWeaponCommand(entity: Entity, controller: GameController, weapon: Weapon) extends Command {
+class ChangeWeaponCommand(entity: Entity, controller: GameController, weapon: Option[Weapon]) extends Command {
   def execute(): Option[GameState] = {
     try{
-      entity.changeWeapon(Some(weapon))
+      entity.changeWeapon(weapon)
       Some(new ActionState(controller))
     } catch {
       case e: InvalidCarrier =>
