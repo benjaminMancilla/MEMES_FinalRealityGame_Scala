@@ -3,7 +3,6 @@ package controller.visitor
 import entity.character.Character
 import entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
 import entity.enemy.Enemy
-import exceptions.stateE.InvalidSpellSelector
 
 class StateVisitor extends ActionVisitor {
   var buffer: List[String] = List.empty[String]

@@ -2,6 +2,8 @@ package entity
 
 import controller.visitor.ActionVisitor
 import effect.Effect
+import entity.character.Character
+import entity.enemy.ConcreteEnemy
 import magic.{DefensiveSpell, Magic, OffensiveSpell}
 import weapon.Weapon
 
@@ -44,7 +46,7 @@ trait Entity extends PIEntity {
    * Performs an attack on another entityE.
    * @param entity The entityE being attacked.
    */
-  def doAttack(entity: Entity): Unit
+  def doGenericAttack(entity: Entity): Unit
 
   /**
    * Performs healing on another entityE.
@@ -97,6 +99,12 @@ trait Entity extends PIEntity {
   def removeSkipTurn(): Unit
 
   def clearEffects(): Unit
+
+  def receiveAttack(entity: Entity): Unit
+
+  def doAttack(entity: ConcreteEnemy): Unit
+
+  def doAttack(entity: Character): Unit
 
 }
 

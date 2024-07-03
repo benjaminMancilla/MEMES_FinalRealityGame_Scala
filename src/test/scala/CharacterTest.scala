@@ -69,14 +69,14 @@ class CharacterTest extends munit.FunSuite {
   entity1.changeWeapon(Some(new Sword("Mace", 50, 10)))
   private val entity2 = new ConcreteEnemy("Entity2", 80, 10, 30, 10)
 
-  test("doAttack should reduce the hit points of the attacked entity") {
+  test("doGenericAttack should reduce the hit points of the attacked entity") {
     val initialHitPoints = entity2.current_hit_points
     entity1.doAttack(entity2)
     assert(entity2.current_hit_points < initialHitPoints)
     assert(entity2.current_hit_points == 40)
   }
 
-  test("doAttack should not reduce hit points if the attacker is out of combat") {
+  test("doGenericAttack should not reduce hit points if the attacker is out of combat") {
     entity1.state = false
     val initialHitPoints = entity2.current_hit_points
     entity1.doAttack(entity2)
@@ -166,7 +166,7 @@ class CharacterTest extends munit.FunSuite {
     val warrior = new Warrior("Entity1", 100, 10, 20)
     val ninja = new Ninja("Entity1", 100, 10, 20)
     intercept[ProhibitedTarget]{
-      warrior.doAttack(ninja, 10)
+      warrior.doAttack(ninja)
     }
 
   }

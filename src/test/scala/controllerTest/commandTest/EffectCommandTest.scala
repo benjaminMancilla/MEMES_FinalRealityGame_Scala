@@ -1,12 +1,12 @@
 package controllerTest.commandTest
 
-import controller.GameControllerConcrete
+
 import controller.state.EndTurnState
 import controller.state.actionStates.ActionState
 import controller.state.command.EffectCommand
 import controllerTest.ControllerTest
 import effect.{Paralyzed, Poisoned}
-import magic.whiteMagic.Poison
+
 
 class EffectCommandTest extends ControllerTest {
 
@@ -54,6 +54,18 @@ class EffectCommandTest extends ControllerTest {
     val nextState = command.execute()
 
     assert(nextState.getOrElse(fail("Expected Some(state), but received None")).isInstanceOf[EndTurnState])
+  }
+
+  test("EffectCommand should transition to ActionState if target pass all the effects") {
+    controller.turnScheduler.updateActionProgress(1000)
+    controller.turnScheduler.checkWaitEntities()
+    val target = controller.turnScheduler.nextAttacker
+    target.addEffect(new Poisoned(magicDamageI = 30))
+
+    val command = new EffectCommand(target, controller)
+    val nextState = command.execute()
+
+    assert(nextState.getOrElse(fail("Expected Some(state), but received None")).isInstanceOf[ActionState])
   }
 
 

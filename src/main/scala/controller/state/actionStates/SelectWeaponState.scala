@@ -1,10 +1,7 @@
 package controller.state.actionStates
 
 import controller.GameController
-import controller.state.{AbstractState, GameState}
-import entity.Entity
-import exceptions.weaponE.{InvalidCarrier, InvalidWeaponException}
-import turn.TurnScheduler
+import controller.state.command.ChangeWeaponCommand
 
 class SelectWeaponState(controller: GameController) extends AbstractSelectTargetState(controller) {
 
@@ -16,16 +13,13 @@ class SelectWeaponState(controller: GameController) extends AbstractSelectTarget
       nextState.foreach(controller.setState)
       return
     }
-    try{
-      controller.turnScheduler.nextAttacker.changeWeapon(Some(controller.weaponInventory(tryTarget)))
+    controller.turnScheduler.nextAttacker.changeWeapon(Some(controller.weaponInventory(tryTarget)))
+    val entity = controller.turnScheduler.nextAttacker
+    val weapon = controller.weaponInventory(tryTarget)
 
-    } catch {
-      case e: InvalidCarrier =>
-        println(s"Weapon Error: ${e.getMessage}") //Should not happen due to implicit entity type
-        nextState = Some(new ActionState(controller))
-      case e: InvalidWeaponException =>
-        println(s"${e.getMessage}")
-        nextState = None
-    }
+    val weaponCommand = new ChangeWeaponCommand(entity, controller, weapon)
+    val nextStateOption = weaponCommand.execute()
+
+    nextStateOption.foreach(controller.setState)
   }
 }

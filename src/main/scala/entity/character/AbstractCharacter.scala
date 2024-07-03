@@ -123,9 +123,8 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    * If the attack is performed on a Character, we get an exception.
    *
    * @param entity The enemy being attacked.
-   * @param damage The amount of damage to be inflicted.
    */
-  def doAttack(entity: Character, damage: Int): Unit = {
+  def doAttack(entity: Character): Unit = {
     throw new ProhibitedTarget("Characters can not attack other characters")
   }
 
@@ -145,6 +144,9 @@ abstract class AbstractCharacter(nameI: String, hit_pointsI: Int, defenseI: Int,
    */
   override def checkSpell(spell: DefensiveSpell): Unit = {}
 
+  def receiveAttack(entity: Entity): Unit = {
+    entity.doAttack(this)
+  }
 }
 
 

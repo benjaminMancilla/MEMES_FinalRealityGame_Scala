@@ -79,5 +79,9 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
 
   def autoTurn: Unit = {}
 
+  def receiveAttack(entity: Entity): Unit = {
+    entity.doAttack(this)
+  }
+
 }
 

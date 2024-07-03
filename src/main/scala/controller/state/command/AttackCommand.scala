@@ -11,8 +11,7 @@ import turn.TurnScheduler
 class AttackCommand(attacker: Entity, target: Entity, controller: GameController) extends Command {
   def execute(): Option[GameState] = {
     try {
-      attacker.doAttack(target)
-      println(s"Attack result: ${attacker.doAttack(target)}")
+      attacker.doGenericAttack(target)
       controller.turnScheduler.updateEntity(attacker)
       controller.turnScheduler.updateEntity(target)
       Some(new ResetBarState(controller))

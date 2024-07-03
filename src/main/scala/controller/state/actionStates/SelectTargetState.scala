@@ -22,6 +22,7 @@ class SelectTargetState(controller: GameController)
 
     val attackCommand = new AttackCommand(attacker, target, controller)
     val nextStateOption = attackCommand.execute()
+    updateAffectedEntity()
 
     nextStateOption.foreach(controller.setState)
   }

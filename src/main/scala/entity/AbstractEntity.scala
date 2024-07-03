@@ -1,12 +1,14 @@
 package entity
 
 import effect.Effect
+import entity.enemy.ConcreteEnemy
+import entity.character.Character
 import exceptions.Require
 import exceptions.effectE.RepeatedEffect
 import magic.{DefensiveSpell, Magic, OffensiveSpell}
 import exceptions.entityE.HealingDeadEntity
 import exceptions.magicE.{InvalidSpellTarget, NonMagicalCaster}
-import exceptions.weaponE.InvalidWeaponException
+import exceptions.weaponE.{InvalidCarrier, InvalidWeaponException}
 import weapon.Weapon
 
 import scala.collection.mutable
@@ -176,11 +178,14 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   /**
-   * Performs an attack on another entity.
+   * Performs an attack on another entity, uses doubleDispatch due to
+   * ambiguity.
    *
    * @param entity The entity being attacked.
    */
-  def doAttack(entity: Entity): Unit = {}
+  def doGenericAttack(entity: Entity): Unit = {
+    entity.receiveAttack(this)
+  }
 
   /**
    * Indicates whether the entityE is controlled by the player or not.
@@ -294,7 +299,7 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   }
 
   def changeWeapon(newWeapon: Option[Weapon]): Unit = {
-    throw new InvalidWeaponException(s"${this.name} can not have weapon")
+    throw new InvalidCarrier(s"${this.name} can not have weapon")
   }
 
   def removeSkipTurn(): Unit = {
@@ -304,5 +309,11 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
   def clearEffects(): Unit = {
     _activeEffects.clear()
   }
+
+  def receiveAttack(entity: Entity): Unit
+
+  def doAttack(entity: ConcreteEnemy): Unit
+
+  def doAttack(entity: Character): Unit
 
 }
