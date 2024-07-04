@@ -1,11 +1,11 @@
-import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
-import entity.character.magicCharacter.{BlackMage, WhiteMage}
-import entity.enemy.ConcreteEnemy
 import exceptions.entityE.{HealingDeadEntity, ProhibitedTarget}
 import exceptions.weaponE.{EmptyWeaponException, InvalidWeaponException}
 import exceptions.{InvalidNameException, InvalidStatException}
-import weapon.commonWeapon.{Axe, Bow, Sword}
-import weapon.magicWeapon.{Staff, Wand}
+import model.entity.character.commonCharacter.{Ninja, Paladin, Warrior}
+import model.entity.character.magicCharacter.{BlackMage, WhiteMage}
+import model.entity.enemy.ConcreteEnemy
+import model.weapon.commonWeapon.{Axe, Bow, Sword}
+import model.weapon.magicWeapon.{Staff, Wand}
 
 import scala.collection.mutable.ArrayBuffer
 

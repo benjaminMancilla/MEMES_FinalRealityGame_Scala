@@ -1,6 +1,7 @@
 package controllerTest.stateTest
 
-import controller.state.{StartState, StartTurnState, UpdateBarState}
+import controller.state.macroStates.{StartState, UpdateBarState}
+import controller.state.turnStates.StartTurnState
 import controllerTest.ControllerTest
 
 class StartStateTest extends ControllerTest {

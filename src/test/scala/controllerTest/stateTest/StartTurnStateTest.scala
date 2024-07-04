@@ -1,6 +1,6 @@
 package controllerTest.stateTest
 
-import controller.state.{ApplyEffectState, StartTurnState}
+import controller.state.turnStates.{ApplyEffectState, StartTurnState}
 import controllerTest.ControllerTest
 
 class StartTurnStateTest extends ControllerTest {

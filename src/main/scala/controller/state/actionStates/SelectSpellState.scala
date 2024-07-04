@@ -1,14 +1,15 @@
 package controller.state.actionStates
 
 import controller.GameController
-import controller.state.{AbstractState, GameState, ResetBarState}
-import controller.visitor.{GeneralActionVisitor, SelectSpellVisitor}
-import entity.Entity
+import controller.state.turnStates.ResetBarState
+import controller.state.{AbstractState, GameState}
+import controller.visitor.{GameStateVisitor, GeneralActionVisitor, SelectSpellVisitor}
 import exceptions.stateE.InvalidSpellSelector
-import magic.Magic
-import magic.blackMagic.{Fire, Thunder}
-import magic.whiteMagic.{Heal, Paralyze, Poison}
-import turn.TurnScheduler
+import model.entity.Entity
+import model.magic.Magic
+import model.magic.blackMagic.{Fire, Thunder}
+import model.magic.whiteMagic.{Heal, Paralyze, Poison}
+import model.turn.TurnScheduler
 
 class SelectSpellState(controller: GameController) extends AbstractState(controller) {
   override def needInput() = true
@@ -16,7 +17,6 @@ class SelectSpellState(controller: GameController) extends AbstractState(control
   private var nextState: Option[GameState] = None
 
   override def handleInput(input: String): Unit = {
-    println("SELECTSPELL")
     try{
       controller.turnScheduler.nextAttacker.accept(visitor)
     } catch {
@@ -52,5 +52,9 @@ class SelectSpellState(controller: GameController) extends AbstractState(control
     //If ActionState does not get a valid input nextState stays None.
     //Then, update does nothing, staying in a loop until it gets a valid
     //input.
+  }
+
+  override def accept(visitor: GameStateVisitor): Unit = {
+    visitor.visitSpell(this)
   }
 }

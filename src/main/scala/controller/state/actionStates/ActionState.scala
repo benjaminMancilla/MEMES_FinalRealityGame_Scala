@@ -1,10 +1,11 @@
 package controller.state.actionStates
 
 import controller.GameController
-import controller.state.{AbstractState, GameState, ResetBarState}
-import controller.visitor.GeneralActionVisitor
-import entity.Entity
-import turn.TurnScheduler
+import controller.state.turnStates.ResetBarState
+import controller.state.{AbstractState, GameState}
+import controller.visitor.{GameStateVisitor, GeneralActionVisitor}
+import model.entity.Entity
+import model.turn.TurnScheduler
 
 class ActionState(controller: GameController) extends AbstractState(controller) {
   override def needInput() = true
@@ -12,12 +13,8 @@ class ActionState(controller: GameController) extends AbstractState(controller) 
   private var nextState: Option[GameState] = None
 
   override def handleInput(input: String): Unit = {
-    println("ACTIONSTATE")
     controller.turnScheduler.nextAttacker.accept(visitor)
     val validOptions: List[String] = visitor.buffer
-    println(validOptions)
-    println(input)
-    println(validOptions.contains(input))
 
     if (validOptions.contains(input)) {
       input match {
@@ -46,5 +43,9 @@ class ActionState(controller: GameController) extends AbstractState(controller) 
     //If ActionState does not get a valid input nextState stays None.
     //Then, update does nothing, staying in a loop until it gets a valid
     //input.
+  }
+
+  override def accept(visitor: GameStateVisitor): Unit = {
+    visitor.visitAction(this)
   }
 }

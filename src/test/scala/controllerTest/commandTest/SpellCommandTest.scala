@@ -1,14 +1,14 @@
 package controllerTest.commandTest
 
 import controller.GameController
-import controller.state.ResetBarState
+import controller.command.SpellCommand
 import controller.state.actionStates.ActionState
-import controller.state.command.SpellCommand
+import controller.state.turnStates.ResetBarState
 import controllerTest.ControllerTest
-import entity.character.magicCharacter.MagicCharacter
-import magic.blackMagic.Fire
-import magic.whiteMagic.Heal
-import weapon.commonWeapon.Sword
+import model.entity.character.magicCharacter.MagicCharacter
+import model.magic.blackMagic.Fire
+import model.magic.whiteMagic.Heal
+import model.weapon.commonWeapon.Sword
 
 class SpellCommandTest extends ControllerTest {
   test("SpellCommand should transition to ResetBarState when spell is cast successfully") {

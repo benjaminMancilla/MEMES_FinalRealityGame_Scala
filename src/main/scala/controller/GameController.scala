@@ -1,8 +1,8 @@
 package controller
 import controller.state.GameState
-import entity.Entity
-import turn.TurnScheduler
-import weapon.Weapon
+import model.entity.Entity
+import model.turn.TurnScheduler
+import model.weapon.Weapon
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -24,5 +24,9 @@ trait GameController {
   def currentState: GameState
 
   def addWeapon(weapon: Weapon): Unit
+
+  def combatResult: String
+
+  def combatResult_=(string: String): Unit
 
 }

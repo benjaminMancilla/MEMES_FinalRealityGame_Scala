@@ -1,13 +1,13 @@
 package controller.state.actionStates
 
 import controller.GameController
-import controller.state.command.AttackCommand
+import controller.command.AttackCommand
+import controller.visitor.GameStateVisitor
 
 class SelectTargetState(controller: GameController)
   extends AbstractSelectTargetState(controller: GameController) {
 
   override def update(): Unit = {
-    println("SELECTTARGET")
     if (tryTarget == -1) {
       return
     }
@@ -20,5 +20,9 @@ class SelectTargetState(controller: GameController)
     updateAffectedEntity(tryTarget)
 
     nextStateOption.foreach(controller.setState)
+  }
+
+  override def accept(visitor: GameStateVisitor): Unit = {
+    visitor.visitTarget(this)
   }
 }

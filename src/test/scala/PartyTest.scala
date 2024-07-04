@@ -1,9 +1,9 @@
-import entity.character.commonCharacter.{Ninja, Warrior}
-import entity.character.magicCharacter.BlackMage
-import entity.character.Character
 import exceptions.entityE.EntityOverflow
+import model.entity.character.Character
+import model.entity.character.commonCharacter.{Ninja, Warrior}
+import model.entity.character.magicCharacter.BlackMage
+import model.party.ConcreteParty
 import munit.FunSuite
-import party.ConcreteParty
 
 import scala.collection.mutable.ArrayBuffer
 

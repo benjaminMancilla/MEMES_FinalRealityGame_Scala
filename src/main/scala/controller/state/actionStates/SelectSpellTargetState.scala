@@ -1,15 +1,15 @@
 package controller.state.actionStates
 
 import controller.GameController
-import controller.state.command.SpellCommand
-import magic.Magic
+import controller.command.SpellCommand
+import controller.visitor.GameStateVisitor
+import model.magic.Magic
 
 class SelectSpellTargetState(controller: GameController, spell: Magic)
   extends AbstractSelectTargetState(controller: GameController){
 
 
   override def update(): Unit = {
-    println("SELECTTARGET")
     if (tryTarget == -1) {
       return
     }
@@ -22,6 +22,10 @@ class SelectSpellTargetState(controller: GameController, spell: Magic)
     updateAffectedEntity(tryTarget)
 
     nextStateOption.foreach(controller.setState)
+  }
+
+  override def accept(visitor: GameStateVisitor): Unit = {
+    visitor.visitTarget(this)
   }
 
 }

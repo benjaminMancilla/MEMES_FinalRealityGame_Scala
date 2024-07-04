@@ -1,13 +1,13 @@
 package controllerTest.stateTest
 
 import controller.GameController
-import controller.state.ResetBarState
+import controller.command.ChangeWeaponCommand
 import controller.state.actionStates.{SelectTargetState, SelectWeaponState}
-import controller.state.command.ChangeWeaponCommand
+import controller.state.turnStates.ResetBarState
 import controllerTest.ControllerTest
-import entity.Entity
+import model.entity.Entity
+import model.weapon.Weapon
 import munit.FunSuite
-import weapon.Weapon
 
 import java.lang.ModuleLayer.Controller
 

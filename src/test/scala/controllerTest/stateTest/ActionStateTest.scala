@@ -1,7 +1,7 @@
 package controllerTest.stateTest
 
-import controller.state.{EndTurnState, ResetBarState}
 import controller.state.actionStates.{ActionState, SelectSpellState, SelectTargetState, SelectWeaponState}
+import controller.state.turnStates.{EndTurnState, ResetBarState}
 import controllerTest.ControllerTest
 
 class ActionStateTest extends ControllerTest{

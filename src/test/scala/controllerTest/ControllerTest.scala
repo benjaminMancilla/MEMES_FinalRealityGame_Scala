@@ -1,21 +1,22 @@
 package controllerTest
 
 import controller.GameControllerConcrete
-import controller.state.{GameState, StartState}
-import entity.Entity
-import entity.character.commonCharacter.{Ninja, Warrior}
-import entity.character.magicCharacter.{BlackMage, WhiteMage}
-import entity.character.Character
-import entity.enemy.ConcreteEnemy
+import controller.state.GameState
+import controller.state.macroStates.StartState
 import munit.FunSuite
-import party.{ConcreteParty, Party}
-import turn.TurnScheduler
-import weapon.Weapon
-import weapon.commonWeapon.{Axe, Bow}
-import weapon.magicWeapon.Staff
 
 import scala.collection.mutable.ArrayBuffer
 import controllerTest.MockState
+import model.entity.Entity
+import model.entity.character.Character
+import model.entity.character.commonCharacter.{Ninja, Warrior}
+import model.entity.character.magicCharacter.{BlackMage, WhiteMage}
+import model.entity.enemy.ConcreteEnemy
+import model.party.{ConcreteParty, Party}
+import model.turn.TurnScheduler
+import model.weapon.Weapon
+import model.weapon.commonWeapon.{Axe, Bow}
+import model.weapon.magicWeapon.Staff
 
 
 class ControllerTest extends munit.FunSuite {
@@ -68,13 +69,13 @@ class ControllerTest extends munit.FunSuite {
   }
 
   test("GameControllerConcrete should change state correctly") {
-    val newState = new MockState()
+    val newState = new MockState(controller)
     controller.setState(newState)
     assertEquals(controller.currentState, newState)
   }
 
   test("GameControllerConcrete should delegate handleInput to current state") {
-    val mockState = new MockState()
+    val mockState = new MockState(controller)
     controller.setState(mockState)
     val input = "someInput"
     controller.handleInput(input)
@@ -82,7 +83,7 @@ class ControllerTest extends munit.FunSuite {
   }
 
   test("GameControllerConcrete should delegate update to current state") {
-    val mockState = new MockState()
+    val mockState = new MockState(controller)
     controller.setState(mockState)
     controller.update()
     assert(mockState.updateCalled, "update should have been called on the current state")

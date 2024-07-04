@@ -1,8 +1,9 @@
 package controllerTest
 
-import controller.state.GameState
+import controller.GameController
+import controller.state.{AbstractState, GameState}
 
-class MockState extends GameState {
+class MockState(controller: GameController) extends AbstractState(controller) {
   var handleInputCalled = false
   var updateCalled = false
 
@@ -15,4 +16,5 @@ class MockState extends GameState {
   override def update(): Unit = {
     updateCalled = true
   }
+
 }

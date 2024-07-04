@@ -1,7 +1,7 @@
-import effect.{Burned, Paralyzed, Poisoned}
-import entity.enemy.ConcreteEnemy
 import exceptions.InvalidStatException
 import exceptions.effectE.{InvalidTurnAmount, RepeatedEffect}
+import model.effect.{Burned, Paralyzed, Poisoned}
+import model.entity.enemy.ConcreteEnemy
 import munit.FunSuite
 
 class EffectTest extends FunSuite{

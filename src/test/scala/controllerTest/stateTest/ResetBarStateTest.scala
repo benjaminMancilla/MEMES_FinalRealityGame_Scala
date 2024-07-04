@@ -1,6 +1,6 @@
 package controllerTest.stateTest
 
-import controller.state.{EndTurnState, ResetBarState}
+import controller.state.turnStates.{EndTurnState, ResetBarState}
 import controllerTest.ControllerTest
 
 class ResetBarStateTest extends ControllerTest {

@@ -1,9 +1,9 @@
 package controllerTest.stateTest
 
-import controller.state.StartState
 import controller.state.actionStates.{ActionState, SelectWeaponState}
+import controller.state.macroStates.StartState
 import controllerTest.ControllerTest
-import weapon.commonWeapon.{Axe, Sword}
+import model.weapon.commonWeapon.{Axe, Sword}
 
 class SelectWeaponStateTest extends ControllerTest {
 

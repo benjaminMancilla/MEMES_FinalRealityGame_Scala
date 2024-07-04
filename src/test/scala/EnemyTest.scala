@@ -1,7 +1,7 @@
-import entity.character.commonCharacter.Warrior
-import entity.enemy.ConcreteEnemy
 import exceptions.InvalidStatException
 import exceptions.entityE.ProhibitedTarget
+import model.entity.character.commonCharacter.Warrior
+import model.entity.enemy.ConcreteEnemy
 import munit.FunSuite
 class EnemyTest extends FunSuite {
 

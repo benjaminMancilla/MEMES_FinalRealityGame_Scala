@@ -1,9 +1,9 @@
-import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
-import entity.character.magicCharacter.{BlackMage, WhiteMage}
 import exceptions.magicE.NonMagicWeaponException
 import exceptions.{InvalidNameException, InvalidStatException}
+import model.entity.character.commonCharacter.{Ninja, Paladin, Warrior}
+import model.entity.character.magicCharacter.{BlackMage, WhiteMage}
+import model.weapon.commonWeapon.{Axe, Bow, Sword}
 import munit.FunSuite
-import weapon.commonWeapon.{Axe, Bow, Sword}
 class WeaponTest extends FunSuite {
 
   test("AbstractWeapon should not initialize with invalid parameters"){

@@ -1,10 +1,10 @@
 package controllerTest.visitorTest
 
 import controller.visitor.GeneralActionVisitor
-import entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
-import entity.character.Character
-import entity.character.commonCharacter.Warrior
-import entity.enemy.{ConcreteEnemy, Enemy}
+import model.entity.character.Character
+import model.entity.character.commonCharacter.Warrior
+import model.entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
+import model.entity.enemy.{ConcreteEnemy, Enemy}
 import munit.FunSuite
 
 class GeneralActionVisitorTest extends FunSuite {

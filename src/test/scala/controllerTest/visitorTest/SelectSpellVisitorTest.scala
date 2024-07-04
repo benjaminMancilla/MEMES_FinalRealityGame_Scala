@@ -1,11 +1,11 @@
 package controllerTest.visitorTest
 
 import controller.visitor.SelectSpellVisitor
-import entity.character.Character
-import entity.character.commonCharacter.Warrior
-import entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
-import entity.enemy.{ConcreteEnemy, Enemy}
 import exceptions.stateE.InvalidSpellSelector
+import model.entity.character.Character
+import model.entity.character.commonCharacter.Warrior
+import model.entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
+import model.entity.enemy.{ConcreteEnemy, Enemy}
 
 
 class SelectSpellVisitorTest extends munit.FunSuite {

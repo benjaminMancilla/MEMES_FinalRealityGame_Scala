@@ -1,11 +1,12 @@
 package controller
 
-import controller.state.{GameState, StartState}
-import entity.Entity
+import controller.state.GameState
+import controller.state.macroStates.StartState
 import exceptions.Require
-import party.Party
-import turn.TurnScheduler
-import weapon.Weapon
+import model.entity.Entity
+import model.party.Party
+import model.turn.TurnScheduler
+import model.weapon.Weapon
 
 import scala.collection.mutable.ArrayBuffer
 class GameControllerConcrete(partyI: Party, turnSchedulerI: TurnScheduler, actionBarIncreaseI: Int, inventoryI:List[Weapon]) extends GameController{
@@ -14,6 +15,7 @@ class GameControllerConcrete(partyI: Party, turnSchedulerI: TurnScheduler, actio
   private var _inventory: List[Weapon] = Require.WeaponInventory(inventoryI, party, "Inventory").sizeAtLeast()
   private var _currentState: GameState = new StartState(this)
   private val _actionBarIncrease = {Require.Stat(actionBarIncreaseI, "actionBarIncrease") atLeast 1 }
+  private var _combatResult: String = "Unfinished"
 
   def setState(state: GameState): Unit = {
     _currentState = state
@@ -38,6 +40,12 @@ class GameControllerConcrete(partyI: Party, turnSchedulerI: TurnScheduler, actio
   def addWeapon(weapon: Weapon): Unit = {
     val newList = _inventory :+ weapon
     _inventory = newList
+  }
+
+  def combatResult: String = _combatResult
+
+  def combatResult_=(string: String): Unit = {
+    _combatResult = string
   }
 
 

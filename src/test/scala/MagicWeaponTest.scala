@@ -1,9 +1,9 @@
-import entity.character.commonCharacter.{Ninja, Paladin, Warrior}
-import entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
 import exceptions.InvalidStatException
+import model.entity.character.commonCharacter.{Ninja, Paladin, Warrior}
+import model.entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
+import model.weapon.commonWeapon.{Axe, Bow, Sword}
+import model.weapon.magicWeapon.{Staff, Wand}
 import munit.FunSuite
-import weapon.commonWeapon.{Axe, Bow, Sword}
-import weapon.magicWeapon.{Staff, Wand}
 
 class MagicWeaponTest extends FunSuite {
 

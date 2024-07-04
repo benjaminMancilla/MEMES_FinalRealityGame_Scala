@@ -1,11 +1,11 @@
 package controllerTest.commandTest
 
 
-import controller.state.EndTurnState
+import controller.command.EffectCommand
 import controller.state.actionStates.ActionState
-import controller.state.command.EffectCommand
+import controller.state.turnStates.{EndTurnState, ResetBarState}
 import controllerTest.ControllerTest
-import effect.{Paralyzed, Poisoned}
+import model.effect.{Paralyzed, Poisoned}
 
 
 class EffectCommandTest extends ControllerTest {
@@ -38,7 +38,7 @@ class EffectCommandTest extends ControllerTest {
     val command = new EffectCommand(target, controller)
     val nextState = command.execute()
 
-    assert(nextState.getOrElse(fail("Expected Some(state), but received None")).isInstanceOf[EndTurnState])
+    assert(nextState.getOrElse(fail("Expected Some(state), but received None")).isInstanceOf[ResetBarState])
   }
 
   test("EffectCommand should transition to EndTurnState if target should skip turn") {
@@ -53,7 +53,7 @@ class EffectCommandTest extends ControllerTest {
     val command = new EffectCommand(target, controller)
     val nextState = command.execute()
 
-    assert(nextState.getOrElse(fail("Expected Some(state), but received None")).isInstanceOf[EndTurnState])
+    assert(nextState.getOrElse(fail("Expected Some(state), but received None")).isInstanceOf[ResetBarState])
   }
 
   test("EffectCommand should transition to ActionState if target pass all the effects") {

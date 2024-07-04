@@ -1,13 +1,13 @@
 package controllerTest.commandTest
 
+import controller.command.ChangeWeaponCommand
 import controller.state.actionStates.ActionState
-import controller.state.command.ChangeWeaponCommand
 import controllerTest.ControllerTest
-import entity.character.Character
-import entity.enemy.ConcreteEnemy
+import model.entity.character.Character
+import model.entity.enemy.ConcreteEnemy
+import model.weapon.commonWeapon.{Bow, Sword}
+import model.weapon.magicWeapon.Staff
 import munit.FunSuite
-import weapon.commonWeapon.{Bow, Sword}
-import weapon.magicWeapon.Staff
 
 class ChangeWeaponCommandTest extends ControllerTest {
 

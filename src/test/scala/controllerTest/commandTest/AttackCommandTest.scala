@@ -1,10 +1,10 @@
 package controllerTest.commandTest
 
-import controller.state.ResetBarState
+import controller.command.AttackCommand
 import controller.state.actionStates.{SelectTargetState, SelectWeaponState}
-import controller.state.command.AttackCommand
+import controller.state.turnStates.ResetBarState
 import controllerTest.ControllerTest
-import weapon.commonWeapon.Sword
+import model.weapon.commonWeapon.Sword
 
 class AttackCommandTest extends ControllerTest  {
 

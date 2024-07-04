@@ -1,10 +1,10 @@
 package exceptions
 
 import exceptions.weaponE.InvalidWeaponException
-import weapon.Weapon
-import entity.character.Character
 import exceptions.stateE.InvalidWeaponInventory
-import party.Party
+import model.entity.character.Character
+import model.party.Party
+import model.weapon.Weapon
 
 
 /** The `Require` object provides utilities for validating specific constraints or requirements.

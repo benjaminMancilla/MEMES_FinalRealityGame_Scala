@@ -1,10 +1,10 @@
 package controllerTest.stateTest
 
-import controller.state.{ApplyEffectState, EndTurnState, StartTurnState}
+import controller.command.EffectCommand
 import controller.state.actionStates.ActionState
-import controller.state.command.EffectCommand
+import controller.state.turnStates.{ApplyEffectState, EndTurnState, ResetBarState, StartTurnState}
 import controllerTest.ControllerTest
-import effect.{Paralyzed, Poisoned}
+import model.effect.{Paralyzed, Poisoned}
 
 class ApplyEffectStateTest extends ControllerTest{
 
@@ -33,7 +33,7 @@ class ApplyEffectStateTest extends ControllerTest{
     val state = new ApplyEffectState(controller)
     state.update()
 
-    assert(controller.currentState.isInstanceOf[EndTurnState], "Controller should transition to EndTurnState")
+    assert(controller.currentState.isInstanceOf[ResetBarState], "Controller should transition to EndTurnState")
   }
 
   test("ApplyEffectState should transition to EndState if the skipTurn condition is on") {
@@ -48,7 +48,7 @@ class ApplyEffectStateTest extends ControllerTest{
     val state = new ApplyEffectState(controller)
     state.update()
 
-    assert(controller.currentState.isInstanceOf[EndTurnState], "Controller should transition to EndTurnState")
+    assert(controller.currentState.isInstanceOf[ResetBarState], "Controller should transition to EndTurnState")
   }
 
 

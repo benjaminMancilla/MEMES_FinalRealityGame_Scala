@@ -1,8 +1,9 @@
 package controller.state
 
 import controller.GameController
+import controller.visitor.GameStateVisitor
 
-class AbstractState(controller: GameController) extends GameState {
+abstract class AbstractState(controller: GameController) extends GameState {
   def needInput(): Boolean = false
   def update(): Unit = {}
   def handleInput(input: String): Unit = {}
@@ -12,4 +13,8 @@ class AbstractState(controller: GameController) extends GameState {
       controller.turnScheduler.removeEntity(controller.turnScheduler.turn_info(index)._1)
     }
   }
+
+  def getController: GameController = controller
+
+  def accept(visitor: GameStateVisitor): Unit = {}
 }

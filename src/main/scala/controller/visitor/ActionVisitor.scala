@@ -1,8 +1,8 @@
 package controller.visitor
 
-import entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
-import entity.character.Character
-import entity.enemy.Enemy
+import model.entity.character.Character
+import model.entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
+import model.entity.enemy.Enemy
 
 trait ActionVisitor {
   def visitEnemy(enemy: Enemy): Unit
