@@ -1,7 +1,7 @@
 package controllerTest.stateTest
 
 import controller.GameController
-import controller.command.ChangeWeaponCommand
+import controller.command.ChangeWeaponGameCommand
 import controller.state.actionStates.{ActionState, SelectSpellTargetState}
 import controller.state.turnStates.ResetBarState
 import controllerTest.ControllerGenerator
@@ -83,7 +83,7 @@ class SelectSpellTargetStateTest extends ControllerGenerator {
     controller.turnScheduler.dequeueReady()
     controller.turnScheduler.dequeueReady()
 
-    val command = new ChangeWeaponCommand(controller.turnScheduler.nextAttacker, controller, Some(new Sword("Sword", 10, 10)))
+    val command = new ChangeWeaponGameCommand(controller.turnScheduler.nextAttacker, controller, Some(new Sword("Sword", 10, 10)))
     command.execute()
 
     val spell = new Fire()
@@ -101,7 +101,7 @@ class SelectSpellTargetStateTest extends ControllerGenerator {
     controller.turnScheduler.dequeueReady()
     controller.turnScheduler.dequeueReady()
 
-    val command = new ChangeWeaponCommand(controller.turnScheduler.nextAttacker, controller, None)
+    val command = new ChangeWeaponGameCommand(controller.turnScheduler.nextAttacker, controller, None)
     command.execute()
 
     val spell = new Fire()

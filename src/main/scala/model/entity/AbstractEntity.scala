@@ -69,6 +69,9 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
    */
   private val _activeEffects: ListBuffer[Effect] = ListBuffer()
 
+  /**
+   * Indicates if the entity is disabled for the turn.
+   */
   private var _skipTurn: Boolean = false
 
   /**
@@ -281,6 +284,9 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     }
   }
 
+  /**
+   * Updates the active effects on the entity.
+   */
   def updateEffects(): Unit = {
     _activeEffects.foreach { effect =>
       effect.applyEffect(this)
@@ -288,32 +294,72 @@ abstract class AbstractEntity(nameI: String, hit_pointsI: Int, defenseI: Int, we
     _activeEffects.filterInPlace(_.turnEffect > 0)
   }
 
+
+  /**
+   * Getter for skipTurn
+   */
   def skipTurn: Boolean = _skipTurn
 
+  /**
+   * Setter for skipTurn
+   */
   def skipTurn_=(bool: Boolean): Unit = {
     _skipTurn = bool
   }
 
+
+  /**
+   * Casts an Spell on another entity.
+   * A generic entity not necessary have access to magic.
+   *
+   * @param target target entity that receives the spell.
+   * @param spell magic used on the target.
+   */
   def castSpell(target:Entity, spell: Magic): Unit = {
     throw new NonMagicalCaster(s"${this.name} is not a Magic character, has not access to magic")
   }
 
+
+  /**
+   * Changes the weapon of an entity
+   * A generic entity not necessary have access to weapons.
+   *
+   * @param newWeapon weapon that wants to be equipped.
+
+   */
   def changeWeapon(newWeapon: Option[Weapon]): Unit = {
     throw new InvalidCarrier(s"${this.name} can not have weapon")
   }
 
+
+  /**
+   * Clears the skipTurn state
+   */
   def removeSkipTurn(): Unit = {
     _skipTurn = false
   }
 
+  /**
+   Clear all active effects on the entity.
+   */
   def clearEffects(): Unit = {
     _activeEffects.clear()
   }
 
+
+  /**
+   Generic method for receiving an attack of another entity.
+   */
   def receiveAttack(entity: Entity): Unit
 
+  /**
+   Generic method for doing an attack to a Enemy.
+   */
   def doAttack(entity: ConcreteEnemy): Unit
 
+  /**
+   Generic method for doing an attack to a entity.
+   */
   def doAttack(entity: Character): Unit
 
 }

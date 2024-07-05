@@ -9,18 +9,31 @@ import exceptions.weaponE.EmptyWeaponException
 import model.entity.Entity
 import model.magic.Magic
 
-class SpellCommand(caster: Entity, target: Entity, controller: GameController, spell: Magic) extends Command {
+/**
+ * Command to execute a spell cast by a caster entity on a target entity.
+ *
+ * @param caster The entity casting the spell.
+ * @param target The entity on which the spell is cast.
+ * @param controller The game controller managing the game state.
+ * @param spell The magic spell being cast.
+ */
+class SpellGameCommand(caster: Entity, target: Entity, controller: GameController, spell: Magic) extends GameCommand {
+
+  /**
+   * Executes the spell casting command, casting the specified spell from the caster entity onto the target entity.
+   *
+   * @return Optional GameState after executing the spell cast command.
+   */
   def execute(): Option[GameState] = {
     try {
       caster.castSpell(target, spell)
-      //updateAffectedEntity()
       Some(new ResetBarState(controller))
     } catch {
-      case e: InvalidMagicType => //Should not happen due to the implicit entity type
+      case e: InvalidMagicType =>
         println(s"Not valid Magic Error: ${e.getMessage}")
         Some(new ActionState(controller))
 
-      case e: NonMagicalCaster => //Should not happen due to the implicit entity type
+      case e: NonMagicalCaster =>
         println(s"Not valid Caster Error: ${e.getMessage}")
         Some(new ActionState(controller))
 
@@ -33,15 +46,13 @@ class SpellCommand(caster: Entity, target: Entity, controller: GameController, s
         Some(new ActionState(controller))
 
       case e: EmptyWeaponException =>
-        println(s"Must have a first weapon for the spell: ${e.getMessage}")
+        println(s"Must have a weapon equipped to cast a spell: ${e.getMessage}")
         Some(new ActionState(controller))
 
       case e: InvalidSpellTarget =>
-        println(s"You can not cast ${spell.name} on ${target.name}: ${e.getMessage}")
+        println(s"Invalid spell target: ${e.getMessage}")
         None
     }
-
   }
-
-
 }
+

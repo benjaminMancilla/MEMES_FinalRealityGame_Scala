@@ -1,7 +1,7 @@
 package controllerTest.stateTest
 
 import controller.GameController
-import controller.command.ChangeWeaponCommand
+import controller.command.ChangeWeaponGameCommand
 import controller.state.actionStates.{SelectTargetState, SelectWeaponState}
 import controller.state.turnStates.ResetBarState
 import controllerTest.ControllerGenerator
@@ -32,7 +32,7 @@ class SelectTargetStateTest extends ControllerGenerator {
     controller.turnScheduler.dequeueReady()
     controller.turnScheduler.dequeueReady()
     controller.turnScheduler.dequeueReady()
-    val command = new ChangeWeaponCommand(controller.turnScheduler.nextAttacker, controller: GameController, None)
+    val command = new ChangeWeaponGameCommand(controller.turnScheduler.nextAttacker, controller: GameController, None)
     command.execute()
     val state = new SelectTargetState(controller)
     state.handleInput("4")

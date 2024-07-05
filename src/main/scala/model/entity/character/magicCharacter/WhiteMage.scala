@@ -43,6 +43,12 @@ class WhiteMage(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int, ma
     spell.checkSorcerer(this)
   }
 
+
+  /**
+   * Accepts a visitor to perform actions specific to a Black Mage.
+   *
+   * @param visitor The ActionVisitor instance visiting this Black Mage.
+   */
   override def accept(visitor: ActionVisitor): Unit = visitor.visitWhiteMagicCharacter(this)
 }
 

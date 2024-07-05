@@ -59,9 +59,24 @@ trait TraitTurnScheduler extends PITurnScheduler {
    */
   def dequeueReady(): Entity
 
+  /**
+   * Updates the information of a specific entity.
+   *
+   * This method is used to refresh or modify the data related to the given entity, such as its action bar value
+   * or other turn-related attributes.
+   *
+   * @param entity The entity whose information needs to be updated.
+   */
   def updateEntity(entity: Entity): Unit
 
+  /**
+   * ArrayBuffer holding information about the entities' turn status.
+   *
+   * Each tuple contains an entity, its current action bar value, its maximum action bar value, and a boolean
+   * indicating whether the entity is waiting for its turn.
+   */
   val _turn_info: ArrayBuffer[(Entity, Int, Int, Boolean)]
 
 }
+
 

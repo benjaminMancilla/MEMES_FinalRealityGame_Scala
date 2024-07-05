@@ -75,10 +75,20 @@ class ConcreteEnemy(nameI: String, hit_pointsI: Int, defenseI: Int, weightI: Int
    */
   override def checkSpell(spell: OffensiveSpell): Unit = {}
 
+  /**
+   * Enemies can only receive offensive spells
+   *
+   * @return Unit
+   */
   def accept(visitor: ActionVisitor): Unit = visitor.visitEnemy(this)
 
-  def autoTurn: Unit = {}
-
+  /**
+   * Double Dispatch for attacks, gives the class
+   * to the attacker so it can know if is a legal
+   * attack or not.
+   *
+   * @return Unit
+   */
   def receiveAttack(entity: Entity): Unit = {
     entity.doAttack(this)
   }

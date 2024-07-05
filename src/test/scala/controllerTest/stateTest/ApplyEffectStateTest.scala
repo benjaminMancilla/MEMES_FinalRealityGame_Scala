@@ -1,6 +1,6 @@
 package controllerTest.stateTest
 
-import controller.command.EffectCommand
+import controller.command.EffectGameCommand
 import controller.state.actionStates.ActionState
 import controller.state.turnStates.{ApplyEffectState, EndTurnState, ResetBarState, StartTurnState}
 import controllerTest.ControllerGenerator

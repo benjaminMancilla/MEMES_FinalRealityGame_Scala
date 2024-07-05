@@ -9,7 +9,20 @@ import exceptions.weaponE.EmptyWeaponException
 import model.entity.Entity
 import model.turn.TurnScheduler
 
-class AttackCommand(attacker: Entity, target: Entity, controller: GameController) extends Command {
+/**
+ * Command to execute an attack action between an attacker and a target entity.
+ *
+ * @param attacker The entity performing the attack.
+ * @param target The entity being targeted by the attack.
+ * @param controller The game controller managing the game state.
+ */
+class AttackGameCommand(attacker: Entity, target: Entity, controller: GameController) extends GameCommand {
+
+  /**
+   * Executes the attack command, updating entities and returning a new game state.
+   *
+   * @return Optional GameState after executing the attack command.
+   */
   def execute(): Option[GameState] = {
     try {
       attacker.doGenericAttack(target)
@@ -29,3 +42,4 @@ class AttackCommand(attacker: Entity, target: Entity, controller: GameController
     }
   }
 }
+
