@@ -2,9 +2,9 @@ package controllerTest.stateTest
 
 import controller.state.macroStates.{DefeatState, UpdateBarState, VictoryState}
 import controller.state.turnStates.EndTurnState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class EndTurnStateTest extends ControllerTest {
+class EndTurnStateTest extends ControllerGenerator {
 
   test("EndTurnState should transition to VictoryState when no enemies remain") {
     controller.turnScheduler.updateActionProgress(1000)

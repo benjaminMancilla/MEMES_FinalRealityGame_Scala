@@ -4,14 +4,16 @@ import controller.GameController
 import controller.command.SpellCommand
 import controller.state.actionStates.ActionState
 import controller.state.turnStates.ResetBarState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.entity.character.magicCharacter.MagicCharacter
 import model.magic.blackMagic.Fire
 import model.magic.whiteMagic.Heal
 import model.weapon.commonWeapon.Sword
 
-class SpellCommandTest extends ControllerTest {
+class SpellCommandTest extends ControllerGenerator {
   test("SpellCommand should transition to ResetBarState when spell is cast successfully") {
+    controller.turnScheduler.updateActionProgress(100)
+    controller.turnScheduler.checkWaitEntities()
     val caster = controller.turnScheduler.turn_info(1)._1
     val target = controller.turnScheduler.turn_info(4)._1
     val spell = new Fire
@@ -23,6 +25,8 @@ class SpellCommandTest extends ControllerTest {
   }
 
   test("SpellCommand should transition to ActionState on InvalidMagicType exception") {
+    controller.turnScheduler.updateActionProgress(100)
+    controller.turnScheduler.checkWaitEntities()
     val caster = controller.turnScheduler.turn_info(1)._1
     val target = controller.turnScheduler.turn_info(4)._1
     val invalidSpell = new Heal
@@ -34,6 +38,8 @@ class SpellCommandTest extends ControllerTest {
   }
 
   test("SpellCommand should transition to ActionState on NonMagicalCaster exception") {
+    controller.turnScheduler.updateActionProgress(100)
+    controller.turnScheduler.checkWaitEntities()
     val caster = controller.turnScheduler.turn_info(0)._1
     val target = controller.turnScheduler.turn_info(4)._1
     val spell = new Fire
@@ -46,6 +52,8 @@ class SpellCommandTest extends ControllerTest {
   }
 
   test("SpellCommand should transition to ActionState on NoMagicPoints exception") {
+    controller.turnScheduler.updateActionProgress(100)
+    controller.turnScheduler.checkWaitEntities()
     val caster = controller.turnScheduler.turn_info(1)._1
     val target = controller.turnScheduler.turn_info(4)._1
     val spell = new Fire
@@ -60,6 +68,8 @@ class SpellCommandTest extends ControllerTest {
   }
 
   test("SpellCommand should transition to ActionState on NonMagicWeaponException") {
+    controller.turnScheduler.updateActionProgress(100)
+    controller.turnScheduler.checkWaitEntities()
     val caster = controller.turnScheduler.turn_info(1)._1
     val target = controller.turnScheduler.turn_info(4)._1
     val spell = new Fire

@@ -3,10 +3,10 @@ package controllerTest.stateTest
 import controller.command.EffectCommand
 import controller.state.actionStates.ActionState
 import controller.state.turnStates.{ApplyEffectState, EndTurnState, ResetBarState, StartTurnState}
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.effect.{Paralyzed, Poisoned}
 
-class ApplyEffectStateTest extends ControllerTest{
+class ApplyEffectStateTest extends ControllerGenerator{
 
 
   test("ApplyEffectState should transition to ActionState when effect is applied successfully") {

@@ -1,3 +1,5 @@
+package modelTest
+
 import exceptions.entityE.{HealingDeadEntity, ProhibitedTarget}
 import exceptions.weaponE.{EmptyWeaponException, InvalidWeaponException}
 import exceptions.{InvalidNameException, InvalidStatException}

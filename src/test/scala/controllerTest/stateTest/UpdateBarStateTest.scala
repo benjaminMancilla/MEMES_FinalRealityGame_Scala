@@ -2,9 +2,9 @@ package controllerTest.stateTest
 
 import controller.state.macroStates.UpdateBarState
 import controller.state.turnStates.StartTurnState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class UpdateBarStateTest extends ControllerTest {
+class UpdateBarStateTest extends ControllerGenerator {
 
   test("UpdateBarState should update the turn scheduler and transition to StartTurnState") {
     // Configuramos el estado inicial como UpdateBarState

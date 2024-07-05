@@ -1,9 +1,9 @@
 package controllerTest.stateTest
 
 import controller.state.actionStates.{ActionState, SelectSpellState, SelectSpellTargetState}
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class SelectSpellStateTest extends ControllerTest {
+class SelectSpellStateTest extends ControllerGenerator {
 
   test("SelectSpellState should transition to SelectSpellTargetState when a valid spell is selected") {
     controller.turnScheduler.updateActionProgress(1000)

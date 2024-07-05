@@ -2,9 +2,9 @@ package controllerTest.stateTest
 
 import controller.state.macroStates.{StartState, UpdateBarState}
 import controller.state.turnStates.StartTurnState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class StartStateTest extends ControllerTest {
+class StartStateTest extends ControllerGenerator {
 
   test("StartState should transition to UpdateBarState if no entities are ready") {
     controller.turnScheduler.turn_ready.clear() // Asegurarse de que no hay entidades listas

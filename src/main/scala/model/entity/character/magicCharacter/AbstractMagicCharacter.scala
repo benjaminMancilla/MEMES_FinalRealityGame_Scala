@@ -89,6 +89,14 @@ abstract class AbstractMagicCharacter(nameI: String, hit_pointsI: Int, defenseI:
     throw new InvalidMagicType(s"${spell.name} spell is not compatible with ${this.name}")
   }
 
+  /**
+   * Accepts a visitor to perform actions specific to a magic character.
+   *
+   * This method implements the visitor pattern to allow ActionVisitors to interact with
+   * regular character instances.
+   *
+   * @param visitor The ActionVisitor instance visiting this magic character.
+   */
   def accept(visitor: ActionVisitor): Unit = visitor.visitMagicCharacter(this)
 
 

@@ -1,3 +1,5 @@
+package modelTest
+
 import exceptions.InvalidStatException
 import exceptions.entityE.ProhibitedTarget
 import model.entity.character.commonCharacter.Warrior

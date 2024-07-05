@@ -11,10 +11,11 @@ class ActionState(controller: GameController) extends AbstractState(controller) 
   override def needInput() = true
   private val visitor = new GeneralActionVisitor()
   private var nextState: Option[GameState] = None
+  controller.turnScheduler.nextAttacker.accept(visitor)
+  private val _validOptions: List[String] = visitor.buffer
 
   override def handleInput(input: String): Unit = {
-    controller.turnScheduler.nextAttacker.accept(visitor)
-    val validOptions: List[String] = visitor.buffer
+
 
     if (validOptions.contains(input)) {
       input match {
@@ -48,4 +49,6 @@ class ActionState(controller: GameController) extends AbstractState(controller) 
   override def accept(visitor: GameStateVisitor): Unit = {
     visitor.visitAction(this)
   }
+
+  def validOptions: List[String] = _validOptions
 }

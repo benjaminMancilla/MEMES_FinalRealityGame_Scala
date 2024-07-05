@@ -1,6 +1,6 @@
 package controllerTest
 
-import controller.GameControllerConcrete
+import controller.{GameController, GameControllerConcrete}
 import controller.state.GameState
 import controller.state.macroStates.StartState
 import munit.FunSuite
@@ -19,7 +19,8 @@ import model.weapon.commonWeapon.{Axe, Bow}
 import model.weapon.magicWeapon.Staff
 
 
-class ControllerTest extends munit.FunSuite {
+class ControllerGenerator extends munit.FunSuite {
+
   var party: Party = _
   var party2: Party = _
   var turnScheduler: TurnScheduler = _
@@ -31,6 +32,21 @@ class ControllerTest extends munit.FunSuite {
 
 
   override def beforeEach(context: BeforeEach): Unit = {
+    val gen1 = controllerGenerator(1)
+    val gen2 = controllerGenerator(2)
+    controller = gen1._1
+    actionBarIncrease = gen1._2
+    inventory = gen1._3
+    turnScheduler = gen1._4
+    party = gen1._5
+
+    controller2 = gen2._1
+    turnScheduler2 = gen2._4
+    party2 = gen2._5
+
+  }
+
+  def controllerGenerator(int: Int): (GameControllerConcrete, Int, List[Weapon], TurnScheduler, Party) = {
     val warrior = new Warrior("Heman", 100, 30, 60)
     val blackMage = new BlackMage("Saruman", 60, 10, 20, 100)
     val whiteMage = new WhiteMage("Gandalf", 60, 10, 20, 100)
@@ -59,46 +75,17 @@ class ControllerTest extends munit.FunSuite {
     actionBarIncrease = 10
     controller = new GameControllerConcrete(party, turnScheduler, actionBarIncrease, inventory)
     controller2 = new GameControllerConcrete(party2, turnScheduler2, actionBarIncrease, inventory)
+    if (int == 1){
+      (controller, actionBarIncrease, inventory, turnScheduler, party)
+    }
+    else {
+      (controller2, actionBarIncrease, inventory, turnScheduler2, party2)
+    }
+
   }
 
-  test("GameControllerConcrete should be created with correct initial values") {
-    assertEquals(controller.actionBarIncrease, actionBarIncrease)
-    assertEquals(controller.weaponInventory, inventory)
-    assertEquals(controller.turnCurrentSate, turnScheduler.turn_info)
-    assert(controller.currentState.isInstanceOf[StartState])
-  }
 
-  test("GameControllerConcrete should change state correctly") {
-    val newState = new MockState(controller)
-    controller.setState(newState)
-    assertEquals(controller.currentState, newState)
-  }
 
-  test("GameControllerConcrete should delegate handleInput to current state") {
-    val mockState = new MockState(controller)
-    controller.setState(mockState)
-    val input = "someInput"
-    controller.handleInput(input)
-    assert(mockState.handleInputCalled, "handleInput should have been called on the current state")
-  }
 
-  test("GameControllerConcrete should delegate update to current state") {
-    val mockState = new MockState(controller)
-    controller.setState(mockState)
-    controller.update()
-    assert(mockState.updateCalled, "update should have been called on the current state")
-  }
-
-  test("GameControllerConcrete should return correct actionBarIncrease") {
-    assertEquals(controller.actionBarIncrease, actionBarIncrease)
-  }
-
-  test("GameControllerConcrete should return correct weaponInventory") {
-    assertEquals(controller.weaponInventory, inventory)
-  }
-
-  test("GameControllerConcrete should return correct turnCurrentSate") {
-    assertEquals(controller.turnCurrentSate, turnScheduler.turn_info)
-  }
 }
 

@@ -1,3 +1,5 @@
+package modelTest
+
 import exceptions.magicE.{InvalidMagicType, InvalidSpellTarget}
 import model.entity.character.magicCharacter.{BlackMage, WhiteMage}
 import model.entity.enemy.ConcreteEnemy

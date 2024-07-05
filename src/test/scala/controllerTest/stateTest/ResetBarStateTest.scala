@@ -1,9 +1,9 @@
 package controllerTest.stateTest
 
 import controller.state.turnStates.{EndTurnState, ResetBarState}
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class ResetBarStateTest extends ControllerTest {
+class ResetBarStateTest extends ControllerGenerator {
 
   test("ResetBarState should reset the action bar value of the next attacker") {
     controller.turnScheduler.updateActionProgress(1000)

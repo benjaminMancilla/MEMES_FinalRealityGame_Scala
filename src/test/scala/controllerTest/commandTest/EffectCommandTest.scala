@@ -4,11 +4,11 @@ package controllerTest.commandTest
 import controller.command.EffectCommand
 import controller.state.actionStates.ActionState
 import controller.state.turnStates.{EndTurnState, ResetBarState}
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.effect.{Paralyzed, Poisoned}
 
 
-class EffectCommandTest extends ControllerTest {
+class EffectCommandTest extends ControllerGenerator {
 
   test("EffectCommand should transition to ActionState when target has no active effects") {
     controller.turnScheduler.updateActionProgress(1000)

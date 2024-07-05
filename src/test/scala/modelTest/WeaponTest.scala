@@ -1,3 +1,5 @@
+package modelTest
+
 import exceptions.magicE.NonMagicWeaponException
 import exceptions.{InvalidNameException, InvalidStatException}
 import model.entity.character.commonCharacter.{Ninja, Paladin, Warrior}

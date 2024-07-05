@@ -4,14 +4,14 @@ import controller.GameController
 import controller.command.ChangeWeaponCommand
 import controller.state.actionStates.{SelectTargetState, SelectWeaponState}
 import controller.state.turnStates.ResetBarState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.entity.Entity
 import model.weapon.Weapon
 import munit.FunSuite
 
 import java.lang.ModuleLayer.Controller
 
-class SelectTargetStateTest extends ControllerTest {
+class SelectTargetStateTest extends ControllerGenerator {
 
 
 

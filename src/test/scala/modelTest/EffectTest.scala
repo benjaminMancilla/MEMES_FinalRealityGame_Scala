@@ -1,3 +1,5 @@
+package modelTest
+
 import exceptions.InvalidStatException
 import exceptions.effectE.{InvalidTurnAmount, RepeatedEffect}
 import model.effect.{Burned, Paralyzed, Poisoned}

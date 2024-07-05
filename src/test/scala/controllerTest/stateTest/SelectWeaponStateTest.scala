@@ -2,10 +2,10 @@ package controllerTest.stateTest
 
 import controller.state.actionStates.{ActionState, SelectWeaponState}
 import controller.state.macroStates.StartState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.weapon.commonWeapon.{Axe, Sword}
 
-class SelectWeaponStateTest extends ControllerTest {
+class SelectWeaponStateTest extends ControllerGenerator {
 
   test("SelectWeaponState should transition to ActionState when weapon is changed successfully") {
     controller.turnScheduler.updateActionProgress(1000)

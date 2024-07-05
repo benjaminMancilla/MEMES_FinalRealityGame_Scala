@@ -3,10 +3,10 @@ package controllerTest.commandTest
 import controller.command.AttackCommand
 import controller.state.actionStates.{SelectTargetState, SelectWeaponState}
 import controller.state.turnStates.ResetBarState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.weapon.commonWeapon.Sword
 
-class AttackCommandTest extends ControllerTest  {
+class AttackCommandTest extends ControllerGenerator  {
 
 
   test("AttackCommand should transition to ResetBarState when attack is successful") {

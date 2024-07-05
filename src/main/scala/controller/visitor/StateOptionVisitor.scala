@@ -30,7 +30,7 @@ class StateOptionVisitor(view: GameView) extends GameStateVisitor {
   }
 
   override def visitAction(state: ActionState): Unit = {
-    val options = List("Attack", "Magic", "Weapon", "Run")
+    val options = state.validOptions
     view.displayOptionCommon(options)
   }
 

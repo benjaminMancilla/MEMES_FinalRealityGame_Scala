@@ -1,9 +1,9 @@
 package controllerTest.stateTest
 
 import controller.state.macroStates.VictoryState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class VictoryStateTest extends ControllerTest {
+class VictoryStateTest extends ControllerGenerator {
 
   test("VictoryState should set combatResult to Victory") {
     val victoryState = new VictoryState(controller)

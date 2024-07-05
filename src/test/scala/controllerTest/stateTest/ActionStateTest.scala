@@ -2,9 +2,9 @@ package controllerTest.stateTest
 
 import controller.state.actionStates.{ActionState, SelectSpellState, SelectTargetState, SelectWeaponState}
 import controller.state.turnStates.{EndTurnState, ResetBarState}
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class ActionStateTest extends ControllerTest{
+class ActionStateTest extends ControllerGenerator{
 
 
   test("ActionState should handle valid input 'Attack'") {

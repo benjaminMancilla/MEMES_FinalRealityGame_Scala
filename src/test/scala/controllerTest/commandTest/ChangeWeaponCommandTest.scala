@@ -2,14 +2,14 @@ package controllerTest.commandTest
 
 import controller.command.ChangeWeaponCommand
 import controller.state.actionStates.ActionState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.entity.character.Character
 import model.entity.enemy.ConcreteEnemy
 import model.weapon.commonWeapon.{Bow, Sword}
 import model.weapon.magicWeapon.Staff
 import munit.FunSuite
 
-class ChangeWeaponCommandTest extends ControllerTest {
+class ChangeWeaponCommandTest extends ControllerGenerator {
 
 
   test("ChangeWeaponCommand should transition to ActionState when weapon is changed successfully") {

@@ -4,14 +4,14 @@ import controller.GameController
 import controller.command.ChangeWeaponCommand
 import controller.state.actionStates.{ActionState, SelectSpellTargetState}
 import controller.state.turnStates.ResetBarState
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 import model.entity.character.magicCharacter.MagicCharacter
 import model.magic.blackMagic.Fire
 import model.magic.whiteMagic.Heal
 import model.weapon.commonWeapon.Sword
 
 
-class SelectSpellTargetStateTest extends ControllerTest {
+class SelectSpellTargetStateTest extends ControllerGenerator {
 
   test("SelectSpellTargetState should transition to ResetBarState when spell is cast successfully") {
     controller.turnScheduler.updateActionProgress(1000)

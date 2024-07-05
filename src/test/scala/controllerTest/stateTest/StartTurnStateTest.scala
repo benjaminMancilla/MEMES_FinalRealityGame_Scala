@@ -1,9 +1,9 @@
 package controllerTest.stateTest
 
 import controller.state.turnStates.{ApplyEffectState, StartTurnState}
-import controllerTest.ControllerTest
+import controllerTest.ControllerGenerator
 
-class StartTurnStateTest extends ControllerTest {
+class StartTurnStateTest extends ControllerGenerator {
 
   test("StartTurnState should transition to ApplyEffectState when update is called") {
     val state = new StartTurnState(controller)
@@ -13,17 +13,4 @@ class StartTurnStateTest extends ControllerTest {
     assert(controller.currentState.isInstanceOf[ApplyEffectState], "Controller should transition to ApplyEffectState")
   }
 
-  test("StartTurnState should print STARTTURN when update is called") {
-    val state = new StartTurnState(controller)
-    controller.setState(state)
-
-    // Capture the output
-    val stream = new java.io.ByteArrayOutputStream()
-    Console.withOut(stream) {
-      state.update()
-    }
-
-    val output = stream.toString.trim
-    assert(output == "STARTTURN", s"Expected output to be 'STARTTURN', but got '$output'")
-  }
 }

@@ -1,7 +1,8 @@
+package modelTest
+
 import exceptions.InvalidStatException
 import model.entity.character.commonCharacter.{Ninja, Paladin, Warrior}
-import model.entity.character.magicCharacter.{BlackMage, MagicCharacter, WhiteMage}
-import model.weapon.commonWeapon.{Axe, Bow, Sword}
+import model.entity.character.magicCharacter.{BlackMage, WhiteMage}
 import model.weapon.magicWeapon.{Staff, Wand}
 import munit.FunSuite
 

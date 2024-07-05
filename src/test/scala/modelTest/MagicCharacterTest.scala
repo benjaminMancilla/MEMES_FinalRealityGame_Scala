@@ -1,7 +1,9 @@
-import exceptions.magicE.{NoMagicPoints, NonMagicWeaponException}
-import exceptions.weaponE.EmptyWeaponException
+package modelTest
+
 import exceptions.InvalidStatException
 import exceptions.entityE.ProhibitedTarget
+import exceptions.magicE.{NoMagicPoints, NonMagicWeaponException}
+import exceptions.weaponE.EmptyWeaponException
 import model.entity.character.commonCharacter.Warrior
 import model.entity.character.magicCharacter.{BlackMage, WhiteMage}
 import model.entity.enemy.ConcreteEnemy

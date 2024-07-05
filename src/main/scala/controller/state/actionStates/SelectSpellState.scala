@@ -1,15 +1,12 @@
 package controller.state.actionStates
 
 import controller.GameController
-import controller.state.turnStates.ResetBarState
 import controller.state.{AbstractState, GameState}
 import controller.visitor.{GameStateVisitor, GeneralActionVisitor, SelectSpellVisitor}
 import exceptions.stateE.InvalidSpellSelector
-import model.entity.Entity
-import model.magic.Magic
 import model.magic.blackMagic.{Fire, Thunder}
 import model.magic.whiteMagic.{Heal, Paralyze, Poison}
-import model.turn.TurnScheduler
+
 
 class SelectSpellState(controller: GameController) extends AbstractState(controller) {
   override def needInput() = true

@@ -1,3 +1,5 @@
+package modelTest
+
 import exceptions.entityE.EntityOverflow
 import model.entity.character.Character
 import model.entity.character.commonCharacter.{Ninja, Warrior}
